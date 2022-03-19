@@ -2,7 +2,8 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.util.Collection;
-
+import lombok.Data;
+@Data
 @Entity
 public class Administrador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

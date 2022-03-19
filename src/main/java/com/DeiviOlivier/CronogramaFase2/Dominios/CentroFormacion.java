@@ -33,8 +33,7 @@ public class CentroFormacion {
     @ManyToOne
     @JoinColumn(name = "ID_DISTRITO", referencedColumnName = "ID_DISTRITO", nullable = false)
     private Distrito distritosByIdDistrito;
-    @OneToMany(mappedBy = "centrosFormacionesByIdCentroFormacion")
-    private Collection<CentrosModulos> centrosModulosByIdCentroFormacion;
+    
     @OneToMany(mappedBy = "centrosFormacionesByIdCentroFormacion")
     private Collection<DiaFeriado> diasFeriadosByIdCentroFormacion;
 
@@ -141,13 +140,6 @@ public class CentroFormacion {
         this.distritosByIdDistrito = distritosByIdDistrito;
     }
 
-    public Collection<CentrosModulos> getCentrosModulosByIdCentroFormacion() {
-        return centrosModulosByIdCentroFormacion;
-    }
-
-    public void setCentrosModulosByIdCentroFormacion(Collection<CentrosModulos> centrosModulosByIdCentroFormacion) {
-        this.centrosModulosByIdCentroFormacion = centrosModulosByIdCentroFormacion;
-    }
 
     public Collection<DiaFeriado> getDiasFeriadosByIdCentroFormacion() {
         return diasFeriadosByIdCentroFormacion;

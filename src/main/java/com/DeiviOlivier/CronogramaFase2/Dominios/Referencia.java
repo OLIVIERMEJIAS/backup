@@ -3,6 +3,7 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.Collection;
 
 @Entity
@@ -21,8 +22,8 @@ public class Referencia {
     @Column(name = "HORAS_MAXIMAS_REFERENCIA")
     private BigDecimal horasMaximasReferencia;
     @Basic
-    @Column(name = "HORAS_DIARIAS_REFERENCIA")
-    private BigDecimal horasDiariasReferencia;
+    @Column(name = "HORAS_FINAL_REFERENCIA")
+    private Object horasFinalReferencia;
     @Basic
     @Column(name = "DIAS_REFERENCIA")
     private String diasReferencia;
@@ -76,12 +77,12 @@ public class Referencia {
         this.horasMaximasReferencia = horasMaximasReferencia;
     }
 
-    public BigDecimal getHorasDiariasReferencia() {
-        return horasDiariasReferencia;
+    public Object getHorasDiariasReferencia() {
+        return horasFinalReferencia;
     }
 
-    public void setHorasDiariasReferencia(BigDecimal horasDiariasReferencia) {
-        this.horasDiariasReferencia = horasDiariasReferencia;
+    public void setHorasDiariasReferencia(Object horasfinalReferencia) {
+        this.horasFinalReferencia = horasfinalReferencia;
     }
 
     public String getDiasReferencia() {
@@ -136,7 +137,7 @@ public class Referencia {
         if (referencia != null ? !referencia.equals(that.referencia) : that.referencia != null) return false;
         if (horasMaximasReferencia != null ? !horasMaximasReferencia.equals(that.horasMaximasReferencia) : that.horasMaximasReferencia != null)
             return false;
-        if (horasDiariasReferencia != null ? !horasDiariasReferencia.equals(that.horasDiariasReferencia) : that.horasDiariasReferencia != null)
+        if (horasFinalReferencia != null ? !horasFinalReferencia.equals(that.horasFinalReferencia) : that.horasFinalReferencia != null)
             return false;
         if (diasReferencia != null ? !diasReferencia.equals(that.diasReferencia) : that.diasReferencia != null)
             return false;
@@ -158,7 +159,7 @@ public class Referencia {
         result = 31 * result + (idElemento != null ? idElemento.hashCode() : 0);
         result = 31 * result + (referencia != null ? referencia.hashCode() : 0);
         result = 31 * result + (horasMaximasReferencia != null ? horasMaximasReferencia.hashCode() : 0);
-        result = 31 * result + (horasDiariasReferencia != null ? horasDiariasReferencia.hashCode() : 0);
+        result = 31 * result + (horasFinalReferencia != null ? horasFinalReferencia.hashCode() : 0);
         result = 31 * result + (diasReferencia != null ? diasReferencia.hashCode() : 0);
         result = 31 * result + (horaInicioReferencia != null ? horaInicioReferencia.hashCode() : 0);
         result = 31 * result + (inicioReferencia != null ? inicioReferencia.hashCode() : 0);

@@ -21,8 +21,7 @@ public class Modulo {
     @Basic
     @Column(name = "REQUISITO_MODULO")
     private String requisitoModulo;
-    @OneToMany(mappedBy = "modulosByIdModulo")
-    private Collection<CentrosModulos> centrosModulosByIdModulo;
+
     @OneToMany(mappedBy = "modulosByIdModulo")
     private Collection<ModulosProgramas> modulosProgramasByIdModulo;
     @OneToMany(mappedBy = "modulosByIdModulo")
@@ -97,13 +96,7 @@ public class Modulo {
         return result;
     }
 
-    public Collection<CentrosModulos> getCentrosModulosByIdModulo() {
-        return centrosModulosByIdModulo;
-    }
 
-    public void setCentrosModulosByIdModulo(Collection<CentrosModulos> centrosModulosByIdModulo) {
-        this.centrosModulosByIdModulo = centrosModulosByIdModulo;
-    }
 
     public Collection<ModulosProgramas> getModulosProgramasByIdModulo() {
         return modulosProgramasByIdModulo;
