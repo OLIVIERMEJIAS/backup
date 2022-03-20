@@ -2,8 +2,11 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.util.Collection;
+import lombok.Data;
 
+@Data
 @Entity
+@Table(name="REGIONALES")
 public class Regional {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -15,21 +18,7 @@ public class Regional {
     @OneToMany(mappedBy = "regionalesByIdRegional")
     private Collection<CentroFormacion> centrosFormacionesByIdRegional;
 
-    public byte getIdRegional() {
-        return idRegional;
-    }
-
-    public void setIdRegional(byte idRegional) {
-        this.idRegional = idRegional;
-    }
-
-    public String getNombreRegional() {
-        return nombreRegional;
-    }
-
-    public void setNombreRegional(String nombreRegional) {
-        this.nombreRegional = nombreRegional;
-    }
+    
 
     @Override
     public boolean equals(Object o) {
@@ -52,11 +41,5 @@ public class Regional {
         return result;
     }
 
-    public Collection<CentroFormacion> getCentrosFormacionesByIdRegional() {
-        return centrosFormacionesByIdRegional;
-    }
-
-    public void setCentrosFormacionesByIdRegional(Collection<CentroFormacion> centrosFormacionesByIdRegional) {
-        this.centrosFormacionesByIdRegional = centrosFormacionesByIdRegional;
-    }
+    
 }

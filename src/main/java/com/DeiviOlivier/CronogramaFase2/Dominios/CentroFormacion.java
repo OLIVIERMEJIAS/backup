@@ -2,9 +2,10 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.util.Collection;
-
+import lombok.Data;
+@Data
 @Entity
-@Table(name = "CENTROS_FORMACIONES", schema = "dbo", catalog = "CRONOGRAMAS_INA2")
+@Table(name = "CENTROS_FORMACIONES")
 public class CentroFormacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -37,54 +38,7 @@ public class CentroFormacion {
     @OneToMany(mappedBy = "centrosFormacionesByIdCentroFormacion")
     private Collection<DiaFeriado> diasFeriadosByIdCentroFormacion;
 
-    public short getIdCentroFormacion() {
-        return idCentroFormacion;
-    }
-
-    public void setIdCentroFormacion(short idCentroFormacion) {
-        this.idCentroFormacion = idCentroFormacion;
-    }
-
-    public byte getIdRegional() {
-        return idRegional;
-    }
-
-    public void setIdRegional(byte idRegional) {
-        this.idRegional = idRegional;
-    }
-
-    public short getIdDistrito() {
-        return idDistrito;
-    }
-
-    public void setIdDistrito(short idDistrito) {
-        this.idDistrito = idDistrito;
-    }
-
-    public String getDireccionExacta() {
-        return direccionExacta;
-    }
-
-    public void setDireccionExacta(String direccionExacta) {
-        this.direccionExacta = direccionExacta;
-    }
-
-    public String getNombreCentroFormacion() {
-        return nombreCentroFormacion;
-    }
-
-    public void setNombreCentroFormacion(String nombreCentroFormacion) {
-        this.nombreCentroFormacion = nombreCentroFormacion;
-    }
-
-    public String getCodigoCentroFormacion() {
-        return codigoCentroFormacion;
-    }
-
-    public void setCodigoCentroFormacion(String codigoCentroFormacion) {
-        this.codigoCentroFormacion = codigoCentroFormacion;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -116,36 +70,5 @@ public class CentroFormacion {
         return result;
     }
 
-    public Collection<Administrador> getAdministradoresByIdCentroFormacion() {
-        return administradoresByIdCentroFormacion;
-    }
-
-    public void setAdministradoresByIdCentroFormacion(Collection<Administrador> administradoresByIdCentroFormacion) {
-        this.administradoresByIdCentroFormacion = administradoresByIdCentroFormacion;
-    }
-
-    public Regional getRegionalesByIdRegional() {
-        return regionalesByIdRegional;
-    }
-
-    public void setRegionalesByIdRegional(Regional regionalesByIdRegional) {
-        this.regionalesByIdRegional = regionalesByIdRegional;
-    }
-
-    public Distrito getDistritosByIdDistrito() {
-        return distritosByIdDistrito;
-    }
-
-    public void setDistritosByIdDistrito(Distrito distritosByIdDistrito) {
-        this.distritosByIdDistrito = distritosByIdDistrito;
-    }
-
-
-    public Collection<DiaFeriado> getDiasFeriadosByIdCentroFormacion() {
-        return diasFeriadosByIdCentroFormacion;
-    }
-
-    public void setDiasFeriadosByIdCentroFormacion(Collection<DiaFeriado> diasFeriadosByIdCentroFormacion) {
-        this.diasFeriadosByIdCentroFormacion = diasFeriadosByIdCentroFormacion;
-    }
+    
 }

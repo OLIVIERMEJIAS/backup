@@ -2,8 +2,11 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.util.Collection;
+import lombok.Data;
 
+@Data
 @Entity
+@Table(name="PROVINCIAS")
 public class Provincia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -15,21 +18,6 @@ public class Provincia {
     @OneToMany(mappedBy = "provinciasByIdProvincia")
     private Collection<Canton> cantonesByIdProvincia;
 
-    public byte getIdProvincia() {
-        return idProvincia;
-    }
-
-    public void setIdProvincia(byte idProvincia) {
-        this.idProvincia = idProvincia;
-    }
-
-    public String getNombreProvincia() {
-        return nombreProvincia;
-    }
-
-    public void setNombreProvincia(String nombreProvincia) {
-        this.nombreProvincia = nombreProvincia;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -52,11 +40,4 @@ public class Provincia {
         return result;
     }
 
-    public Collection<Canton> getCantonesByIdProvincia() {
-        return cantonesByIdProvincia;
-    }
-
-    public void setCantonesByIdProvincia(Collection<Canton> cantonesByIdProvincia) {
-        this.cantonesByIdProvincia = cantonesByIdProvincia;
-    }
 }

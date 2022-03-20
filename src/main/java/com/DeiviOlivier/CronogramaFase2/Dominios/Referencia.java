@@ -5,8 +5,10 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Collection;
-
+import lombok.Data;
+@Data
 @Entity
+@Table(name="REFERENCIAS")
 public class Referencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -42,88 +44,13 @@ public class Referencia {
     @OneToMany(mappedBy = "referenciasByIdReferencia")
     private Collection<ModuloReferencia> modulosReferenciasByIdReferencia;
     @ManyToOne
-    @JoinColumn(name = "ID_ELEMENTO", referencedColumnName = "ID_PROGRAMA")
-    private Programa programasByIdElemento;
+    @JoinColumn(name = "ID_MODULO", referencedColumnName = "ID_MODULO")
+    private Programa programasByIdModulo;
+    @ManyToOne
+    @JoinColumn(name = "ID_PROGRAMA", referencedColumnName = "ID_PROGRAMA")
+    private Programa programasByIdPrograma;
 
-    public int getIdReferencia() {
-        return idReferencia;
-    }
 
-    public void setIdReferencia(int idReferencia) {
-        this.idReferencia = idReferencia;
-    }
-
-    public Short getIdElemento() {
-        return idElemento;
-    }
-
-    public void setIdElemento(Short idElemento) {
-        this.idElemento = idElemento;
-    }
-
-    public String getReferencia() {
-        return referencia;
-    }
-
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
-    }
-
-    public BigDecimal getHorasMaximasReferencia() {
-        return horasMaximasReferencia;
-    }
-
-    public void setHorasMaximasReferencia(BigDecimal horasMaximasReferencia) {
-        this.horasMaximasReferencia = horasMaximasReferencia;
-    }
-
-    public Object getHorasDiariasReferencia() {
-        return horasFinalReferencia;
-    }
-
-    public void setHorasDiariasReferencia(Object horasfinalReferencia) {
-        this.horasFinalReferencia = horasfinalReferencia;
-    }
-
-    public String getDiasReferencia() {
-        return diasReferencia;
-    }
-
-    public void setDiasReferencia(String diasReferencia) {
-        this.diasReferencia = diasReferencia;
-    }
-
-    public Object getHoraInicioReferencia() {
-        return horaInicioReferencia;
-    }
-
-    public void setHoraInicioReferencia(Object horaInicioReferencia) {
-        this.horaInicioReferencia = horaInicioReferencia;
-    }
-
-    public Date getInicioReferencia() {
-        return inicioReferencia;
-    }
-
-    public void setInicioReferencia(Date inicioReferencia) {
-        this.inicioReferencia = inicioReferencia;
-    }
-
-    public Date getFinalReferencia() {
-        return finalReferencia;
-    }
-
-    public void setFinalReferencia(Date finalReferencia) {
-        this.finalReferencia = finalReferencia;
-    }
-
-    public String getEstadoReferencia() {
-        return estadoReferencia;
-    }
-
-    public void setEstadoReferencia(String estadoReferencia) {
-        this.estadoReferencia = estadoReferencia;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -168,19 +95,6 @@ public class Referencia {
         return result;
     }
 
-    public Collection<ModuloReferencia> getModulosReferenciasByIdReferencia() {
-        return modulosReferenciasByIdReferencia;
-    }
-
-    public void setModulosReferenciasByIdReferencia(Collection<ModuloReferencia> modulosReferenciasByIdReferencia) {
-        this.modulosReferenciasByIdReferencia = modulosReferenciasByIdReferencia;
-    }
-
-    public Programa getProgramasByIdElemento() {
-        return programasByIdElemento;
-    }
-
-    public void setProgramasByIdElemento(Programa programasByIdElemento) {
-        this.programasByIdElemento = programasByIdElemento;
-    }
+  
+ 
 }

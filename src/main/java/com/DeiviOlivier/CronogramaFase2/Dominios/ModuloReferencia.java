@@ -2,9 +2,10 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.sql.Date;
-
+import lombok.Data;
+@Data
 @Entity
-@Table(name = "MODULOS_REFERENCIAS", schema = "dbo", catalog = "CRONOGRAMAS_INA2")
+@Table(name = "MODULOS_REFERENCIAS")
 public class ModuloReferencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -44,78 +45,7 @@ public class ModuloReferencia {
     @JoinColumn(name = "ID_REFERENCIA", referencedColumnName = "ID_REFERENCIA", nullable = false)
     private Referencia referenciasByIdReferencia;
 
-    public int getIdModuloReferencia() {
-        return idModuloReferencia;
-    }
-
-    public void setIdModuloReferencia(int idModuloReferencia) {
-        this.idModuloReferencia = idModuloReferencia;
-    }
-
-    public short getIdModulo() {
-        return idModulo;
-    }
-
-    public void setIdModulo(short idModulo) {
-        this.idModulo = idModulo;
-    }
-
-    public int getIdProfesor() {
-        return idProfesor;
-    }
-
-    public void setIdProfesor(int idProfesor) {
-        this.idProfesor = idProfesor;
-    }
-
-    public int getIdReferencia() {
-        return idReferencia;
-    }
-
-    public void setIdReferencia(int idReferencia) {
-        this.idReferencia = idReferencia;
-    }
-
-    public String getDiasModuloReferencia() {
-        return diasModuloReferencia;
-    }
-
-    public void setDiasModuloReferencia(String diasModuloReferencia) {
-        this.diasModuloReferencia = diasModuloReferencia;
-    }
-
-    public String getHoraInicioModuloReferencia() {
-        return horaInicioModuloReferencia;
-    }
-
-    public void setHoraInicioModuloReferencia(String horaInicioModuloReferencia) {
-        this.horaInicioModuloReferencia = horaInicioModuloReferencia;
-    }
-
-    public String getHoraFinalModuloReferencia() {
-        return horaFinalModuloReferencia;
-    }
-
-    public void setHoraFinalModuloReferencia(String horaFinalModuloReferencia) {
-        this.horaFinalModuloReferencia = horaFinalModuloReferencia;
-    }
-
-    public Date getInicioModuloReferencia() {
-        return inicioModuloReferencia;
-    }
-
-    public void setInicioModuloReferencia(Date inicioModuloReferencia) {
-        this.inicioModuloReferencia = inicioModuloReferencia;
-    }
-
-    public Date getFinalModuloReferencia() {
-        return finalModuloReferencia;
-    }
-
-    public void setFinalModuloReferencia(Date finalModuloReferencia) {
-        this.finalModuloReferencia = finalModuloReferencia;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -155,27 +85,5 @@ public class ModuloReferencia {
         return result;
     }
 
-    public Modulo getModulosByIdModulo() {
-        return modulosByIdModulo;
-    }
 
-    public void setModulosByIdModulo(Modulo modulosByIdModulo) {
-        this.modulosByIdModulo = modulosByIdModulo;
-    }
-
-    public Profesor getProfesoresByIdProfesor() {
-        return profesoresByIdProfesor;
-    }
-
-    public void setProfesoresByIdProfesor(Profesor profesoresByIdProfesor) {
-        this.profesoresByIdProfesor = profesoresByIdProfesor;
-    }
-
-    public Referencia getReferenciasByIdReferencia() {
-        return referenciasByIdReferencia;
-    }
-
-    public void setReferenciasByIdReferencia(Referencia referenciasByIdReferencia) {
-        this.referenciasByIdReferencia = referenciasByIdReferencia;
-    }
 }

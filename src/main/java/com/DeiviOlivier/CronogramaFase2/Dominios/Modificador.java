@@ -2,8 +2,10 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.sql.Date;
-
+import lombok.Data;
+@Data
 @Entity
+@Table(name="MODIFICADORES")
 public class Modificador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -31,54 +33,7 @@ public class Modificador {
     @JoinColumn(name = "ID_CATEGORIA_MODIFICADOR", referencedColumnName = "ID_CATEGORIA_MODIFICADOR", nullable = false)
     private CategoriaModificador categoriasModificadoresByIdCategoriaModificador;
 
-    public int getIdModificador() {
-        return idModificador;
-    }
-
-    public void setIdModificador(int idModificador) {
-        this.idModificador = idModificador;
-    }
-
-    public int getIdProfesor() {
-        return idProfesor;
-    }
-
-    public void setIdProfesor(int idProfesor) {
-        this.idProfesor = idProfesor;
-    }
-
-    public byte getIdCategoriaModificador() {
-        return idCategoriaModificador;
-    }
-
-    public void setIdCategoriaModificador(byte idCategoriaModificador) {
-        this.idCategoriaModificador = idCategoriaModificador;
-    }
-
-    public Date getInicioModificador() {
-        return inicioModificador;
-    }
-
-    public void setInicioModificador(Date inicioModificador) {
-        this.inicioModificador = inicioModificador;
-    }
-
-    public Date getFinalModificador() {
-        return finalModificador;
-    }
-
-    public void setFinalModificador(Date finalModificador) {
-        this.finalModificador = finalModificador;
-    }
-
-    public String getDescripcionModificador() {
-        return descripcionModificador;
-    }
-
-    public void setDescripcionModificador(String descripcionModificador) {
-        this.descripcionModificador = descripcionModificador;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,19 +65,5 @@ public class Modificador {
         return result;
     }
 
-    public Profesor getProfesoresByIdProfesor() {
-        return profesoresByIdProfesor;
-    }
-
-    public void setProfesoresByIdProfesor(Profesor profesoresByIdProfesor) {
-        this.profesoresByIdProfesor = profesoresByIdProfesor;
-    }
-
-    public CategoriaModificador getCategoriasModificadoresByIdCategoriaModificador() {
-        return categoriasModificadoresByIdCategoriaModificador;
-    }
-
-    public void setCategoriasModificadoresByIdCategoriaModificador(CategoriaModificador categoriasModificadoresByIdCategoriaModificador) {
-        this.categoriasModificadoresByIdCategoriaModificador = categoriasModificadoresByIdCategoriaModificador;
-    }
+    
 }

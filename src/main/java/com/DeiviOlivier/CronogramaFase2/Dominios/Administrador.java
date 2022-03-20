@@ -5,6 +5,7 @@ import java.util.Collection;
 import lombok.Data;
 @Data
 @Entity
+@Table(name="ADMINISTRADORES")
 public class Administrador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -34,84 +35,17 @@ public class Administrador {
     @Basic
     @Column(name = "CORREO_ADMINISTRADOR")
     private String correoAdministrador;
+    @Column(name="ID_ROL")
+    private byte idRol;
     @ManyToOne
     @JoinColumn(name = "ID_CENTRO_FORMACION", referencedColumnName = "ID_CENTRO_FORMACION", nullable = false)
     private CentroFormacion centrosFormacionesByIdCentroFormacion;
     @OneToMany(mappedBy = "administradoresByIdAdministrador")
     private Collection<Profesor> profesoresByIdAdministrador;
-
-    public int getIdAdministrador() {
-        return idAdministrador;
-    }
-
-    public void setIdAdministrador(int idAdministrador) {
-        this.idAdministrador = idAdministrador;
-    }
-
-    public short getIdCentroFormacion() {
-        return idCentroFormacion;
-    }
-
-    public void setIdCentroFormacion(short idCentroFormacion) {
-        this.idCentroFormacion = idCentroFormacion;
-    }
-
-    public int getCedulaAdministrador() {
-        return cedulaAdministrador;
-    }
-
-    public void setCedulaAdministrador(int cedulaAdministrador) {
-        this.cedulaAdministrador = cedulaAdministrador;
-    }
-
-    public String getContrasenaAdministrador() {
-        return contrasenaAdministrador;
-    }
-
-    public void setContrasenaAdministrador(String contrasenaAdministrador) {
-        this.contrasenaAdministrador = contrasenaAdministrador;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getNombreAdministrador() {
-        return nombreAdministrador;
-    }
-
-    public void setNombreAdministrador(String nombreAdministrador) {
-        this.nombreAdministrador = nombreAdministrador;
-    }
-
-    public String getApellido1Administrador() {
-        return apellido1Administrador;
-    }
-
-    public void setApellido1Administrador(String apellido1Administrador) {
-        this.apellido1Administrador = apellido1Administrador;
-    }
-
-    public String getApellido2Administrador() {
-        return apellido2Administrador;
-    }
-
-    public void setApellido2Administrador(String apellido2Administrador) {
-        this.apellido2Administrador = apellido2Administrador;
-    }
-
-    public String getCorreoAdministrador() {
-        return correoAdministrador;
-    }
-
-    public void setCorreoAdministrador(String correoAdministrador) {
-        this.correoAdministrador = correoAdministrador;
-    }
-
+    @OneToOne
+    @JoinColumn(name="ID_ROL", referencedColumnName = "ID_ROL", nullable = false)
+    private Rol rol;
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -152,19 +86,5 @@ public class Administrador {
         return result;
     }
 
-    public CentroFormacion getCentrosFormacionesByIdCentroFormacion() {
-        return centrosFormacionesByIdCentroFormacion;
-    }
-
-    public void setCentrosFormacionesByIdCentroFormacion(CentroFormacion centrosFormacionesByIdCentroFormacion) {
-        this.centrosFormacionesByIdCentroFormacion = centrosFormacionesByIdCentroFormacion;
-    }
-
-    public Collection<Profesor> getProfesoresByIdAdministrador() {
-        return profesoresByIdAdministrador;
-    }
-
-    public void setProfesoresByIdAdministrador(Collection<Profesor> profesoresByIdAdministrador) {
-        this.profesoresByIdAdministrador = profesoresByIdAdministrador;
-    }
+    
 }

@@ -1,9 +1,10 @@
 package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
-
+import lombok.Data;
+@Data
 @Entity
-@Table(name = "MODULOS_PROGRAMAS", schema = "dbo", catalog = "CRONOGRAMAS_INA2")
+@Table(name = "MODULOS_PROGRAMAS")
 @IdClass(ModulosProgramasPK.class)
 public class ModulosProgramas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,22 +22,7 @@ public class ModulosProgramas {
     @JoinColumn(name = "ID_MODULO", referencedColumnName = "ID_MODULO", nullable = false)
     private Modulo modulosByIdModulo;
 
-    public short getIdPrograma() {
-        return idPrograma;
-    }
-
-    public void setIdPrograma(short idPrograma) {
-        this.idPrograma = idPrograma;
-    }
-
-    public short getIdModulo() {
-        return idModulo;
-    }
-
-    public void setIdModulo(short idModulo) {
-        this.idModulo = idModulo;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,19 +43,5 @@ public class ModulosProgramas {
         return result;
     }
 
-    public Programa getProgramasByIdPrograma() {
-        return programasByIdPrograma;
-    }
-
-    public void setProgramasByIdPrograma(Programa programasByIdPrograma) {
-        this.programasByIdPrograma = programasByIdPrograma;
-    }
-
-    public Modulo getModulosByIdModulo() {
-        return modulosByIdModulo;
-    }
-
-    public void setModulosByIdModulo(Modulo modulosByIdModulo) {
-        this.modulosByIdModulo = modulosByIdModulo;
-    }
+    
 }

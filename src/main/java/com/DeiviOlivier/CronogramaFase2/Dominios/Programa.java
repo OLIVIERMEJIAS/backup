@@ -2,8 +2,10 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.util.Collection;
-
+import lombok.Data;
+@Data
 @Entity
+@Table(name="PROGRAMAS")
 public class Programa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -20,41 +22,10 @@ public class Programa {
     private short horasTotales;
     @OneToMany(mappedBy = "programasByIdPrograma")
     private Collection<ModulosProgramas> modulosProgramasByIdPrograma;
-    @OneToMany(mappedBy = "programasByIdElemento")
+    @OneToMany(mappedBy = "programasByIdPrograma")
     private Collection<Referencia> referenciasByIdPrograma;
 
-    public short getIdPrograma() {
-        return idPrograma;
-    }
-
-    public void setIdPrograma(short idPrograma) {
-        this.idPrograma = idPrograma;
-    }
-
-    public String getNombrePrograma() {
-        return nombrePrograma;
-    }
-
-    public void setNombrePrograma(String nombrePrograma) {
-        this.nombrePrograma = nombrePrograma;
-    }
-
-    public String getCodigoPrograma() {
-        return codigoPrograma;
-    }
-
-    public void setCodigoPrograma(String codigoPrograma) {
-        this.codigoPrograma = codigoPrograma;
-    }
-
-    public short getHorasTotales() {
-        return horasTotales;
-    }
-
-    public void setHorasTotales(short horasTotales) {
-        this.horasTotales = horasTotales;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,19 +52,5 @@ public class Programa {
         return result;
     }
 
-    public Collection<ModulosProgramas> getModulosProgramasByIdPrograma() {
-        return modulosProgramasByIdPrograma;
-    }
 
-    public void setModulosProgramasByIdPrograma(Collection<ModulosProgramas> modulosProgramasByIdPrograma) {
-        this.modulosProgramasByIdPrograma = modulosProgramasByIdPrograma;
-    }
-
-    public Collection<Referencia> getReferenciasByIdPrograma() {
-        return referenciasByIdPrograma;
-    }
-
-    public void setReferenciasByIdPrograma(Collection<Referencia> referenciasByIdPrograma) {
-        this.referenciasByIdPrograma = referenciasByIdPrograma;
-    }
 }

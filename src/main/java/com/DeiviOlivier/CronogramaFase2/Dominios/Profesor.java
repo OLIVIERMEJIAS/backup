@@ -2,8 +2,11 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.util.Collection;
+import lombok.Data;
 
+@Data
 @Entity
+@Table(name="PROFESORES")
 public class Profesor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -30,6 +33,8 @@ public class Profesor {
     @Basic
     @Column(name = "CORREO_PROFESOR")
     private String correoProfesor;
+    @Column(name="ID_ROL")
+    private byte idRol;
     @OneToMany(mappedBy = "profesoresByIdProfesor")
     private Collection<Modificador> modificadoresByIdProfesor;
     @OneToMany(mappedBy = "profesoresByIdProfesor")
@@ -37,71 +42,9 @@ public class Profesor {
     @ManyToOne
     @JoinColumn(name = "ID_ADMINISTRADOR", referencedColumnName = "ID_ADMINISTRADOR", nullable = false)
     private Administrador administradoresByIdAdministrador;
-
-    public int getIdProfesor() {
-        return idProfesor;
-    }
-
-    public void setIdProfesor(int idProfesor) {
-        this.idProfesor = idProfesor;
-    }
-
-    public int getIdAdministrador() {
-        return idAdministrador;
-    }
-
-    public void setIdAdministrador(int idAdministrador) {
-        this.idAdministrador = idAdministrador;
-    }
-
-    public String getContrasenaProfesor() {
-        return contrasenaProfesor;
-    }
-
-    public void setContrasenaProfesor(String contrasenaProfesor) {
-        this.contrasenaProfesor = contrasenaProfesor;
-    }
-
-    public int getCedulaProfesor() {
-        return cedulaProfesor;
-    }
-
-    public void setCedulaProfesor(int cedulaProfesor) {
-        this.cedulaProfesor = cedulaProfesor;
-    }
-
-    public String getNombreProfesor() {
-        return nombreProfesor;
-    }
-
-    public void setNombreProfesor(String nombreProfesor) {
-        this.nombreProfesor = nombreProfesor;
-    }
-
-    public String getApellido1Profesor() {
-        return apellido1Profesor;
-    }
-
-    public void setApellido1Profesor(String apellido1Profesor) {
-        this.apellido1Profesor = apellido1Profesor;
-    }
-
-    public String getApellido2Profesor() {
-        return apellido2Profesor;
-    }
-
-    public void setApellido2Profesor(String apellido2Profesor) {
-        this.apellido2Profesor = apellido2Profesor;
-    }
-
-    public String getCorreoProfesor() {
-        return correoProfesor;
-    }
-
-    public void setCorreoProfesor(String correoProfesor) {
-        this.correoProfesor = correoProfesor;
-    }
-
+@   OneToOne
+    @JoinColumn(name="ID_ROL", referencedColumnName = "ID_ROL", nullable = false)
+    private Rol rol;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -139,27 +82,5 @@ public class Profesor {
         return result;
     }
 
-    public Collection<Modificador> getModificadoresByIdProfesor() {
-        return modificadoresByIdProfesor;
-    }
 
-    public void setModificadoresByIdProfesor(Collection<Modificador> modificadoresByIdProfesor) {
-        this.modificadoresByIdProfesor = modificadoresByIdProfesor;
-    }
-
-    public Collection<ModuloReferencia> getModulosReferenciasByIdProfesor() {
-        return modulosReferenciasByIdProfesor;
-    }
-
-    public void setModulosReferenciasByIdProfesor(Collection<ModuloReferencia> modulosReferenciasByIdProfesor) {
-        this.modulosReferenciasByIdProfesor = modulosReferenciasByIdProfesor;
-    }
-
-    public Administrador getAdministradoresByIdAdministrador() {
-        return administradoresByIdAdministrador;
-    }
-
-    public void setAdministradoresByIdAdministrador(Administrador administradoresByIdAdministrador) {
-        this.administradoresByIdAdministrador = administradoresByIdAdministrador;
-    }
 }

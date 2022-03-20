@@ -2,8 +2,10 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.util.Collection;
-
+import lombok.Data;
+@Data
 @Entity
+@Table(name="DISTRITOS")
 public class Distrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -21,29 +23,7 @@ public class Distrito {
     @JoinColumn(name = "ID_CANTON", referencedColumnName = "ID_CANTON", nullable = false)
     private Canton cantonesByIdCanton;
 
-    public short getIdDistrito() {
-        return idDistrito;
-    }
-
-    public void setIdDistrito(short idDistrito) {
-        this.idDistrito = idDistrito;
-    }
-
-    public String getNombreDistrito() {
-        return nombreDistrito;
-    }
-
-    public void setNombreDistrito(String nombreDistrito) {
-        this.nombreDistrito = nombreDistrito;
-    }
-
-    public byte getIdCanton() {
-        return idCanton;
-    }
-
-    public void setIdCanton(byte idCanton) {
-        this.idCanton = idCanton;
-    }
+    
 
     @Override
     public boolean equals(Object o) {
@@ -68,19 +48,5 @@ public class Distrito {
         return result;
     }
 
-    public Collection<CentroFormacion> getCentrosFormacionesByIdDistrito() {
-        return centrosFormacionesByIdDistrito;
-    }
 
-    public void setCentrosFormacionesByIdDistrito(Collection<CentroFormacion> centrosFormacionesByIdDistrito) {
-        this.centrosFormacionesByIdDistrito = centrosFormacionesByIdDistrito;
-    }
-
-    public Canton getCantonesByIdCanton() {
-        return cantonesByIdCanton;
-    }
-
-    public void setCantonesByIdCanton(Canton cantonesByIdCanton) {
-        this.cantonesByIdCanton = cantonesByIdCanton;
-    }
 }

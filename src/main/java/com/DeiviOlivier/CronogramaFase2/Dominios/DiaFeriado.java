@@ -2,9 +2,10 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.sql.Date;
-
+import lombok.Data;
+@Data
 @Entity
-@Table(name = "DIAS_FERIADOS", schema = "dbo", catalog = "CRONOGRAMAS_INA2")
+@Table(name = "DIAS_FERIADOS")
 public class DiaFeriado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -23,37 +24,7 @@ public class DiaFeriado {
     @JoinColumn(name = "ID_CENTRO_FORMACION", referencedColumnName = "ID_CENTRO_FORMACION")
     private CentroFormacion centrosFormacionesByIdCentroFormacion;
 
-    public byte getIdDiaFeriado() {
-        return idDiaFeriado;
-    }
-
-    public void setIdDiaFeriado(byte idDiaFeriado) {
-        this.idDiaFeriado = idDiaFeriado;
-    }
-
-    public String getNombreDiaFeriado() {
-        return nombreDiaFeriado;
-    }
-
-    public void setNombreDiaFeriado(String nombreDiaFeriado) {
-        this.nombreDiaFeriado = nombreDiaFeriado;
-    }
-
-    public Date getFechaInicioDiaFeriado() {
-        return fechaInicioDiaFeriado;
-    }
-
-    public void setFechaInicioDiaFeriado(Date fechaInicioDiaFeriado) {
-        this.fechaInicioDiaFeriado = fechaInicioDiaFeriado;
-    }
-
-    public Short getIdCentroFormacion() {
-        return idCentroFormacion;
-    }
-
-    public void setIdCentroFormacion(Short idCentroFormacion) {
-        this.idCentroFormacion = idCentroFormacion;
-    }
+   
 
     @Override
     public boolean equals(Object o) {
@@ -82,11 +53,5 @@ public class DiaFeriado {
         return result;
     }
 
-    public CentroFormacion getCentrosFormacionesByIdCentroFormacion() {
-        return centrosFormacionesByIdCentroFormacion;
-    }
-
-    public void setCentrosFormacionesByIdCentroFormacion(CentroFormacion centrosFormacionesByIdCentroFormacion) {
-        this.centrosFormacionesByIdCentroFormacion = centrosFormacionesByIdCentroFormacion;
-    }
+   
 }

@@ -2,8 +2,10 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.util.Collection;
-
+import lombok.Data;
+@Data
 @Entity
+@Table(name="MODULOS")
 public class Modulo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -26,47 +28,10 @@ public class Modulo {
     private Collection<ModulosProgramas> modulosProgramasByIdModulo;
     @OneToMany(mappedBy = "modulosByIdModulo")
     private Collection<ModuloReferencia> modulosReferenciasByIdModulo;
+    @OneToMany(mappedBy = "programasByIdModulo")
+    private Collection<Referencia> referenciasByIdPrograma;
 
-    public short getIdModulo() {
-        return idModulo;
-    }
-
-    public void setIdModulo(short idModulo) {
-        this.idModulo = idModulo;
-    }
-
-    public String getNombreModulo() {
-        return nombreModulo;
-    }
-
-    public void setNombreModulo(String nombreModulo) {
-        this.nombreModulo = nombreModulo;
-    }
-
-    public String getCodigoModulo() {
-        return codigoModulo;
-    }
-
-    public void setCodigoModulo(String codigoModulo) {
-        this.codigoModulo = codigoModulo;
-    }
-
-    public short getHorasModulo() {
-        return horasModulo;
-    }
-
-    public void setHorasModulo(short horasModulo) {
-        this.horasModulo = horasModulo;
-    }
-
-    public String getRequisitoModulo() {
-        return requisitoModulo;
-    }
-
-    public void setRequisitoModulo(String requisitoModulo) {
-        this.requisitoModulo = requisitoModulo;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,21 +61,4 @@ public class Modulo {
         return result;
     }
 
-
-
-    public Collection<ModulosProgramas> getModulosProgramasByIdModulo() {
-        return modulosProgramasByIdModulo;
-    }
-
-    public void setModulosProgramasByIdModulo(Collection<ModulosProgramas> modulosProgramasByIdModulo) {
-        this.modulosProgramasByIdModulo = modulosProgramasByIdModulo;
-    }
-
-    public Collection<ModuloReferencia> getModulosReferenciasByIdModulo() {
-        return modulosReferenciasByIdModulo;
-    }
-
-    public void setModulosReferenciasByIdModulo(Collection<ModuloReferencia> modulosReferenciasByIdModulo) {
-        this.modulosReferenciasByIdModulo = modulosReferenciasByIdModulo;
-    }
 }

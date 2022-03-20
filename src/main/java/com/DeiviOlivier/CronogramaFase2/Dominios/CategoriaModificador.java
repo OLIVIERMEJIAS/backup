@@ -2,9 +2,10 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.util.Collection;
-
+import lombok.Data;
+@Data
 @Entity
-@Table(name = "CATEGORIAS_MODIFICADORES", schema = "dbo", catalog = "CRONOGRAMAS_INA2")
+@Table(name = "CATEGORIAS_MODIFICADORES")
 public class CategoriaModificador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -16,22 +17,7 @@ public class CategoriaModificador {
     @OneToMany(mappedBy = "categoriasModificadoresByIdCategoriaModificador")
     private Collection<Modificador> modificadoresByIdCategoriaModificador;
 
-    public byte getIdCategoriaModificador() {
-        return idCategoriaModificador;
-    }
-
-    public void setIdCategoriaModificador(byte idCategoriaModificador) {
-        this.idCategoriaModificador = idCategoriaModificador;
-    }
-
-    public String getNombreCategoriaModificador() {
-        return nombreCategoriaModificador;
-    }
-
-    public void setNombreCategoriaModificador(String nombreCategoriaModificador) {
-        this.nombreCategoriaModificador = nombreCategoriaModificador;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,11 +39,5 @@ public class CategoriaModificador {
         return result;
     }
 
-    public Collection<Modificador> getModificadoresByIdCategoriaModificador() {
-        return modificadoresByIdCategoriaModificador;
-    }
-
-    public void setModificadoresByIdCategoriaModificador(Collection<Modificador> modificadoresByIdCategoriaModificador) {
-        this.modificadoresByIdCategoriaModificador = modificadoresByIdCategoriaModificador;
-    }
+    
 }

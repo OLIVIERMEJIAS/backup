@@ -5,7 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-
+import lombok.Data;
+@Data
 public class ModulosProgramasPK implements Serializable {
     @Column(name = "ID_PROGRAMA")
     @Id
@@ -16,21 +17,7 @@ public class ModulosProgramasPK implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private short idModulo;
 
-    public short getIdPrograma() {
-        return idPrograma;
-    }
 
-    public void setIdPrograma(short idPrograma) {
-        this.idPrograma = idPrograma;
-    }
-
-    public short getIdModulo() {
-        return idModulo;
-    }
-
-    public void setIdModulo(short idModulo) {
-        this.idModulo = idModulo;
-    }
 
     @Override
     public boolean equals(Object o) {

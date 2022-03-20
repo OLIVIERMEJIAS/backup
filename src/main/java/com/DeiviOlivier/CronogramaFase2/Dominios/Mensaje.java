@@ -2,8 +2,11 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 
 import javax.persistence.*;
 import java.sql.Date;
+import lombok.Data;
 
+@Data
 @Entity
+@Table(name="MENSAJES")
 public class Mensaje {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -22,46 +25,7 @@ public class Mensaje {
     @Column(name = "ASUNTO_MENSAJE")
     private String asuntoMensaje;
 
-    public int getIdMensaje() {
-        return idMensaje;
-    }
-
-    public void setIdMensaje(int idMensaje) {
-        this.idMensaje = idMensaje;
-    }
-
-    public int getIdProfesor() {
-        return idProfesor;
-    }
-
-    public void setIdProfesor(int idProfesor) {
-        this.idProfesor = idProfesor;
-    }
-
-    public int getIdAdministrador() {
-        return idAdministrador;
-    }
-
-    public void setIdAdministrador(int idAdministrador) {
-        this.idAdministrador = idAdministrador;
-    }
-
-    public Date getFechaMensaje() {
-        return fechaMensaje;
-    }
-
-    public void setFechaMensaje(Date fechaMensaje) {
-        this.fechaMensaje = fechaMensaje;
-    }
-
-    public String getAsuntoMensaje() {
-        return asuntoMensaje;
-    }
-
-    public void setAsuntoMensaje(String asuntoMensaje) {
-        this.asuntoMensaje = asuntoMensaje;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
