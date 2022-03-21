@@ -10,7 +10,7 @@ public class Modulo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_MODULO")
-    private short idModulo;
+    private Long idModulo;
     @Basic
     @Column(name = "NOMBRE_MODULO")
     private String nombreModulo;
@@ -51,14 +51,5 @@ public class Modulo {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = (int) idModulo;
-        result = 31 * result + (nombreModulo != null ? nombreModulo.hashCode() : 0);
-        result = 31 * result + (codigoModulo != null ? codigoModulo.hashCode() : 0);
-        result = 31 * result + (int) horasModulo;
-        result = 31 * result + (requisitoModulo != null ? requisitoModulo.hashCode() : 0);
-        return result;
-    }
 
 }

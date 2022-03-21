@@ -12,5 +12,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author HP
  */
 public interface IModuloDAO extends JpaRepository<Modulo, Long>{
+    //Método Personalizado Spring Data
+    public Iterable<Modulo> findByNombreModuloContainsOrCodigoModulo(String nom, String cod);
     
+    Long deleteByNombreModulo(String nombre);
+
 }
