@@ -3,13 +3,103 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <div class="container">
+            <div class="card">
+                <div class="card-header d-flex justify-content-around">
+                    <h3>Gestión de Referencias</h3>
+                </div>
+
+            <div class="card-body">
+                <form th:action="@{/guardarReferencia}" method="post" th:object="${referencia}">
+                    <input type="hidden" name="idReferencia" th:field="*{idReferencia}" value=""/>
+
+                        <div>
+                            <label for="tipo" class="form-label">Seleccione Modalidad</label>
+                            <input class="btn" type="checkbox" id="checkPrograma" name="checkPrograma" value="Programa"/>
+                            <input class="btn" type="checkbox" id="checkModulo" name="checkModulo" value="Módulo Individual"/>
+                        </div>
+                        <div>
+                            <label for="nombrePrograma" class="form-label">Seleccione el programa</label>
+                            <input type="hidden" id="idPrograma" name="idPrograma" value=""
+                                   th:field="*{programaReferencia.idPrograma}" class="form-control"/>
+                            <input type="text" id="nombrePrograma" name="nombrePrograma" value=""
+                                   readonly="true" th:field="*{programaReferencia.nombrePrograma}"
+                                    />
+                            <input type="button" value="Buscar" name="btnBuscarPrograma" />
+
+                        </div>
+                         <div>
+                            <label for="nombrePrograma" class="form-label">Seleccione el módulo</label>
+                            <input type="hidden" id="idModulo" name="idModulo" value=""
+                                    th:field="*{moduloReferencia.idModulo}" class="form-control"/>
+                            <input type="text" id="nombreModulo" name="nombreModulo" value="" readonly="true"
+                                   th:field="*{moduloReferencia.nombreModulo}"/>
+                            <input type="button" value="Buscar" name="btnBuscarModulo" />
+
+                        </div>
+
+                    <div>
+                        <label class="form-label">Seleccione los días lectivos</label>
+                        <div class="input-group">
+                            <input class="btn btn-outline-primary" type="checkbox" id="checkLunes" name="checkLunes" value="Lunes"/>
+                            <input class="btn btn-outline-primary" type="checkbox" id="checkMartes" name="checkMartes" value="Martes"/>
+                            <input class="btn btn-outline-primary" type="checkbox" id="checkMiercoles" name="checkMiercoles" value="Miércoles"/>
+                            <input class="btn btn-outline-primary" type="checkbox" id="checkJueves" name="checkJueves" value="Jueves"/>
+                            <input class="btn btn-outline-primary" type="checkbox" id="checkViernes" name="checkViernes" value="Viernes"/>
+                            <input class="btn btn-outline-primary" type="checkbox" id="checkSabado" name="checkSabado" value="Sábado"/>
+                        </div> 
+
+                    </div>
+
+                    <div>
+                        <label class="form-label">Seleccione el máximo de horas del programa</label>
+                        <div class="input-group">
+                            <input class="btn btn-outline-primary" type="checkbox" id="check6" name="check6" value="6"/>
+                            <input class="btn btn-outline-primary" type="checkbox" id="check5.4" name="check5.4" value="5.4"/>
+                        </div> 
+                    </div>
+                      <div>
+                        <label for="fechaInicial" class="form-label">Seleccione la fecha inicial</label>
+                        <div class="input-group">
+                            <input type="date" id="fechaInicial" name="fechaInicial" value=""
+                                    th:field="*{inicioReferencia}"/>
+                        </div> 
+                    </div>
+                    <div>
+                        <label for="horaInicial" class="form-label">Seleccione la hora inicial</label>
+                        <div class="input-group">
+                            <input type="time" id="horaInicial" name="horaInicial" value=""
+                                    th:field="*{horaInicioReferencia}"/>
+                        </div> 
+                    </div>
+                    
+                      <div>
+                        <label for="horaFinal" class="form-label">Seleccione la hora final</label>
+                        <div class="input-group">
+                            <input  th:field="*{horaFinalReferencia}"
+                                    class="btn btn-outline-primary" type="time" id="horaFinal" name="horaFinal" value=""/>
+                        </div> 
+                        
+                    </div>
+                    
+                    <div class="input-group">
+                            <input class="btn btn-primary" type="submit" id="btnGuardar" name="btnGuardar" value="Guardar"/>
+                            <a class="btn btn-warning" type="button" id="btnBorrar" name="btnBorrar">Borrar Todo</a>
+                   
+                    </div> 
+                        
+                </form> <!--FIN FORMULARIO-->
+            </div>
+            </div>
+        </div>
     </body>
 </html>
