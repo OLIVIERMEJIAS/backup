@@ -22,7 +22,7 @@ public class Programa {
     private short horasTotales;
     @OneToMany(mappedBy = "programasByIdPrograma")
     private Collection<ModulosProgramas> modulosProgramasByIdPrograma;
-    @OneToMany(mappedBy = "programasByIdPrograma")
+    @OneToMany(mappedBy = "programaReferencia")
     private Collection<Referencia> referenciasByIdPrograma;
 
     

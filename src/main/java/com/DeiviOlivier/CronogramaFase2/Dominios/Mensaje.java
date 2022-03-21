@@ -13,19 +13,19 @@ public class Mensaje {
     @Column(name = "ID_MENSAJE")
     private int idMensaje;
     @Basic
-    @Column(name = "ID_PROFESOR")
-    private int idProfesor;
-    @Basic
-    @Column(name = "ID_ADMINISTRADOR")
-    private int idAdministrador;
-    @Basic
     @Column(name = "FECHA_MENSAJE")
     private Date fechaMensaje;
     @Basic
     @Column(name = "ASUNTO_MENSAJE")
     private String asuntoMensaje;
-
-    
+    @ManyToOne
+    @JoinColumn(name="ID_PROFESOR")
+    private Profesor profesorMensajes;
+            
+    @ManyToOne
+    @JoinColumn(name="ID_ADMINISTRADOR")
+    private Administrador administradorMensajes;
+            
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,8 +34,6 @@ public class Mensaje {
         Mensaje mensajes = (Mensaje) o;
 
         if (idMensaje != mensajes.idMensaje) return false;
-        if (idProfesor != mensajes.idProfesor) return false;
-        if (idAdministrador != mensajes.idAdministrador) return false;
         if (fechaMensaje != null ? !fechaMensaje.equals(mensajes.fechaMensaje) : mensajes.fechaMensaje != null)
             return false;
         if (asuntoMensaje != null ? !asuntoMensaje.equals(mensajes.asuntoMensaje) : mensajes.asuntoMensaje != null)
@@ -47,8 +45,6 @@ public class Mensaje {
     @Override
     public int hashCode() {
         int result = idMensaje;
-        result = 31 * result + idProfesor;
-        result = 31 * result + idAdministrador;
         result = 31 * result + (fechaMensaje != null ? fechaMensaje.hashCode() : 0);
         result = 31 * result + (asuntoMensaje != null ? asuntoMensaje.hashCode() : 0);
         return result;

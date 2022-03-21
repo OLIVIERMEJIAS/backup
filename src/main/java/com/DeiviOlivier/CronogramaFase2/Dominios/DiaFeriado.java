@@ -17,11 +17,8 @@ public class DiaFeriado {
     @Basic
     @Column(name = "FECHA_INICIO_DIA_FERIADO")
     private Date fechaInicioDiaFeriado;
-    @Basic
-    @Column(name = "ID_CENTRO_FORMACION")
-    private Short idCentroFormacion;
     @ManyToOne
-    @JoinColumn(name = "ID_CENTRO_FORMACION", referencedColumnName = "ID_CENTRO_FORMACION")
+    @JoinColumn(name = "ID_CENTRO_FORMACION")
     private CentroFormacion centrosFormacionesByIdCentroFormacion;
 
    
@@ -38,9 +35,7 @@ public class DiaFeriado {
             return false;
         if (fechaInicioDiaFeriado != null ? !fechaInicioDiaFeriado.equals(that.fechaInicioDiaFeriado) : that.fechaInicioDiaFeriado != null)
             return false;
-        if (idCentroFormacion != null ? !idCentroFormacion.equals(that.idCentroFormacion) : that.idCentroFormacion != null)
-            return false;
-
+        
         return true;
     }
 
@@ -49,7 +44,6 @@ public class DiaFeriado {
         int result = (int) idDiaFeriado;
         result = 31 * result + (nombreDiaFeriado != null ? nombreDiaFeriado.hashCode() : 0);
         result = 31 * result + (fechaInicioDiaFeriado != null ? fechaInicioDiaFeriado.hashCode() : 0);
-        result = 31 * result + (idCentroFormacion != null ? idCentroFormacion.hashCode() : 0);
         return result;
     }
 

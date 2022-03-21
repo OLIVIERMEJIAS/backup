@@ -26,10 +26,10 @@ public class Modulo {
 
     @OneToMany(mappedBy = "modulosByIdModulo")
     private Collection<ModulosProgramas> modulosProgramasByIdModulo;
-    @OneToMany(mappedBy = "modulosByIdModulo")
+    @OneToMany(mappedBy = "modulosReferencia")
     private Collection<ModuloReferencia> modulosReferenciasByIdModulo;
-    @OneToMany(mappedBy = "programasByIdModulo")
-    private Collection<Referencia> referenciasByIdPrograma;
+    @OneToMany(mappedBy = "moduloReferencia")
+    private Collection<Referencia> referenciasByIdModulo;
 
     
     @Override

@@ -11,9 +11,7 @@ public class Administrador {
     @Id
     @Column(name = "ID_ADMINISTRADOR")
     private int idAdministrador;
-    @Basic
-    @Column(name = "ID_CENTRO_FORMACION")
-    private short idCentroFormacion;
+
     @Basic
     @Column(name = "CEDULA_ADMINISTRADOR")
     private int cedulaAdministrador;
@@ -35,17 +33,17 @@ public class Administrador {
     @Basic
     @Column(name = "CORREO_ADMINISTRADOR")
     private String correoAdministrador;
-    @Column(name="ID_ROL")
-    private byte idRol;
+
     @ManyToOne
-    @JoinColumn(name = "ID_CENTRO_FORMACION", referencedColumnName = "ID_CENTRO_FORMACION", nullable = false)
+    @JoinColumn(name = "ID_CENTRO_FORMACION", nullable = false)
     private CentroFormacion centrosFormacionesByIdCentroFormacion;
     @OneToMany(mappedBy = "administradoresByIdAdministrador")
     private Collection<Profesor> profesoresByIdAdministrador;
     @OneToOne
     @JoinColumn(name="ID_ROL", referencedColumnName = "ID_ROL", nullable = false)
     private Rol rol;
-    
+    @OneToMany(mappedBy="administradorMensajes")
+    private Collection<Mensaje> mensajes;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,7 +52,6 @@ public class Administrador {
         Administrador that = (Administrador) o;
 
         if (idAdministrador != that.idAdministrador) return false;
-        if (idCentroFormacion != that.idCentroFormacion) return false;
         if (cedulaAdministrador != that.cedulaAdministrador) return false;
         if (contrasenaAdministrador != null ? !contrasenaAdministrador.equals(that.contrasenaAdministrador) : that.contrasenaAdministrador != null)
             return false;
@@ -75,7 +72,6 @@ public class Administrador {
     @Override
     public int hashCode() {
         int result = idAdministrador;
-        result = 31 * result + (int) idCentroFormacion;
         result = 31 * result + cedulaAdministrador;
         result = 31 * result + (contrasenaAdministrador != null ? contrasenaAdministrador.hashCode() : 0);
         result = 31 * result + (nombreUsuario != null ? nombreUsuario.hashCode() : 0);

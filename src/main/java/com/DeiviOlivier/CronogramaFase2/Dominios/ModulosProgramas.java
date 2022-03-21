@@ -5,21 +5,16 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "MODULOS_PROGRAMAS")
-@IdClass(ModulosProgramasPK.class)
 public class ModulosProgramas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "ID_PROGRAMA")
-    private short idPrograma;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "ID_MODULO")
-    private short idModulo;
+    @Column(name="ID_MODULO_PROGRAMA")
+    private int idModuloPrograma;
     @ManyToOne
-    @JoinColumn(name = "ID_PROGRAMA", referencedColumnName = "ID_PROGRAMA", nullable = false)
+    @JoinColumn(name = "ID_PROGRAMA", nullable = false)
     private Programa programasByIdPrograma;
     @ManyToOne
-    @JoinColumn(name = "ID_MODULO", referencedColumnName = "ID_MODULO", nullable = false)
+    @JoinColumn(name = "ID_MODULO", nullable = false)
     private Modulo modulosByIdModulo;
 
     
@@ -30,18 +25,11 @@ public class ModulosProgramas {
 
         ModulosProgramas that = (ModulosProgramas) o;
 
-        if (idPrograma != that.idPrograma) return false;
-        if (idModulo != that.idModulo) return false;
 
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = (int) idPrograma;
-        result = 31 * result + (int) idModulo;
-        return result;
-    }
+   
 
     
 }

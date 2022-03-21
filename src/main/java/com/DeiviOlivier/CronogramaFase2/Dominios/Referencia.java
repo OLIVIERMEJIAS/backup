@@ -15,23 +15,22 @@ public class Referencia {
     @Column(name = "ID_REFERENCIA")
     private int idReferencia;
     @Basic
-    @Column(name = "ID_ELEMENTO")
-    private Short idElemento;
-    @Basic
     @Column(name = "REFERENCIA")
     private String referencia;
     @Basic
     @Column(name = "HORAS_MAXIMAS_REFERENCIA")
-    private BigDecimal horasMaximasReferencia;
-    @Basic
-    @Column(name = "HORAS_FINAL_REFERENCIA")
-    private Object horasFinalReferencia;
+    private BigDecimal horasMaximasReferencia; 
     @Basic
     @Column(name = "DIAS_REFERENCIA")
     private String diasReferencia;
     @Basic
     @Column(name = "HORA_INICIO_REFERENCIA")
-    private Object horaInicioReferencia;
+    private String horaInicioReferencia;
+    @Basic
+    @Column(name = "HORAS_FINAL_REFERENCIA")
+    private String horasFinalReferencia;
+    
+   
     @Basic
     @Column(name = "INICIO_REFERENCIA")
     private Date inicioReferencia;
@@ -44,11 +43,11 @@ public class Referencia {
     @OneToMany(mappedBy = "referenciasByIdReferencia")
     private Collection<ModuloReferencia> modulosReferenciasByIdReferencia;
     @ManyToOne
-    @JoinColumn(name = "ID_MODULO", referencedColumnName = "ID_MODULO")
-    private Programa programasByIdModulo;
+    @JoinColumn(name = "ID_MODULO")
+    private Modulo moduloReferencia;
     @ManyToOne
-    @JoinColumn(name = "ID_PROGRAMA", referencedColumnName = "ID_PROGRAMA")
-    private Programa programasByIdPrograma;
+    @JoinColumn(name = "ID_PROGRAMA")
+    private Programa programaReferencia;
 
 
 
@@ -60,7 +59,6 @@ public class Referencia {
         Referencia that = (Referencia) o;
 
         if (idReferencia != that.idReferencia) return false;
-        if (idElemento != null ? !idElemento.equals(that.idElemento) : that.idElemento != null) return false;
         if (referencia != null ? !referencia.equals(that.referencia) : that.referencia != null) return false;
         if (horasMaximasReferencia != null ? !horasMaximasReferencia.equals(that.horasMaximasReferencia) : that.horasMaximasReferencia != null)
             return false;
@@ -83,7 +81,6 @@ public class Referencia {
     @Override
     public int hashCode() {
         int result = idReferencia;
-        result = 31 * result + (idElemento != null ? idElemento.hashCode() : 0);
         result = 31 * result + (referencia != null ? referencia.hashCode() : 0);
         result = 31 * result + (horasMaximasReferencia != null ? horasMaximasReferencia.hashCode() : 0);
         result = 31 * result + (horasFinalReferencia != null ? horasFinalReferencia.hashCode() : 0);

@@ -14,11 +14,9 @@ public class Canton {
     @Basic
     @Column(name = "NOMBRE_CANTON")
     private String nombreCanton;
-    @Basic
-    @Column(name = "ID_PROVINCIA")
-    private byte idProvincia;
+
     @ManyToOne
-    @JoinColumn(name = "ID_PROVINCIA", referencedColumnName = "ID_PROVINCIA", nullable = false)
+    @JoinColumn(name = "ID_PROVINCIA", nullable = false)
     private Provincia provinciasByIdProvincia;
     @OneToMany(mappedBy = "cantonesByIdCanton")
     private Collection<Distrito> distritosByIdCanton;
@@ -32,7 +30,6 @@ public class Canton {
         Canton cantones = (Canton) o;
 
         if (idCanton != cantones.idCanton) return false;
-        if (idProvincia != cantones.idProvincia) return false;
         if (nombreCanton != null ? !nombreCanton.equals(cantones.nombreCanton) : cantones.nombreCanton != null)
             return false;
 
@@ -43,7 +40,6 @@ public class Canton {
     public int hashCode() {
         int result = (int) idCanton;
         result = 31 * result + (nombreCanton != null ? nombreCanton.hashCode() : 0);
-        result = 31 * result + (int) idProvincia;
         return result;
     }
 

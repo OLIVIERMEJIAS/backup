@@ -12,9 +12,7 @@ public class Profesor {
     @Id
     @Column(name = "ID_PROFESOR")
     private int idProfesor;
-    @Basic
-    @Column(name = "ID_ADMINISTRADOR")
-    private int idAdministrador;
+    
     @Basic
     @Column(name = "CONTRASENA_PROFESOR")
     private String contrasenaProfesor;
@@ -33,18 +31,18 @@ public class Profesor {
     @Basic
     @Column(name = "CORREO_PROFESOR")
     private String correoProfesor;
-    @Column(name="ID_ROL")
-    private byte idRol;
-    @OneToMany(mappedBy = "profesoresByIdProfesor")
+    @OneToMany(mappedBy = "profesoresModificadores")
     private Collection<Modificador> modificadoresByIdProfesor;
     @OneToMany(mappedBy = "profesoresByIdProfesor")
     private Collection<ModuloReferencia> modulosReferenciasByIdProfesor;
     @ManyToOne
-    @JoinColumn(name = "ID_ADMINISTRADOR", referencedColumnName = "ID_ADMINISTRADOR", nullable = false)
+    @JoinColumn(name = "ID_ADMINISTRADOR", nullable = false)
     private Administrador administradoresByIdAdministrador;
 @   OneToOne
     @JoinColumn(name="ID_ROL", referencedColumnName = "ID_ROL", nullable = false)
     private Rol rol;
+    @OneToMany(mappedBy="profesorMensajes")
+    private Collection<Mensaje> mensajes;
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,7 +51,6 @@ public class Profesor {
         Profesor that = (Profesor) o;
 
         if (idProfesor != that.idProfesor) return false;
-        if (idAdministrador != that.idAdministrador) return false;
         if (cedulaProfesor != that.cedulaProfesor) return false;
         if (contrasenaProfesor != null ? !contrasenaProfesor.equals(that.contrasenaProfesor) : that.contrasenaProfesor != null)
             return false;
@@ -63,16 +60,16 @@ public class Profesor {
             return false;
         if (apellido2Profesor != null ? !apellido2Profesor.equals(that.apellido2Profesor) : that.apellido2Profesor != null)
             return false;
+       if (correoProfesor != null ? !correoProfesor.equals(that.correoProfesor) : that.correoProfesor != null)
+            return false;
         if (correoProfesor != null ? !correoProfesor.equals(that.correoProfesor) : that.correoProfesor != null)
             return false;
-
         return true;
     }
 
     @Override
     public int hashCode() {
         int result = idProfesor;
-        result = 31 * result + idAdministrador;
         result = 31 * result + (contrasenaProfesor != null ? contrasenaProfesor.hashCode() : 0);
         result = 31 * result + cedulaProfesor;
         result = 31 * result + (nombreProfesor != null ? nombreProfesor.hashCode() : 0);

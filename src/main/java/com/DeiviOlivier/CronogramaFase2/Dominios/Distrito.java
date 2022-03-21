@@ -14,13 +14,11 @@ public class Distrito {
     @Basic
     @Column(name = "NOMBRE_DISTRITO")
     private String nombreDistrito;
-    @Basic
-    @Column(name = "ID_CANTON")
-    private byte idCanton;
+
     @OneToMany(mappedBy = "distritosByIdDistrito")
     private Collection<CentroFormacion> centrosFormacionesByIdDistrito;
     @ManyToOne
-    @JoinColumn(name = "ID_CANTON", referencedColumnName = "ID_CANTON", nullable = false)
+    @JoinColumn(name = "ID_CANTON", nullable = false)
     private Canton cantonesByIdCanton;
 
     
@@ -33,7 +31,6 @@ public class Distrito {
         Distrito distritos = (Distrito) o;
 
         if (idDistrito != distritos.idDistrito) return false;
-        if (idCanton != distritos.idCanton) return false;
         if (nombreDistrito != null ? !nombreDistrito.equals(distritos.nombreDistrito) : distritos.nombreDistrito != null)
             return false;
 
@@ -44,7 +41,6 @@ public class Distrito {
     public int hashCode() {
         int result = (int) idDistrito;
         result = 31 * result + (nombreDistrito != null ? nombreDistrito.hashCode() : 0);
-        result = 31 * result + (int) idCanton;
         return result;
     }
 

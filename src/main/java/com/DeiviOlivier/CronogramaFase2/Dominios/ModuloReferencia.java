@@ -12,15 +12,6 @@ public class ModuloReferencia {
     @Column(name = "ID_MODULO_REFERENCIA")
     private int idModuloReferencia;
     @Basic
-    @Column(name = "ID_MODULO ")
-    private short idModulo;
-    @Basic
-    @Column(name = "ID_PROFESOR")
-    private int idProfesor;
-    @Basic
-    @Column(name = "ID_REFERENCIA")
-    private int idReferencia;
-    @Basic
     @Column(name = "DIAS_MODULO_REFERENCIA")
     private String diasModuloReferencia;
     @Basic
@@ -36,13 +27,13 @@ public class ModuloReferencia {
     @Column(name = "FINAL_MODULO_REFERENCIA")
     private Date finalModuloReferencia;
     @ManyToOne
-    @JoinColumn(name = "ID_MODULO ", referencedColumnName = "ID_MODULO", nullable = false)
-    private Modulo modulosByIdModulo;
+    @JoinColumn(name = "ID_MODULO ", nullable = false)
+    private Modulo modulosReferencia;
     @ManyToOne
-    @JoinColumn(name = "ID_PROFESOR", referencedColumnName = "ID_PROFESOR", nullable = false)
+    @JoinColumn(name = "ID_PROFESOR", nullable = false)
     private Profesor profesoresByIdProfesor;
     @ManyToOne
-    @JoinColumn(name = "ID_REFERENCIA", referencedColumnName = "ID_REFERENCIA", nullable = false)
+    @JoinColumn(name = "ID_REFERENCIA", nullable = false)
     private Referencia referenciasByIdReferencia;
 
     
@@ -54,9 +45,6 @@ public class ModuloReferencia {
         ModuloReferencia that = (ModuloReferencia) o;
 
         if (idModuloReferencia != that.idModuloReferencia) return false;
-        if (idModulo != that.idModulo) return false;
-        if (idProfesor != that.idProfesor) return false;
-        if (idReferencia != that.idReferencia) return false;
         if (diasModuloReferencia != null ? !diasModuloReferencia.equals(that.diasModuloReferencia) : that.diasModuloReferencia != null)
             return false;
         if (horaInicioModuloReferencia != null ? !horaInicioModuloReferencia.equals(that.horaInicioModuloReferencia) : that.horaInicioModuloReferencia != null)
@@ -74,9 +62,6 @@ public class ModuloReferencia {
     @Override
     public int hashCode() {
         int result = idModuloReferencia;
-        result = 31 * result + (int) idModulo;
-        result = 31 * result + idProfesor;
-        result = 31 * result + idReferencia;
         result = 31 * result + (diasModuloReferencia != null ? diasModuloReferencia.hashCode() : 0);
         result = 31 * result + (horaInicioModuloReferencia != null ? horaInicioModuloReferencia.hashCode() : 0);
         result = 31 * result + (horaFinalModuloReferencia != null ? horaFinalModuloReferencia.hashCode() : 0);
