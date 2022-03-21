@@ -13,7 +13,7 @@ public class Referencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_REFERENCIA")
-    private int idReferencia;
+    private Long idReferencia;
     @Basic
     @Column(name = "REFERENCIA")
     private String referencia;
@@ -27,8 +27,8 @@ public class Referencia {
     @Column(name = "HORA_INICIO_REFERENCIA")
     private String horaInicioReferencia;
     @Basic
-    @Column(name = "HORAS_FINAL_REFERENCIA")
-    private String horasFinalReferencia;
+    @Column(name = "HORA_FINAL_REFERENCIA")
+    private String horaFinalReferencia;
     
    
     @Basic
@@ -62,7 +62,7 @@ public class Referencia {
         if (referencia != null ? !referencia.equals(that.referencia) : that.referencia != null) return false;
         if (horasMaximasReferencia != null ? !horasMaximasReferencia.equals(that.horasMaximasReferencia) : that.horasMaximasReferencia != null)
             return false;
-        if (horasFinalReferencia != null ? !horasFinalReferencia.equals(that.horasFinalReferencia) : that.horasFinalReferencia != null)
+        if (horaFinalReferencia != null ? !horaFinalReferencia.equals(that.horaFinalReferencia) : that.horaFinalReferencia != null)
             return false;
         if (diasReferencia != null ? !diasReferencia.equals(that.diasReferencia) : that.diasReferencia != null)
             return false;
@@ -78,19 +78,7 @@ public class Referencia {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = idReferencia;
-        result = 31 * result + (referencia != null ? referencia.hashCode() : 0);
-        result = 31 * result + (horasMaximasReferencia != null ? horasMaximasReferencia.hashCode() : 0);
-        result = 31 * result + (horasFinalReferencia != null ? horasFinalReferencia.hashCode() : 0);
-        result = 31 * result + (diasReferencia != null ? diasReferencia.hashCode() : 0);
-        result = 31 * result + (horaInicioReferencia != null ? horaInicioReferencia.hashCode() : 0);
-        result = 31 * result + (inicioReferencia != null ? inicioReferencia.hashCode() : 0);
-        result = 31 * result + (finalReferencia != null ? finalReferencia.hashCode() : 0);
-        result = 31 * result + (estadoReferencia != null ? estadoReferencia.hashCode() : 0);
-        return result;
-    }
+  
 
   
  
