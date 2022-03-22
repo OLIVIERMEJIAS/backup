@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantillas/plantilla1 ::head">
+        <title></title>
+    </head>
+    <body>
+        <div class="container mt-3 py-3 bg-light rounded-3">
+            <header th:replace="plantillas/plantilla1 ::header"></header>
+            <h1 class="card-header">Administrar programas</h1>
+            
+            <div class="row">
+                <div class="col-10 mx-auto">
+                    <form th:action="@{/guardarPrograma}" method="post" th:object="${programa}">
+                        <input type="hidden" name="idPrograma" th:field="*{idPrograma}"/>
+                        <div class="form-group">
+                            <label for="nombrePrograma" class="form-label">Nombre del programa: </label>
+                            <input type="text" name="nombrePrograma" class="form-control" th:field="*{nombrePrograma}"/>
+                                <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('nombrePrograma')}" 
+                                      th:errors="*{nombrePrograma}">
+                                </span>    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="codigoPrograma" class="form-label">Código del programa: </label>
+                            <input type="text" name="codigoPrograma" class="form-control" th:field="*{codigoPrograma}"/>
+                                <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('codigoPrograma')}" 
+                                      th:errors="*{codigoPrograma}">
+                                </span>    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="horasTotales" class="form-label">Cantidad de horas: </label>
+                            <input type="number" name="horasTotales" class="form-control" th:field="*{horasTotales}"/>
+                                <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('horasTotales')}" 
+                                      th:errors="*{horasTotales}">
+                                </span>    
+                        </div>
+
+                        <div class="mt-3">
+                            <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar"/>
+                            <a th:href="@{/programas}" class="btn btn-warning">Regresar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+

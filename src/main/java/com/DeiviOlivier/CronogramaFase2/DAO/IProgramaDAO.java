@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author HP
  */
 public interface IProgramaDAO extends JpaRepository<Programa, Long>{
-    
+    public Iterable<Programa> findByNombreProgramaContainsOrCodigoPrograma(String nom, String cod);
 }

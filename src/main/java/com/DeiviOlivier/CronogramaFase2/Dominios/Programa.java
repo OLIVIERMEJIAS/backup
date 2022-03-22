@@ -10,7 +10,7 @@ public class Programa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_PROGRAMA")
-    private short idPrograma;
+    private Long idPrograma;
     @Basic
     @Column(name = "NOMBRE_PROGRAMA")
     private String nombrePrograma;
@@ -42,15 +42,4 @@ public class Programa {
 
         return true;
     }
-
-    @Override
-    public int hashCode() {
-        int result = (int) idPrograma;
-        result = 31 * result + (nombrePrograma != null ? nombrePrograma.hashCode() : 0);
-        result = 31 * result + (codigoPrograma != null ? codigoPrograma.hashCode() : 0);
-        result = 31 * result + (int) horasTotales;
-        return result;
-    }
-
-
 }
