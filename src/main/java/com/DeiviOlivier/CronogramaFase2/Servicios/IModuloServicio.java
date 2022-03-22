@@ -4,10 +4,24 @@
  */
 package com.DeiviOlivier.CronogramaFase2.Servicios;
 
+import com.DeiviOlivier.CronogramaFase2.Dominios.Modulo;
+import java.util.List;
+import org.springframework.stereotype.Service;
+
 /**
  *
  * @author HP
  */
+@Service
 public interface IModuloServicio {
+
+    public void guardar(Modulo modulo);
+
+    public List<Modulo> listar();
+
+    public List<Modulo> listar(String nombre, String codigo);
+
+    public Modulo obtenerModulo(Long idModulo);
     
+    public void eliminar(Long id);
 }
