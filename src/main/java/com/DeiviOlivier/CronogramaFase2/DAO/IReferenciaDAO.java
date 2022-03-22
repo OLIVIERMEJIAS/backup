@@ -17,6 +17,5 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface IReferenciaDAO extends JpaRepository<Referencia,Long>{
     
-   public List<Referencia> findByReferenciaOrProgramaOrModulo(String codigo,
-           Programa programa, Modulo modulo);
+   public List<Referencia> findByReferencia(String codigo);
 }

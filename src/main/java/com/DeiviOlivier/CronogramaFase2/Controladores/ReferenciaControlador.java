@@ -41,8 +41,7 @@ public class ReferenciaControlador {
     @PostMapping("/filtrarReferencias")
     public String filtrar(Referencia referencia){
         List<Referencia> lista;
-        lista = referenciaServicio.filtrar(referencia.getReferencia(), referencia.getProgramaReferencia(),
-                referencia.getModuloReferencia());
+        lista = referenciaServicio.filtrar(referencia.getReferencia());
         //model.addAttribute("referencias", lista);
         return "listaReferencias";
     }

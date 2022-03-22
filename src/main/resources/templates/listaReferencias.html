@@ -29,13 +29,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div class="col-9 rounded">
                         <form th:action="@{/filtrarReferencias}" method="post">
                             <div class="input-group shadow p-2 mb-2 bg-body rounded">
-                                <input type="text" name="txtTexto" placeholder="Ingrese Código, Nombre de Programa o módulo individual" class="form-control"/>
+                                <input type="text" name="txtTexto" placeholder="Ingrese Código de Referencia" class="form-control"/>
                                 <input type="submit" name="btnBuscar" value="Buscar" class="btn btn-primary"/>
                             </div>
                         </form>
                     </div>
                     <div class="col-3 shadow p-2 mb-2 bg-body rounded">
-                        <a th:href="@{/nuevaReferencia}" class="btn btn-primary w-100"><i class="fas fa-user-plus"></i> Agregar Cliente</a>
+                        <a th:href="@{/nuevaReferencia}" class="btn btn-primary w-100"><i class="fas fa-user-plus"></i> Agregar Referencia</a>
                     </div>
                 </div>
                 <div class="mt-3" th:if="${referencias != null and !referencias.empty}">
@@ -65,7 +65,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     </table>
                 </div>
                 <div th:if="${clientes == null or clientes.empty}">
-                    No hay Clientes en la Base de Datos
+                    No hay Referencias guardadas
                 </div>
             </div>
         </div>
