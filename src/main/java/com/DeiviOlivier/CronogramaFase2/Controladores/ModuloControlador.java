@@ -81,7 +81,7 @@ public class ModuloControlador {
         if (modulo!=null) {
             try {
                 servicioModulo.eliminar(modulo.getIdModulo());
-                msg="Cliente Eliminado!";
+                msg="Módulo Eliminado!";
                 model.addAttribute("msg",msg);
             } catch (Exception e) { model.addAttribute("msg","Hubo un error");
             }
