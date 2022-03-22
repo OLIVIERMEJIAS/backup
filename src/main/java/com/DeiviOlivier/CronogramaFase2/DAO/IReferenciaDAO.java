@@ -4,8 +4,12 @@
  */
 package com.DeiviOlivier.CronogramaFase2.DAO;
 
+import com.DeiviOlivier.CronogramaFase2.Dominios.Modulo;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Programa;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -13,4 +17,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface IReferenciaDAO extends JpaRepository<Referencia,Long>{
     
+   public List<Referencia> findByReferenciaOrProgramaOrModulo(String codigo,
+           Programa programa, Modulo modulo);
 }
