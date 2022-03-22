@@ -4,7 +4,11 @@
  */
 package com.DeiviOlivier.CronogramaFase2.Controladores;
 
+import com.DeiviOlivier.CronogramaFase2.Dominios.Modulo;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Programa;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
+import com.DeiviOlivier.CronogramaFase2.Servicios.IModuloServicio;
+import com.DeiviOlivier.CronogramaFase2.Servicios.IProgramaServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IReferenciaServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +26,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ReferenciaControlador {
     @Autowired
     private IReferenciaServicio referenciaServicio;
+    @Autowired
+    private IModuloServicio modServ;
+    @Autowired
+    private IProgramaServicio progServ;
     @GetMapping("/nuevaReferencia")
-    public String nuevaReferencia(Referencia referencia){
+    public String nuevaReferencia(Referencia referencia,Model model){
+        List<Modulo> listMod = modServ.listar();
+        List<Programa> listProg = progServ.listar();
+        model.addAttribute("programasReferencia", listProg);
+        model.addAttribute("modulosSeleccionar", listMod);
         return "referencia";
     }
     
@@ -34,15 +46,15 @@ public class ReferenciaControlador {
     
     @GetMapping("/referencias")
     public String nuevaReferencia(Model model){
-        List<Referencia> lista;
-        //model.addAttribute("referencias", lista);
+        List<Referencia> lista = referenciaServicio.listar();
+        model.addAttribute("referencias", lista);
         return "listaReferencias";
     }
     @PostMapping("/filtrarReferencias")
-    public String filtrar(Referencia referencia){
+    public String filtrar(Referencia referencia,Model model){
         List<Referencia> lista;
         lista = referenciaServicio.filtrar(referencia.getReferencia());
-        //model.addAttribute("referencias", lista);
+        model.addAttribute("referencias", lista);
         return "listaReferencias";
     }
     

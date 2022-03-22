@@ -33,7 +33,7 @@ public class Profesor {
     private String correoProfesor;
     @OneToMany(mappedBy = "profesoresModificadores")
     private Collection<Modificador> modificadoresByIdProfesor;
-    @OneToMany(mappedBy = "profesoresByIdProfesor")
+    @OneToMany(mappedBy = "profesor")
     private Collection<ModuloReferencia> modulosReferenciasByIdProfesor;
     @ManyToOne
     @JoinColumn(name = "ID_ADMINISTRADOR", nullable = false)

@@ -4,10 +4,17 @@
  */
 package com.DeiviOlivier.CronogramaFase2.Servicios;
 
+import com.DeiviOlivier.CronogramaFase2.Dominios.ModuloReferencia;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
+import java.util.List;
+
 /**
  *
  * @author HP
  */
 public interface IModuloReferenciaServicio {
-    
+    public void eliminar(Long id);
+    public void guardar(ModuloReferencia moduloReferencia);
+    public ModuloReferencia obtenerModuloReferencia(Long id);
+    public List<ModuloReferencia> listar(Referencia referencia);
 }
