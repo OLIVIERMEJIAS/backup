@@ -39,14 +39,14 @@ public class ProgramaControlador {
     
     @GetMapping("/nuevoPrograma")
     public String nuevo(Programa programa){
-        return "programas";
+        return "programa";
     }
     
     @PostMapping("/guardarPrograma")
     public String guardar(@Valid Programa programa, Errors er){
         
         if(er.hasErrors()){
-            return "programas";
+            return "programa";
         }
         
         servicioPrograma.guardar(programa);
@@ -58,8 +58,8 @@ public class ProgramaControlador {
         
         programa = servicioPrograma.obtenerPrograma((programa.getIdPrograma()));
         if(programa != null){
-            model.addAttribute("programas", programa);
-            return "programas";
+            model.addAttribute("programa", programa);
+            return "programa";
         }
         String msg="No se logró cargar el programa";
         List<Programa> lista = servicioPrograma.listar();

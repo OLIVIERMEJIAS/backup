@@ -44,14 +44,14 @@ public class ModuloControlador {
     
     @GetMapping("/nuevoModulo")
     public String nuevo(Modulo modulo){
-        return "modulos";
+        return "modulo";
     }
     
     @PostMapping("/guardarModulo")
     public String guardar(@Valid Modulo modulo, Errors er){
         
         if(er.hasErrors()){
-            return "modulos";
+            return "modulo";
         }
         
         servicioModulo.guardar(modulo);
@@ -63,14 +63,15 @@ public class ModuloControlador {
         
         modulo = servicioModulo.obtenerModulo((modulo.getIdModulo()));
         if(modulo != null){
-            model.addAttribute("modulos", modulo);
-            return "modulos";
+            model.addAttribute("modulo", modulo);
+            return "modulo";
         }
         String msg="No se logró cargar el módulo";
         List<Modulo> lista = servicioModulo.listar();
         model.addAttribute("modulos", lista);
         model.addAttribute("msg", msg);
         return "listarModulos";
+        
     }
     
     @GetMapping("/eliminarModulo")

@@ -46,7 +46,7 @@
                                 <td th:text ="${item.idProfesor}" hidden="true"></td>
                                 <td th:text ="${item.nombreProfesor}"></td>
                                 <td th:text ="${item.apellido1Profesor}"></td>
-                                <td th:text ="${item.corrreoProfesor}"></td>
+                                <td th:text ="${item.correoProfesor}"></td>
                                 <td th:text ="${item.cedulaProfesor}"></td>
                                 <td> 
                                     <a th:href="@{/editarProfesor/}+${item.idProfesor}"><i class="fas fa-pen"></i> Editar</a> | 
@@ -58,7 +58,7 @@
 
                     </table>
                 </div>
-                <div th:if="${programas == null or programas.empty}">
+                <div th:if="${profesores == null or profesores.empty}">
                     Actualmente no hay datos de profesores.
                 </div>
             </div>

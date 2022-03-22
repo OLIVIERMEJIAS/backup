@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
     <head th:replace="plantillas/plantilla1 ::head">
-        <title></title>
+        <title>hola</title>
     </head>
     <body style="display: flex">
         <header th:replace="plantillas/plantilla1 ::header"></header>
         <div class="container mt-3 py-3 bg-light rounded-3">
-            <h1 class="card-header">Administrar programas</h1>
+            <h1 class="card-header">Administrar profesores</h1>
 
             <div class="row">
                 <div class="col-10 mx-auto">
@@ -41,7 +41,7 @@
 
                         <div class="form-group">
                             <label for="cedulaProfesor" class="form-label">Cédula:</label>
-                            <input type="number" name="cedulaProfesor" class="form-control" th:field="*{cedulaProfesor}"/>
+                            <input type="text" name="cedulaProfesor" class="form-control" th:field="*{cedulaProfesor}"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('cedulaProfesor')}" 
                                   th:errors="*{cedulaProfesor}">

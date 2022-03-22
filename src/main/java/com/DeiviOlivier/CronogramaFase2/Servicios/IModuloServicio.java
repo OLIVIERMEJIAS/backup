@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  *
  * @author HP
  */
-@Service
 public interface IModuloServicio {
 
     public void guardar(Modulo modulo);

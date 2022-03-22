@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
@@ -38,14 +39,14 @@ public class ProfesorControlador {
     
     @GetMapping("/nuevoProfesor")
     public String nuevo(Profesor profesor){
-        return "profesores";
+        return "profesor";
     }
     
     @PostMapping("/guardarProfesores")
     public String guardar(@Valid Profesor profesor, Errors er){
         
         if(er.hasErrors()){
-            return "profesores";
+            return "profesor";
         }
         
         servicioProfesor.guardar(profesor);
@@ -53,18 +54,17 @@ public class ProfesorControlador {
     }
     
     @GetMapping("/editarProfesor/{idProfesor}")
-    public String editar(Profesor profesor, Model model){
-        
-        profesor = servicioProfesor.obtenerProfesor((profesor.getIdProfesor()));
+    public String editar(Profesor profesor, Model model, RedirectAttributes redirAtt){
+        profesor = servicioProfesor.obtenerProfesor(profesor.getIdProfesor());
         if(profesor != null){
-            model.addAttribute("profesores", profesor);
-            return "profesores";
+            model.addAttribute("profesor", profesor);
+            return "profesor"; 
+        }else{
+            String msg="Imposible cargar el profesor";
+            redirAtt.addFlashAttribute("msg", msg);
+            return "redirect:/profesores";
         }
-        String msg="No se logró cargar el profesor";
-        List<Profesor> lista = servicioProfesor.listar();
-        model.addAttribute("profesores", lista);
-        model.addAttribute("msg", msg);
-        return "listarProfesores";
+        
     }
     
     @GetMapping("/eliminarProfesor")
