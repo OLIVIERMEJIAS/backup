@@ -56,37 +56,50 @@ public class ProfesorControlador {
     @GetMapping("/editarProfesor/{idProfesor}")
     public String editar(Profesor profesor, Model model, RedirectAttributes redirAtt){
         profesor = servicioProfesor.obtenerProfesor(profesor.getIdProfesor());
-        if(profesor != null){
-            model.addAttribute("profesor", profesor);
-            return "profesor"; 
-        }else{
-            String msg="Imposible cargar el profesor";
-            redirAtt.addFlashAttribute("msg", msg);
-            return "redirect:/profesores";
+        
+        if (profesor != null) {
+            redirAtt.addFlashAttribute("profesor", profesor);
+            return "redirect:/nuevoProfesor";
+        } else {
+            String editar = "Imposible cargar el profesor";
+            redirAtt.addFlashAttribute("editar", editar);
+            return "redirect:/listarProfesores";
         }
         
     }
     
     @GetMapping("/eliminarProfesor")
-    public String eliminar(Profesor profesor, Model model){
+    public String eliminar(Profesor profesor, Model model,RedirectAttributes redirAtt){
         
-        String msg="";
-        
+        profesor = servicioProfesor.obtenerProfesor(profesor.getIdProfesor());
+
+        if (profesor != null) {
+            redirAtt.addFlashAttribute("profesor", profesor);
+            String eliminar = "1";
+            redirAtt.addFlashAttribute("eliminar", eliminar);
+            redirAtt.addFlashAttribute("editar", "2");
+            return "redirect:/nuevoProfesor";
+        } else {
+            String eliminar = "Imposible cargar el profesor";
+            redirAtt.addFlashAttribute("eliminar", eliminar);
+            return "redirect:/listarProfesores";
+        }
+    }
+    
+    @GetMapping("/borrarProfesor")
+    public String borrarProfesor(Profesor profesor, Model model,RedirectAttributes redirAtt) {
+
         if (profesor!=null) {
             try {
                 servicioProfesor.eliminar(profesor.getIdProfesor());
-                msg="Profesor Eliminado!";
-                model.addAttribute("msg",msg);
-            } catch (Exception e) { model.addAttribute("msg","Hubo un error");
+                redirAtt.addFlashAttribute("msg","Eliminado con éxito");
+                return "redirect:/profesores";
+            } catch (Exception e) { 
+                redirAtt.addFlashAttribute("msg","No se puede eliminar un profesor vinculado actualmente");
+                
             }
         }
-        //Esto no se gace
-        List<Profesor> lista = servicioProfesor.listar();
-        model.addAttribute("profesor", lista);
-        //Hasta Aquí
-        return "listarProfesores";
-        
-        //TODO: PONERLE LOS REDIRECT ATRIBUTTES
+        return "redirect:/profesores";
     }
     
 }

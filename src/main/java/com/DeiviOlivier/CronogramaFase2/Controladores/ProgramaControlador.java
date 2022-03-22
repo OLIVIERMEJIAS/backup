@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -54,40 +55,51 @@ public class ProgramaControlador {
     }
     
     @GetMapping("/editarPrograma/{idPrograma}")
-    public String editar(Programa programa, Model model){
+    public String editar(Programa programa, Model model,RedirectAttributes redirAtt){
         
-        programa = servicioPrograma.obtenerPrograma((programa.getIdPrograma()));
-        if(programa != null){
-            model.addAttribute("programa", programa);
-            return "programa";
+        programa = servicioPrograma.obtenerPrograma(programa.getIdPrograma());
+        
+        if (programa != null) {
+            redirAtt.addFlashAttribute("programa", programa);
+            return "redirect:/nuevoPrograma";
+        } else {
+            String editar = "Imposible cargar el programa";
+            redirAtt.addFlashAttribute("editar", editar);
+            return "redirect:/listarProgramas";
         }
-        String msg="No se logró cargar el programa";
-        List<Programa> lista = servicioPrograma.listar();
-        model.addAttribute("programas", lista);
-        model.addAttribute("msg", msg);
-        return "listarProgramas";
     }
     
     @GetMapping("/eliminarPrograma")
-    public String eliminar(Programa programa, Model model){
+    public String eliminar(Programa programa, Model model,RedirectAttributes redirAtt){
         
-        String msg="";
-        programa = servicioPrograma.obtenerPrograma((programa.getIdPrograma()));
-        
+        programa = servicioPrograma.obtenerPrograma(programa.getIdPrograma());
+
+        if (programa != null) {
+            redirAtt.addFlashAttribute("programa", programa);
+            String eliminar = "1";
+            redirAtt.addFlashAttribute("eliminar", eliminar);
+            redirAtt.addFlashAttribute("editar", "2");
+            return "redirect:/nuevoPrograma";
+        } else {
+            String eliminar = "Imposible cargar el programa";
+            redirAtt.addFlashAttribute("eliminar", eliminar);
+            return "redirect:/listarProgramas";
+        }
+    }
+    
+    @GetMapping("/borrarPrograma")
+    public String borrarPrograma(Programa programa, Model model,RedirectAttributes redirAtt) {
+
         if (programa!=null) {
             try {
                 servicioPrograma.eliminar(programa.getIdPrograma());
-                msg="Programa Eliminado!";
-                model.addAttribute("msg",msg);
-            } catch (Exception e) { model.addAttribute("msg","Hubo un error al eliminar");
+                redirAtt.addFlashAttribute("msg","Eliminado con éxito");
+                return "redirect:/programas";
+            } catch (Exception e) { 
+                redirAtt.addFlashAttribute("msg","No se puede eliminar un programa vinculado actualmente");
+                
             }
         }
-        //Esto no se gace
-        List<Programa> lista = servicioPrograma.listar();
-        model.addAttribute("programas", lista);
-        //Hasta Aquí
-        return "listarProgramas";
-        
-        //TODO: PONERLE LOS REDIRECT ATRIBUTTES
+        return "redirect:/programas";
     }
 }
