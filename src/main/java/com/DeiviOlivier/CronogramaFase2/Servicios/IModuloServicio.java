@@ -23,5 +23,5 @@ public interface IModuloServicio {
 
     public Modulo obtenerModulo(Long idModulo);
     
-    public Long eliminar(String nombre);
+    public void eliminar(Long id);
 }

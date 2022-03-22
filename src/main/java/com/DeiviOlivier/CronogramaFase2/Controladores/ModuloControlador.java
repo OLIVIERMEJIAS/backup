@@ -72,4 +72,26 @@ public class ModuloControlador {
         model.addAttribute("msg", msg);
         return "listarModulos";
     }
+    
+    @GetMapping("/eliminarModulo")
+    public String eliminar(Modulo modulo, Model model){
+        
+        String msg="";
+        
+        if (modulo!=null) {
+            try {
+                servicioModulo.eliminar(modulo.getIdModulo());
+                msg="Cliente Eliminado!";
+                model.addAttribute("msg",msg);
+            } catch (Exception e) { model.addAttribute("msg","Hubo un error");
+            }
+        }
+        //Esto no se gace
+        List<Modulo> lista = servicioModulo.listar();
+        model.addAttribute("modulos", lista);
+        //Hasta Aquí
+        return "listarModulos";
+        
+        //TODO: PONERLE LOS REDIRECT ATRIBUTTES
+    }
 }

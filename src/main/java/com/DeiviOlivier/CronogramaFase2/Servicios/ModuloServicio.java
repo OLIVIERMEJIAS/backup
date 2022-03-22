@@ -45,10 +45,11 @@ public class ModuloServicio implements IModuloServicio{
     }
 
     @Override
-    public Long eliminar(String nombre) {
-        return moduloDao.deleteByNombreModulo(nombre);
+    @Transactional
+    public void eliminar(Long id) {
+        moduloDao.deleteById(id);
     }
 
 
-    
+
 }
