@@ -68,10 +68,11 @@ public class ProgramaControlador {
         return "listarProgramas";
     }
     
-    @GetMapping("/eliminarProgramas")
+    @GetMapping("/eliminarPrograma")
     public String eliminar(Programa programa, Model model){
         
         String msg="";
+        programa = servicioPrograma.obtenerPrograma((programa.getIdPrograma()));
         
         if (programa!=null) {
             try {
