@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantillas/plantilla1 ::head">
+        <title></title>
+    </head>
+    <body style="display: flex">
+        <header th:replace="plantillas/plantilla1 ::header"></header>
+        <div class="container mt-3 py-3 bg-light rounded-3">
+            <h1 class="card-header">Administrar programas</h1>
+
+            <div class="row">
+                <div class="col-10 mx-auto">
+                    <form th:action="@{/guardarProfesor}" method="post" th:object="${profesor}">
+                        <input type="hidden" name="idProfesor" th:field="*{idProfesor}"/>
+                        <div class="form-group">
+                            <label for="nombreProfesor" class="form-label">Nombre:</label>
+                            <input type="text" name="nombreProfesor" class="form-control" th:field="*{nombreProfesor}"/>
+                            <span class="font-italic text-danger" 
+                                  th:if="${#fields.hasErrors('nombreProfesor')}" 
+                                  th:errors="*{nombreProfesor}">
+                            </span>    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apellido1Profesor" class="form-label">Apellido:</label>
+                            <input type="text" name="apellido1Profesor" class="form-control" th:field="*{apellido1Profesor}"/>
+                            <span class="font-italic text-danger" 
+                                  th:if="${#fields.hasErrors('apellido1Profesor')}" 
+                                  th:errors="*{apellido1Profesor}">
+                            </span>    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correoProfesor" class="form-label">Email:</label>
+                            <input type="text" name="correoProfesor" class="form-control" th:field="*{correoProfesor}"/>
+                            <span class="font-italic text-danger" 
+                                  th:if="${#fields.hasErrors('correoProfesor')}" 
+                                  th:errors="*{correoProfesor}">
+                            </span>    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cedulaProfesor" class="form-label">Cédula:</label>
+                            <input type="number" name="cedulaProfesor" class="form-control" th:field="*{cedulaProfesor}"/>
+                            <span class="font-italic text-danger" 
+                                  th:if="${#fields.hasErrors('cedulaProfesor')}" 
+                                  th:errors="*{cedulaProfesor}">
+                            </span>    
+                        </div>
+
+                        <div class="mt-3">
+                            <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar"/>
+                            <a th:href="@{/profesores}" class="btn btn-warning">Regresar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

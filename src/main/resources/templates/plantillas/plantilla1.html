@@ -5,7 +5,7 @@
         <title>Cronograma INA</title>
         <meta charset="UTF-8"/>
 
-                <link rel="stylesheet" th:href="@{webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
 
         <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.15.4/css/all.css}"/>
         <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
@@ -13,48 +13,52 @@
         <script th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <link href="../../static/estilo.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:fragment="header">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" th:href="@{/}">Administración de Cronograma</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarText">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" th:href="@{/}">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/modulos}">Módulos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/programas}">Programas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/profesores}">Profesores</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/referencias}">Referencias</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/cronogramas}">Cronogramas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/noLectivos}">Días no lectivos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/mensajes}">Mensajes</a>
-                            </li>
-                        </ul>
-                        <span class="navbar-text">
-                            <i>Ejercicio Práctico INA</i>
-                        </span>
-                    </div>
-                </div>
-            </nav>
+            <div class="container-fluid">
+                <div class="row min-vh-100 flex-column flex-md-row">
+                    <aside>
+                        <nav class="navbar navbar-expand-md navbar-dark bd-dark flex-md-column flex-row align-items-center py-2 text-center sticky-top " id="sidebar">
+                            <div class="text-center p-3">
+
+                                <img src="static/images/logo.png" alt="profile picture" class="img-fluid rounded-circle my-4 d-none d-md-block bg-light"/>
+                                <a th:href="@{/}" class="navbar-brand mx-0 font-weight-bold  text-nowrap" >Cronograma INA</a>
+                            </div>
+                            <button type="button" class="navbar-toggler border-0 order-1" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse order-last" id="nav">
+                                <ul class="navbar-nav flex-column w-100 justify-content-center">
+                                    <li class="nav-item">
+                                        <a th:href="@{/modulos}" class="nav-link font-weight-bold" >Módulos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a th:href="@{/programas}" class="nav-link font-weight-bold">Programas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a th:href="@{/profesores}" class="nav-link font-weight-bold">Profesores</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a th:href="@{/referencias}" class="nav-link font-weight-bold">Referencias</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a th:href="@{/cronogramas}" class="nav-link font-weight-bold">Cronogramas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a th:href="@{/noLectivos}" class="nav-link font-weight-bold">Días No Lectivos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a th:href="@{/mensajes}" class="nav-link font-weight-bold">Mensajes</a>
+                                    </li>
+                                </ul>
+                            </div>      
+                        </nav>   
+                    </aside>
+            </div>
+            </div>
         </header>
         <main>
 

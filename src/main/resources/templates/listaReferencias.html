@@ -10,11 +10,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <body>
+    <body style="display: flex">
+        <header th:replace="plantillas/plantilla1 :: header" ></header>
          <div class="container mt-3 py-3 bg-light rounded-3">
-            <header th:replace="plantillas/plantilla1 :: header" >
-
-            </header>
             <h1 class="card-header">Lista de Referencias</h1>
 
             <div th:if="${msg!=null and !msg.empty}">
