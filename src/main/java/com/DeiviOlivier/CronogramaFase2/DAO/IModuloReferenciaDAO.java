@@ -5,6 +5,8 @@
 package com.DeiviOlivier.CronogramaFase2.DAO;
 
 import com.DeiviOlivier.CronogramaFase2.Dominios.ModuloReferencia;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -12,5 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author HP
  */
 public interface IModuloReferenciaDAO extends JpaRepository<ModuloReferencia,Long>{
-    
+    public List<ModuloReferencia> findByReferencia(Referencia referencia);
 }

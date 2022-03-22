@@ -30,8 +30,8 @@
                             <input type="text" id="nombrePrograma" name="nombrePrograma" value=""
                                    readonly="true" th:field="*{programaReferencia.nombrePrograma}" class="form-control"
                                    />
-                            <input type="button" value="Buscar" name="btnBuscarPrograma" class="btn-primary form-control mt-2"/>
-
+                            <a id="btnBuscarP" class="btn btn-success" data-bs-toggle="modal"
+                                               data-bs-target="#modalProgramas"><i class="fas fa-binoculars"></i>Buscar</a>
                         </div>
                         <div>
                             <label for="nombrePrograma" class="form-label">Seleccione el módulo</label>
@@ -39,8 +39,8 @@
                                    th:field="*{moduloReferencia.idModulo}" class="form-control"/>
                             <input type="text" id="nombreModulo" name="nombreModulo" value="" readonly="true"
                                    th:field="*{moduloReferencia.nombreModulo}" class="form-control"/>
-                            <input type="button" value="Buscar" name="btnBuscarModulo" class="btn-primary form-control mt-2"/>
-
+                                <a id="btnBuscarM" class="btn btn-success" data-bs-toggle="modal"
+                                               data-bs-target="#modalModulos"><i class="fas fa-binoculars"></i>Buscar</a>
                         </div>
 
                         <div>
@@ -96,6 +96,140 @@
                     </form> <!--FIN FORMULARIO-->
                 </div>
             </div>
+            
+             <section>
+                <div class="modal fade" id="modalProgramas" tabindex="-1" role="dialog"
+                     aria-labelledby="programaModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="programaModalLabel" >Listado de Programas</h5>                                
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                
+                            </div>
+                            <div class="modal-body">
+                                <div th:if="${programasReferencia != null and !programasReferencia.empty}">
+                                    <table class="table" id="tablaProgramas">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Nombre:</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="item:${programasReferencia}">
+                                                <td th:text="${item.idPrograma}"></td>
+                                                <td th:text="${item.nombrePrograma}"></td>
+                                                <td>
+                                                    <a href="#" th:onclick="seleccionar([[${item.idPrograma}]],[[${item.nombrePrograma}]])">Seleccionar</a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div th:if="${programasReferencia == null or programasReferencia.empty}">
+                                    No hay Programas guardados
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button id="btnCerrar" type="button" class="btn btn-primary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                            </div>                            
+                        </div>
+
+                    </div>
+
+
+                </div> <!--FIN MODAL-->
+            </section>
+        
+        <script type="text/javascript">
+            function seleccionar(id, nombre) {
+                $("#idPrograma").val(id);
+                $("#nombrePrograma").val(nombre);
+                $("#btnCerrar").click();
+            }
+
+            $(document).ready(function () {
+                $("#tablaProgramas").DataTable({
+                    "ordering": false,
+                    "lengthMenu": [5, 10, 15],
+                    "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
+                })
+            })
+
+        </script>
+        
+        <section>
+                <div class="modal fade" id="modalModulos" tabindex="-1" role="dialog"
+                     aria-labelledby="moduloModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="moduloModalLabel" >Listado de Módulos</h5>                                
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                
+                            </div>
+                            <div class="modal-body">
+                                <div th:if="${modulosSeleccionar != null and !modulosSeleccionar.empty}">
+                                    <table class="table" id="tablaModulos">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Nombre:</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="item:${modulosSeleccionar}">
+                                                <td th:text="${item.idModulo}"></td>
+                                                <td th:text="${item.nombreModulo}"></td>
+                                                <td>
+                                                    <a href="#" th:onclick="seleccionar([[${item.idModulo}]],[[${item.nombreModulo}]])">Seleccionar</a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div th:if="${modulosSeleccionar == null or modulosSeleccionar.empty}">
+                                    No hay Módulos guardados
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button id="btonCerrar" type="button" class="btn btn-primary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                            </div>                            
+                        </div>
+
+                    </div>
+
+
+                </div> <!--FIN MODAL-->
+            </section>
+        
+        <script type="text/javascript">
+            function seleccionarModulo(id, nombre) {
+                $("#idModulo").val(id);
+                $("#nombreModulo").val(nombre);
+                $("#btonCerrar").click();
+            }
+
+            $(document).ready(function () {
+                $("#tablaModulos").DataTable({
+                    "ordering": false,
+                    "lengthMenu": [5, 10, 15],
+                    "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
+                })
+            })
+
+        </script>
         </div>
     </body>
 </html>

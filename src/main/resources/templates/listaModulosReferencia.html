@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantillas/plantilla1 :: head">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+         <div class="container mt-3 py-3 bg-light rounded-3">
+            <header th:replace="plantillas/plantilla1 :: header" >
+
+            </header>
+
+            <div class="container mt-3">
+                <h1>Lista de Módulos Por Referecia</h1>
+                <h2>Referencia: [[${referencia.referencia}]]</h2>
+                <a id="btnBuscarM" class="btn btn-success" data-bs-toggle="modal"
+                data-bs-target="#modalModulos"><i class="fas fa-folder-plus"></i>Agregar Nuevo</a>
+                <div class="mt-3" th:if="${modulosR != null and !modulosR.empty}">
+                    <table class="table table-striped table-hover shadow p-3 mb-3 bg-body rounded">
+                        <thead class="table-dark">
+                            <tr>
+                                <th hidden="true">Id</th>
+                                <th>Nombre del Profesor:</th>
+                                <th>Nombre del Módulo</th>
+                                <th>Días de Clase</th>
+                                <th>Hora Inicio</th>
+                                <th>Hora Final</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Final</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="modR:${modulosR}">
+                                <td hidden="true" th:text ="${modR.idModuloReferencia}"></td>
+                                
+                                 <td>
+                                         [[${modR.profesor.nombreProfesor} + ' ' + ${modR.profesor.apellido1Profesor}
+                                         + ' ' + ${modR.profesor.apellido2Profesor}]]
+                                 </td>
+                                 
+                                <td th:text ="${modR.modulo.nombreModulo}">
+                                </td>
+                                
+                                <td th:text ="${modR.diasModuloReferencia}">
+                                </td>
+                                
+                                 <td th:text ="${modR.horaInicioModuloReferencia}">
+                                </td>
+                                 
+                                 <td th:text ="${modR.horaFinalModuloReferencia}">
+                                </td>
+                               
+                                 <td th:text ="${modR.inicioModuloReferencia}">
+                                </td>
+                                
+                                <td th:text ="${modR.finalModuloReferencia}">
+                                </td>
+                      
+                                <td>
+                                    <a th:href="@{/editarModuloReferencia/}+${modR.idModuloReferencia}"><i class="fas fa-marker"></i>Editar</a> | 
+                                    <a th:href="@{/eliminarModuloReferencia/}+${modR.idModuloReferencia}"><i class="fas fa-trash-alt"></i>Eliminar</a> 
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div th:if="${modulosR == null or modulosR.empty}">
+                    No hay Módulos asignados a esta Referencia
+                </div>
+            </div>
+               
+        
+        <section>
+                <div class="modal fade" id="modalModulos" tabindex="-1" role="dialog"
+                     aria-labelledby="moduloModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="moduloModalLabel" >Listado de Módulos</h5>                                
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                
+                            </div>
+                            <div class="modal-body">
+                                <div th:if="${modSeleccionar != null and !modSeleccionar.empty}">
+                                    <table class="table" id="tablaModulos">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Nombre:</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="item:${modSeleccionar}">
+                                                <td th:text="${item.idModulo}"></td>
+                                                <td th:text="${item.nombreModulo}"></td>
+                                                <td>
+                                                    <a href="#" th:onclick="seleccionar([[${item.idModulo}]],[[${item.nombreModulo}]])">Seleccionar</a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div th:if="${modSeleccionar == null or modSeleccionar.empty}">
+                                    No hay Módulos relacionados a esta Referencia
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button id="btonCerrar" type="button" class="btn btn-primary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                            </div>                            
+                        </div>
+
+                    </div>
+
+
+                </div> <!--FIN MODAL-->
+            </section>
+        
+        <script type="text/javascript">
+            function seleccionarModulo(id, nombre) {
+                $("#idModulo").val(id);
+                $("#nombreModulo").val(nombre);
+                $("#btonCerrar").click();
+            }
+
+            $(document).ready(function () {
+                $("#tablaModulos").DataTable({
+                    "ordering": false,
+                    "lengthMenu": [5, 10, 15],
+                    "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
+                })
+            })
+
+        </script>
+        </div>
+    </body>
+</html>

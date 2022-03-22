@@ -15,10 +15,10 @@ public class ModuloReferencia {
     @Column(name = "DIAS_MODULO_REFERENCIA")
     private String diasModuloReferencia;
     @Basic
-    @Column(name = "HORA_INICIO_MODULO REFERENCIA")
+    @Column(name = "HORA_INICIO_MODULO_REFERENCIA")
     private String horaInicioModuloReferencia;
     @Basic
-    @Column(name = "HORA_FINAL_MODULO REFERENCIA")
+    @Column(name = "HORA_FINAL_MODULO_REFERENCIA")
     private String horaFinalModuloReferencia;
     @Basic
     @Column(name = "INICIO_MODULO_REFERENCIA")
@@ -28,13 +28,13 @@ public class ModuloReferencia {
     private Date finalModuloReferencia;
     @ManyToOne
     @JoinColumn(name = "ID_MODULO ", nullable = false)
-    private Modulo modulosReferencia;
+    private Modulo modulo;
     @ManyToOne
     @JoinColumn(name = "ID_PROFESOR", nullable = false)
-    private Profesor profesoresByIdProfesor;
+    private Profesor profesor;
     @ManyToOne
     @JoinColumn(name = "ID_REFERENCIA", nullable = false)
-    private Referencia referenciasByIdReferencia;
+    private Referencia referencia;
 
     
     @Override

@@ -24,12 +24,14 @@ public class Modulo {
     @Column(name = "REQUISITO_MODULO")
     private String requisitoModulo;
 
-    @OneToMany(mappedBy = "modulosByIdModulo")
-    private Collection<ModulosProgramas> modulosProgramasByIdModulo;
-    @OneToMany(mappedBy = "modulosReferencia")
+    @OneToMany(mappedBy = "programasByIdPrograma")
+    private Collection<ModulosProgramas> modulosProgramas;
+     @OneToMany(mappedBy = "modulosByIdModulo")
+    private Collection<ModulosProgramas> modulosPrograma;
+    @OneToMany(mappedBy = "modulo")
     private Collection<ModuloReferencia> modulosReferenciasByIdModulo;
     @OneToMany(mappedBy = "moduloReferencia")
-    private Collection<Referencia> referenciasByIdModulo;
+    private Collection<Referencia> referencia;
 
     
     @Override

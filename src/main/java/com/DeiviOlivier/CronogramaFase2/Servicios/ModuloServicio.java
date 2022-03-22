@@ -6,6 +6,8 @@ package com.DeiviOlivier.CronogramaFase2.Servicios;
 
 import com.DeiviOlivier.CronogramaFase2.DAO.IModuloDAO;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Modulo;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Programa;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,16 @@ public class ModuloServicio implements IModuloServicio{
         moduloDao.deleteById(id);
     }
 
+    @Override
+    public List<Modulo> listar(Referencia referencia) {
+        return (List<Modulo>) moduloDao.findByReferencia(referencia);
+    }
 
+    @Override
+    public List<Modulo> listar(Long idPrograma) {
+        return (List<Modulo>) moduloDao.modulosProgramas(idPrograma);
+    }
+
+    
 
 }
