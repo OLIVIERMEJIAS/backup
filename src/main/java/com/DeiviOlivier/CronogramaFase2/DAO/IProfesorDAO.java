@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author HP
  */
 public interface IProfesorDAO extends JpaRepository<Profesor,Long>{
-    
+    public Iterable<Profesor> findByNombreProfesorContainsOrApellido1ProfesorContainsOrCedulaProfesorContains(String nom, String ape,String cedula);
 }

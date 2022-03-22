@@ -11,14 +11,14 @@ public class Profesor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_PROFESOR")
-    private int idProfesor;
+    private Long idProfesor;
     
     @Basic
     @Column(name = "CONTRASENA_PROFESOR")
     private String contrasenaProfesor;
     @Basic
     @Column(name = "CEDULA_PROFESOR")
-    private int cedulaProfesor;
+    private String cedulaProfesor;
     @Basic
     @Column(name = "NOMBRE_PROFESOR")
     private String nombreProfesor;
@@ -65,18 +65,6 @@ public class Profesor {
         if (correoProfesor != null ? !correoProfesor.equals(that.correoProfesor) : that.correoProfesor != null)
             return false;
         return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idProfesor;
-        result = 31 * result + (contrasenaProfesor != null ? contrasenaProfesor.hashCode() : 0);
-        result = 31 * result + cedulaProfesor;
-        result = 31 * result + (nombreProfesor != null ? nombreProfesor.hashCode() : 0);
-        result = 31 * result + (apellido1Profesor != null ? apellido1Profesor.hashCode() : 0);
-        result = 31 * result + (apellido2Profesor != null ? apellido2Profesor.hashCode() : 0);
-        result = 31 * result + (correoProfesor != null ? correoProfesor.hashCode() : 0);
-        return result;
     }
 
 
