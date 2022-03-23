@@ -1,6 +1,6 @@
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-    <head th:replace="plantillas/plantilla1 :: head ">
+    <head th:replace="plantillas/plantilla1 :: head">
         <title>TODO supply a title</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,10 +15,11 @@
                 </div>
 
                 <div class="card-body">
-                    <form th:action="@{/guardarReferencias}" method="post" th:object="${referencia}">
+                    <form th:action="@{/guardarReferencia}" method="post" th:object="${referencia}">
                         <input type="hidden" name="idReferencia" th:field="*{idReferencia}" value=""/>
-
-                        <div th:if="${selectPrograma != null}">
+                        
+                        <div class="row">
+                        <div class="col-6">
                             <label for="nombrePrograma" class="form-label">Seleccione el programa</label>
                             <input type="hidden" id="idPrograma" name="idPrograma" value=""
                                    th:field="*{programaReferencia.idPrograma}" class="form-control"/>
@@ -28,7 +29,7 @@
                             <a id="btnBuscarP" class="btn btn-success" data-bs-toggle="modal"
                                                data-bs-target="#modalProgramas"><i class="fas fa-binoculars"></i>Buscar</a>
                         </div>
-                        <div th:if="${selectPrograma == null}">
+                        <div class="col-6">
                             <label for="nombrePrograma" class="form-label">Seleccione el módulo</label>
                             <input type="hidden" id="idModulo" name="idModulo" value=""
                                    th:field="*{moduloReferencia.idModulo}" class="form-control"/>
@@ -37,82 +38,41 @@
                                 <a id="btnBuscarM" class="btn btn-success" data-bs-toggle="modal"
                                                data-bs-target="#modalModulos"><i class="fas fa-binoculars"></i>Buscar</a>
                         </div>
+                        </div>  
+                        <div class="row">
+                        <div class="col-6">
+                            <label class="form-label" for="codigo">Ingrese el código de la referencia</label>
+                            <div class="input-group">
+                                <input type="text" id="horasMaximas" name="codigo" value="" th:field="*{codigo}" />
+                            </div> 
+                        </div>
                         
-                           <div>
-                            <label class="form-label">Indique el código de la Referencia</label>
-                           
-                            <input class="form-input" type="text" value="" name="codigoReferencia" id="codigoReferencia"
-                                   th:field="*{referencia}"/>
-                            </div>
-                        
-                        <div>
-                            <label class="form-label">Seleccione los días lectivos</label>
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" name="lunes" id="lunes"/>
-                            <label class="form-check-label" for="lunes">
-                              Lunes
-                            </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="" name="martes" id="martes"/>
-                              <label class="form-check-label" for="martes">
-                                Martes
-                              </label>
-                            </div>
-                            
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" name="miercoles" id="miercoles"/>
-                            <label class="form-check-label" for="miercoles">
-                              Miércoles
-                            </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="" name="jueves" id="jueves"/>
-                              <label class="form-check-label" for="jueves">
-                                Jueves
-                              </label>
-                            </div>
-                            
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" name="viernes" id="viernes"/>
-                            <label class="form-check-label" for="viernes">
-                              Viernes
-                            </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="" name="sabado" id="sabado"/>
-                              <label class="form-check-label" for="sabado">
-                                Sábado
-                              </label>
-                            </div>
+                       <div class="col-6">
+                            <label class="form-label">Ingrese los días lectivos, con respecto a los ejemplos:</label>
+                            <label class="form-label">LKMJV</label>
+                            <label class="form-label">LKJVS</label>
+                            <label class="form-label">No use espacios, comas u otro símbolo</label>
+                           <label class="form-label">L: LUNES, K: MARTES, M:MIÉRCOLES, J:JUEVES, V:VIERNES y S:SABADO</label> 
+                       
+                           <input type="text" id="dias" name="dias" value="" th:field="*{diasReferencia}"/>
 
                         </div>
-
+                        </div>
+                        <div class="row">
                         <div>
                             <label class="form-label">Seleccione el máximo de horas del programa</label>
-                            <div class="form-check">
-                           <input class="form-check-input" type="radio" name="6Horas" id="6Horas" checked ="true" 
-                                  th:field="*{horasMaximasReferencia}" value="6" />
-                           <label class="form-check-label" for="6Horas" >
-                             6 Horas
-                           </label>
-                         </div>
-                         <div class="form-check">
-                           <input class="form-check-input" value="5.4" type="radio" name="5.4Horas" id="5.4Horas"
-                                  th:field="*{horasMaximasReferencia}"/>
-                           <label class="form-check-label" for="5.4Horas">
-                             5.4 Horas
-                           </label>
-                         </div>
+                            <div class="input-group">
+                                <input type="number" id="horasMaximas" name="horasMaximas" value="" th:field="*{horasMaximasReferencia}" />
+                            </div> 
                         </div>
-                        <div>
+                        <div class="col-3">
                             <label for="fechaInicial" class="form-label">Seleccione la fecha inicial</label>
                             <div class="input-group">
                                 <input type="date" id="fechaInicial" name="fechaInicial" value=""
                                        th:field="*{inicioReferencia}" class="form-control"/>
                             </div> 
                         </div>
-                        <div>
+                        <div class="col-3">
                             <label for="horaInicial" class="form-label">Seleccione la hora inicial</label>
                             <div class="input-group">
                                 <input type="time" id="horaInicial" name="horaInicial" value=""
@@ -120,7 +80,7 @@
                             </div> 
                         </div>
 
-                        <div>
+                        <div class="col-3">
                             <label for="horaFinal" class="form-label">Seleccione la hora final</label>
                             <div class="input-group">
                                 <input  th:field="*{horaFinalReferencia}"
@@ -128,18 +88,55 @@
                             </div> 
 
                         </div>
+                        </div>
+                        <div>
+                            <label class="form-label">Seleccione el estado de la referencia</label>
 
-                        <div class="input-group" th:if="${accionEliminar == null}">
+                            <select class="form-control" th:field="*{estadoReferencia}">
+                                <option selected="true" value="Activo">Activo</option>
+                                <option value="Suspendido">Suspendido</option>
+                                <option value="Finalizado">Finalizado</option>
+                            </select>
+                        </div>
+                        
+                        
+                        <div class="input-group">
                             <input class="btn btn-primary mt-3 p-10" type="submit" id="btnGuardar" name="btnGuardar" value="Guardar" />
-                            <a th:href="@{/nuevaReferencia/}+${modalidad}" class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Borrar Todo</a>
+                            <a class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Borrar Todo</a>
 
                         </div> 
-                        <div th:if="${accionEliminar != null}">
-                            <a th:href="@{/borrarReferencia/}+${idReferencia}" class="btn btn-warning mt-3" type="button" id="btnEliminar" name="btnEliminar">Eliminar</a>
-
-                        </div> 
-
+                     
                     </form> <!--FIN FORMULARIO-->
+                       <div>
+                              <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('codigo')}" 
+                                      th:errors="*{codigo}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('diasReferencia')}" 
+                                      th:errors="*{diasReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('horasMaximasReferencia')}" 
+                                      th:errors="*{horasMaximasReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('inicioReferencia')}" 
+                                      th:errors="*{inicioReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('horaInicialReferencia')}" 
+                                      th:errors="*{horaInicialReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('horaFinalReferencia')}" 
+                                      th:errors="*{horaFinalReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('estadoReferencia')}" 
+                                      th:errors="*{estadoReferencia}">
+                                </span>
+                        </div>
                 </div>
             </div>
             

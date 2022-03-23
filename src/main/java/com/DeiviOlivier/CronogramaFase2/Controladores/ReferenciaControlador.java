@@ -12,9 +12,11 @@ import com.DeiviOlivier.CronogramaFase2.Servicios.IModuloServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IProgramaServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IReferenciaServicio;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -40,25 +42,17 @@ public class ReferenciaControlador {
         model.addAttribute("programasReferencia", listProg);
         model.addAttribute("modulosSeleccionar", listMod);
   
-        model.addAttribute("selectPrograma", "1");
-
-        return "referencia";
-    }
-      @GetMapping("/nuevaReferenciaMod")
-    public String nuevaReferenciaMod(Referencia referencia,Model model){
-        List<Modulo> listMod = modServ.listar();
-        List<Programa> listProg = progServ.listar();
-        model.addAttribute("programasReferencia", listProg);
-        model.addAttribute("modulosSeleccionar", listMod);
-  
         return "referencia";
     }
     
-    @PostMapping("/guardarReferencias")
-    public String guardar(Referencia referencia, Model model){
-        referencia.setDiasReferencia("LMJ");
+    @PostMapping("/guardarReferencia")
+    public String guardar(@Valid Referencia referencia, RedirectAttributes red,Errors e){
+        if(e.hasErrors())
+        {
+            return "referencia";
+        }
         referenciaServicio.guardar(referencia);
-        model.addAttribute("msg", "Referencia agregada con éxito!");
+        red.addFlashAttribute("msg", "Referencia agregada con éxito!");
         return "redirect:/listaReferencias";
     }
     
@@ -71,7 +65,7 @@ public class ReferenciaControlador {
     @PostMapping("/filtrarReferencias")
     public String filtrar(Referencia referencia,RedirectAttributes red){
         List<Referencia> lista;
-        lista = referenciaServicio.filtrar(referencia.getReferencia());
+        lista = referenciaServicio.filtrar(referencia.getCodigo());
         red.addFlashAttribute("referencias", lista);
         return "redirect:/referencias";
     }

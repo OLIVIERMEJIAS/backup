@@ -43,7 +43,7 @@ public class ReferenciaServicio implements IReferenciaServicio{
 
     @Override
     public List<Referencia> filtrar(String codigo) {
-        return referenciaDAO.findByReferencia(codigo);
+        return referenciaDAO.findByCodigo(codigo);
     }
     
 }
