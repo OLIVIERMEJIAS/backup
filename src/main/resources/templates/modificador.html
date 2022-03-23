@@ -7,64 +7,71 @@
         <header th:replace="plantillas/plantilla1 ::header"></header>
         <div class="container mt-3 py-3 bg-light rounded-3">
 
-            <h1 class="card-header">Administrar Asuntos</h1>
+            <h1 class="card-header">Administrar asuntos</h1>
 
             <div class="row">
                 <div class="col-10 mx-auto">
                     <form th:action="@{/guardarModificador}" method="post" th:object="${modificador}">
-                        <input type="hidden" name="idModulo" th:field="*{idModulo}"/>
+                        <input type="hidden" name="idModificador" th:field="*{idModificador}"/>
                         <div class="form-group">
-                            <label for="nombreModulo" class="form-label">Nombre del módulo:</label>
-                            <input type="text" name="nombreModulo" class="form-control" th:field="*{nombreModulo}"/>
+                            <label for="profesoresModificadores" class="form-label">Nombre del profesor:</label>
+                            <input type="text" name="nombreModulo" class="form-control" th:field="*{profesoresModificadores}"/>
                             <span class="font-italic text-danger" 
-                                  th:if="${#fields.hasErrors('nombreModulo')}" 
-                                  th:errors="*{nombreModulo}">
-                            </span>    
-                        </div>
-                        
-
-                        <div class="form-group">
-                            <label for="codigoModulo" class="form-label">Seleccione el motivo del asunto: </label>
-                            <input type="text" name="codigoModulo" class="form-control" th:field="*{codigoModulo}"/>
-                            <span class="font-italic text-danger" 
-                                  th:if="${#fields.hasErrors('codigoModulo')}" 
-                                  th:errors="*{codigoModulo}">
+                                  th:if="${#fields.hasErrors('profesoresModificadores')}" 
+                                  th:errors="*{profesoresModificadores}">
                             </span>    
                         </div>
 
                         <div class="form-group">
-                            <label for="horasModulo" class="form-label">Cantidad de horas: </label>
-                            <input type="number" name="horasModulo" class="form-control" th:field="*{horasModulo}"/>
+                            <label for="categoriasModificadoresByIdCategoriaModificador" class="form-label">Código del módulo: </label>
+                            <input type="text" name="categoriasModificadoresByIdCategoriaModificador" class="form-control" th:field="*{categoriasModificadoresByIdCategoriaModificador}"/>
                             <span class="font-italic text-danger" 
-                                  th:if="${#fields.hasErrors('horasModulo')}" 
-                                  th:errors="*{horasModulo}">
+                                  th:if="${#fields.hasErrors('categoriasModificadoresByIdCategoriaModificador')}" 
+                                  th:errors="*{categoriasModificadoresByIdCategoriaModificador}">
                             </span>    
                         </div>
 
                         <div class="form-group">
-                            <label for="requisitoModulo" class="form-label">Requisito:</label>
-                            <input type="text" name="requisitoModulo" class="form-control" th:field="*{requisitoModulo}"/>
+                            <label for="inicioModificador" class="form-label">Requisito:</label>
+                            <input type="text" name="inicioModificador" class="form-control" th:field="*{inicioModificador}"/>
                             <span class="font-italic text-danger" 
-                                  th:if="${#fields.hasErrors('requisitoModulo')}" 
-                                  th:errors="*{requisitoModulo}">
+                                  th:if="${#fields.hasErrors('inicioModificador')}" 
+                                  th:errors="*{inicioModificador}">
+                            </span>    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="finalModificador" class="form-label">Requisito:</label>
+                            <input type="text" name="finalModificador" class="form-control" th:field="*{finalModificador}"/>
+                            <span class="font-italic text-danger" 
+                                  th:if="${#fields.hasErrors('finalModificador')}" 
+                                  th:errors="*{finalModificador}">
+                            </span>    
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descripcionModificador" class="form-label">Requisito:</label>
+                            <input type="text" name="descripcionModificador" class="form-control" th:field="*{descripcionModificador}"/>
+                            <span class="font-italic text-danger" 
+                                  th:if="${#fields.hasErrors('descripcionModificador')}" 
+                                  th:errors="*{descripcionModificador}">
                             </span>    
                         </div>
 
                         <div th:if="${editar==null}">
                             <div class="mt-3">
                                 <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar"/>
-                                <a th:href="@{/modulos}" class="btn btn-warning">Regresar</a>
+                                <a th:href="@{/modificadores}" class="btn btn-warning">Regresar</a>
                             </div>
                         </div>
                         <div th:if="${eliminar!=null}">
                             <div class="mt-3">
-                                <a class="btn btn-primary" th:href="@{/borrarModulo(idModulo=*{idModulo})}">Eliminar</a>
-                                <a th:href="@{/modulos}" class="btn btn-warning">Regresar</a>
+                                <a class="btn btn-primary" th:href="@{/borrarModificador(idModificador=*{idModificador})}">Eliminar</a>
+                                <a th:href="@{/modificadores}" class="btn btn-warning">Regresar</a>
                             </div>
                         </div>
 
                     </form>
-                    
                 </div>
             </div>
         </div>
