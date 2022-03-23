@@ -102,4 +102,9 @@ public class ProfesorControlador {
         return "redirect:/profesores";
     }
     
+    @GetMapping("/modificador")
+    public String modificadores(Model model){
+        return "modificador";
+    }
+    
 }

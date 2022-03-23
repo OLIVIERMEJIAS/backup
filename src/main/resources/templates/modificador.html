@@ -11,8 +11,8 @@
 
             <div class="row">
                 <div class="col-10 mx-auto">
-                    <form th:action="@{/guardarAsunto}" method="post" th:object="${asunto}">
-                        <input type="hidden" name="idAsunto" th:field="*{idModulo}"/>
+                    <form th:action="@{/guardarModificador}" method="post" th:object="${modificador}">
+                        <input type="hidden" name="idModulo" th:field="*{idModulo}"/>
                         <div class="form-group">
                             <label for="nombreModulo" class="form-label">Nombre del módulo:</label>
                             <input type="text" name="nombreModulo" class="form-control" th:field="*{nombreModulo}"/>
@@ -21,9 +21,10 @@
                                   th:errors="*{nombreModulo}">
                             </span>    
                         </div>
+                        
 
                         <div class="form-group">
-                            <label for="codigoModulo" class="form-label">Código del módulo: </label>
+                            <label for="codigoModulo" class="form-label">Seleccione el motivo del asunto: </label>
                             <input type="text" name="codigoModulo" class="form-control" th:field="*{codigoModulo}"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('codigoModulo')}" 
@@ -63,6 +64,7 @@
                         </div>
 
                     </form>
+                    
                 </div>
             </div>
         </div>
