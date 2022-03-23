@@ -7,6 +7,7 @@ package com.DeiviOlivier.CronogramaFase2.Controladores;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Modulo;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Programa;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
+import com.DeiviOlivier.CronogramaFase2.Servicios.IModuloReferenciaServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IModuloServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IProgramaServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IReferenciaServicio;
@@ -30,18 +31,35 @@ public class ReferenciaControlador {
     private IModuloServicio modServ;
     @Autowired
     private IProgramaServicio progServ;
+    @Autowired
+    private IModuloReferenciaServicio modRefServicio;
     @GetMapping("/nuevaReferencia")
     public String nuevaReferencia(Referencia referencia,Model model){
         List<Modulo> listMod = modServ.listar();
         List<Programa> listProg = progServ.listar();
         model.addAttribute("programasReferencia", listProg);
         model.addAttribute("modulosSeleccionar", listMod);
+  
+        model.addAttribute("selectPrograma", "1");
+
+        return "referencia";
+    }
+      @GetMapping("/nuevaReferenciaMod")
+    public String nuevaReferenciaMod(Referencia referencia,Model model){
+        List<Modulo> listMod = modServ.listar();
+        List<Programa> listProg = progServ.listar();
+        model.addAttribute("programasReferencia", listProg);
+        model.addAttribute("modulosSeleccionar", listMod);
+  
         return "referencia";
     }
     
     @PostMapping("/guardarReferencias")
-    public String guardar(Referencia referencia, RedirectAttributes red){
-        return "listaReferencias";
+    public String guardar(Referencia referencia, Model model){
+        referencia.setDiasReferencia("LMJ");
+        referenciaServicio.guardar(referencia);
+        model.addAttribute("msg", "Referencia agregada con éxito!");
+        return "redirect:/listaReferencias";
     }
     
     @GetMapping("/referencias")
@@ -51,41 +69,71 @@ public class ReferenciaControlador {
         return "listaReferencias";
     }
     @PostMapping("/filtrarReferencias")
-    public String filtrar(Referencia referencia,Model model){
+    public String filtrar(Referencia referencia,RedirectAttributes red){
         List<Referencia> lista;
         lista = referenciaServicio.filtrar(referencia.getReferencia());
-        model.addAttribute("referencias", lista);
-        return "listaReferencias";
+        red.addFlashAttribute("referencias", lista);
+        return "redirect:/referencias";
     }
     
      @GetMapping("/editarReferencia/{idReferencia}")
-    public String editar(Referencia referencia, Model model,RedirectAttributes red){
+    public String editar(Referencia referencia, RedirectAttributes red){
         String msg;
         referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
         if(referencia == null){
-            model.addAttribute("referencia", referencia);
             msg="No se logró cargar la referencia";
-            return "redirect:/listaReferencias";
+            return "redirect:/referencias";
             
         }
-        referenciaServicio.guardar(referencia);
-        msg="Referencia actualizada con éxito";
-        red.addFlashAttribute("msg", msg);
-        return "redirect:/listaClientes";
+        
+    
+        red.addFlashAttribute("referencia", referencia);
+        return "redirect:/nuevaReferencia";
     }
     
-    @GetMapping("/eliminarReferencia")
+    @GetMapping("/eliminarReferencia/{idReferencia}")
     public String eliminar(Referencia referencia, RedirectAttributes red){
         String msg;
         referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
         if(referencia != null){
-        referenciaServicio.eliminar(referencia.getIdReferencia());
-        //borrar modulos referencias
-        msg = "Referencia borrada con éxito";
+         red.addFlashAttribute("referencia", referencia);
+         red.addFlashAttribute("accionEliminar","1");
+        return "redirect:/nuevaReferencia";
         }
         msg = "No existe esta referencia";
         red.addFlashAttribute("msg", msg);
-        return "redirect:/listaReferencias";
+        return "redirect:/referencias";
        
     }
+    
+ 
+    
+    @GetMapping("/borrarReferencia/{idReferencia}")
+    public String borrarModulo(Referencia referencia, RedirectAttributes red) {
+        String msg;
+        referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
+        if (referencia!=null) {
+            try {
+
+                referenciaServicio.eliminar(referencia.getIdReferencia());
+                modRefServicio.eliminarPorReferencia(referencia);
+                msg = "Referencia borrada con éxito";
+                 red.addFlashAttribute("msg", msg);
+                return "redirect:/listaReferencias";
+            } catch (Exception e) { 
+                red.addFlashAttribute("msg","No un error borrando");
+                
+            }
+        }
+          msg = "No existe esta referencia";
+                red.addFlashAttribute("msg", msg);
+                return "redirect:/listaReferencias";
+        
+    }
+    
+    @GetMapping("/modalidad")
+    public String modalidad(){
+        return "modalidadReferencia";
+    }
 }
+

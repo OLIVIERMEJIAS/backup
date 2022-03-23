@@ -40,6 +40,7 @@ public class Referencia {
     @Basic
     @Column(name = "ESTADO_REFERENCIA")
     private String estadoReferencia;
+ 
     @OneToMany(mappedBy = "referencia")
     private Collection<ModuloReferencia> modulosReferenciasByIdReferencia;
     @ManyToOne

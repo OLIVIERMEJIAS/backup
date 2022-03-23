@@ -15,4 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface IModuloReferenciaDAO extends JpaRepository<ModuloReferencia,Long>{
     public List<ModuloReferencia> findByReferencia(Referencia referencia);
+    public void deleteByReferencia(Referencia referencia);
 }

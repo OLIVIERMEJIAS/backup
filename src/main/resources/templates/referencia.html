@@ -15,15 +15,10 @@
                 </div>
 
                 <div class="card-body">
-                    <form th:action="@{/guardarReferencia}" method="post" th:object="${referencia}">
+                    <form th:action="@{/guardarReferencias}" method="post" th:object="${referencia}">
                         <input type="hidden" name="idReferencia" th:field="*{idReferencia}" value=""/>
 
-                        <div>
-                            <label for="tipo" class="form-label">Seleccione Modalidad</label>
-                            <input class="btn" type="checkbox" id="checkPrograma" name="checkPrograma" value="Programa"/>
-                            <input class="btn" type="checkbox" id="checkModulo" name="checkModulo" value="Módulo Individual"/>
-                        </div>
-                        <div>
+                        <div th:if="${selectPrograma != null}">
                             <label for="nombrePrograma" class="form-label">Seleccione el programa</label>
                             <input type="hidden" id="idPrograma" name="idPrograma" value=""
                                    th:field="*{programaReferencia.idPrograma}" class="form-control"/>
@@ -33,7 +28,7 @@
                             <a id="btnBuscarP" class="btn btn-success" data-bs-toggle="modal"
                                                data-bs-target="#modalProgramas"><i class="fas fa-binoculars"></i>Buscar</a>
                         </div>
-                        <div>
+                        <div th:if="${selectPrograma == null}">
                             <label for="nombrePrograma" class="form-label">Seleccione el módulo</label>
                             <input type="hidden" id="idModulo" name="idModulo" value=""
                                    th:field="*{moduloReferencia.idModulo}" class="form-control"/>
@@ -42,26 +37,73 @@
                                 <a id="btnBuscarM" class="btn btn-success" data-bs-toggle="modal"
                                                data-bs-target="#modalModulos"><i class="fas fa-binoculars"></i>Buscar</a>
                         </div>
-
+                        
+                           <div>
+                            <label class="form-label">Indique el código de la Referencia</label>
+                           
+                            <input class="form-input" type="text" value="" name="codigoReferencia" id="codigoReferencia"
+                                   th:field="*{referencia}"/>
+                            </div>
+                        
                         <div>
                             <label class="form-label">Seleccione los días lectivos</label>
-                            <div class="input-group">
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkLunes" name="checkLunes" value="Lunes"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkMartes" name="checkMartes" value="Martes"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkMiercoles" name="checkMiercoles" value="Miércoles"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkJueves" name="checkJueves" value="Jueves"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkViernes" name="checkViernes" value="Viernes"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkSabado" name="checkSabado" value="Sábado"/>
-                            </div> 
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" name="lunes" id="lunes"/>
+                            <label class="form-check-label" for="lunes">
+                              Lunes
+                            </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" name="martes" id="martes"/>
+                              <label class="form-check-label" for="martes">
+                                Martes
+                              </label>
+                            </div>
+                            
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" name="miercoles" id="miercoles"/>
+                            <label class="form-check-label" for="miercoles">
+                              Miércoles
+                            </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" name="jueves" id="jueves"/>
+                              <label class="form-check-label" for="jueves">
+                                Jueves
+                              </label>
+                            </div>
+                            
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" name="viernes" id="viernes"/>
+                            <label class="form-check-label" for="viernes">
+                              Viernes
+                            </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="" name="sabado" id="sabado"/>
+                              <label class="form-check-label" for="sabado">
+                                Sábado
+                              </label>
+                            </div>
 
                         </div>
 
                         <div>
                             <label class="form-label">Seleccione el máximo de horas del programa</label>
-                            <div class="input-group">
-                                <input class="btn btn-outline-primary" type="checkbox" id="check6" name="check6" value="6" />
-                                <input class="btn btn-outline-primary" type="checkbox" id="check5.4" name="check5.4" value="5.4"/>
-                            </div> 
+                            <div class="form-check">
+                           <input class="form-check-input" type="radio" name="6Horas" id="6Horas" checked ="true" 
+                                  th:field="*{horasMaximasReferencia}" value="6" />
+                           <label class="form-check-label" for="6Horas" >
+                             6 Horas
+                           </label>
+                         </div>
+                         <div class="form-check">
+                           <input class="form-check-input" value="5.4" type="radio" name="5.4Horas" id="5.4Horas"
+                                  th:field="*{horasMaximasReferencia}"/>
+                           <label class="form-check-label" for="5.4Horas">
+                             5.4 Horas
+                           </label>
+                         </div>
                         </div>
                         <div>
                             <label for="fechaInicial" class="form-label">Seleccione la fecha inicial</label>
@@ -87,9 +129,13 @@
 
                         </div>
 
-                        <div class="input-group">
+                        <div class="input-group" th:if="${accionEliminar == null}">
                             <input class="btn btn-primary mt-3 p-10" type="submit" id="btnGuardar" name="btnGuardar" value="Guardar" />
-                            <a class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Borrar Todo</a>
+                            <a th:href="@{/nuevaReferencia/}+${modalidad}" class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Borrar Todo</a>
+
+                        </div> 
+                        <div th:if="${accionEliminar != null}">
+                            <a th:href="@{/borrarReferencia/}+${idReferencia}" class="btn btn-warning mt-3" type="button" id="btnEliminar" name="btnEliminar">Eliminar</a>
 
                         </div> 
 

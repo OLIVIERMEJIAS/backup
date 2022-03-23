@@ -25,6 +25,13 @@ public class ModuloReferenciaServicio implements IModuloReferenciaServicio{
     }
 
     @Override
+    public void eliminarPorReferencia(Referencia referencia) {
+        modRedDao.deleteByReferencia(referencia);
+    }
+    
+    
+    
+    @Override
     public void guardar(ModuloReferencia moduloReferencia) {
         modRedDao.save(moduloReferencia);
     }
