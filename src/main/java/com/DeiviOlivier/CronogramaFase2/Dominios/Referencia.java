@@ -3,6 +3,7 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.Calendar;
 import java.util.Collection;
 import javax.validation.constraints.NotEmpty;
@@ -30,12 +31,12 @@ public class Referencia {
     private String diasReferencia;
     @Basic
     @Column(name = "HORA_INICIO_REFERENCIA")
-    @NotEmpty(message = "Es necesaria una hora de inicio")
-    private String horaInicioReferencia;
+    @NotNull(message = "Es necesaria una hora de inicio")
+    private Time horaInicioReferencia;
     @Basic
     @Column(name = "HORA_FINAL_REFERENCIA")
-    @NotEmpty(message = "Es necesario una hora de fin")
-    private String horaFinalReferencia;
+    @NotNull(message = "Es necesario una hora de fin")
+    private Time horaFinalReferencia;
     
    
     @Basic
@@ -43,20 +44,20 @@ public class Referencia {
     @NotNull(message="Es necesaria una fecha de inicio")
     private Date inicioReferencia;
     @Basic
-    @Column(name = "FINAL_REFERENCIA")
+    @Column(name = "FINAL_REFERENCIA",nullable = true)
     private Date finalReferencia;
     @Basic
     @Column(name = "ESTADO_REFERENCIA")
     @NotEmpty(message = "Es necesario un estado")
     private String estadoReferencia;
  
-    @OneToMany(mappedBy = "referencia")
+    @OneToMany(mappedBy = "referencia",orphanRemoval = true)
     private Collection<ModuloReferencia> modulosReferenciasByIdReferencia;
-    @ManyToOne
-    @JoinColumn(name = "ID_MODULO")
+    @ManyToOne(optional = true,cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "ID_MODULO",nullable = true)
     private Modulo moduloReferencia;
-    @ManyToOne
-    @JoinColumn(name = "ID_PROGRAMA")
+    @ManyToOne(optional = true,cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "ID_PROGRAMA",nullable=true)
     private Programa programaReferencia;
 
 

@@ -30,7 +30,7 @@ public class ModuloReferenciaControlador {
     @Autowired
     private IModuloServicio moduloServicio;
     @GetMapping("/modulosReferencia/{idReferencia}")
-    public String inicio(Referencia referencia,Model model){
+    public String inicio(Referencia referencia, Model model){
         List<ModuloReferencia> lista;
         List<Modulo> listaSeleccionar = null;
         referencia = refServicio.obtenerReferencia(referencia.getIdReferencia());
@@ -49,5 +49,47 @@ public class ModuloReferenciaControlador {
         return "listaModulosReferencia";
     }
     
+    @GetMapping("/nuevoModuloReferencia/{idReferencia}/{idModulo}")
+    public String nuevoModuloRef(Referencia referencia, Modulo modulo,
+            ModuloReferencia moduloReferencia, RedirectAttributes red){
+        red.addAttribute("idReferencia", referencia.getIdReferencia());
+        return "redirect:/modulosReferencia";
+    }
     
+       
+     @GetMapping("/editarModRef/{idModuloReferencia}")
+    public String editar(ModuloReferencia moduloReferencia, RedirectAttributes red){
+        String msg;
+        moduloReferencia = modServicio.obtenerModuloReferencia(moduloReferencia.getIdModuloReferencia());
+        if(moduloReferencia == null){
+            msg="No se logró cargar el módulo de la referencia";
+            red.addAttribute("idReferencia", moduloReferencia.getReferencia().getIdReferencia());
+        return "redirect:/modulosReferencia";
+            
+        }
+        
+        modServicio.guardar(moduloReferencia);
+        red.addFlashAttribute("msg", "Módulo de la referencia actualizado con éxito");
+         red.addAttribute("idReferencia", moduloReferencia.getReferencia().getIdReferencia());
+        return "redirect:/modulosReferencia";
+
+    }
+    
+    @GetMapping("/eliminarModRef/{idModuloReferencia}/{idReferencia}")
+    public String eliminar(ModuloReferencia moduloReferencia, Referencia referencia, RedirectAttributes red){
+        String msg;
+        moduloReferencia = modServicio.obtenerModuloReferencia(moduloReferencia.getIdModuloReferencia());
+        if(moduloReferencia != null){
+         red.addFlashAttribute("moduloReferencia", moduloReferencia);
+         red.addFlashAttribute("eliminarModRef","1");
+         red.addAttribute("idReferencia", referencia.getIdReferencia());
+         red.addAttribute("idModulo", moduloReferencia.getModulo().getIdModulo());
+        return "redirect:/modulosReferencia";
+        }
+        msg = "No existe este módulo de la referencia";
+        red.addFlashAttribute("msg", msg);
+        red.addAttribute("idReferencia", referencia.getIdReferencia());
+        return "redirect:/modulosReferencia";
+       
+    }
 }

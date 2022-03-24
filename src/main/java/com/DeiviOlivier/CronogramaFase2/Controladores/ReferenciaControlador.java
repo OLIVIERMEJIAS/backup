@@ -49,11 +49,12 @@ public class ReferenciaControlador {
     public String guardar(@Valid Referencia referencia, RedirectAttributes red,Errors e){
         if(e.hasErrors())
         {
-            return "referencia";
+            red.addAttribute("referencia", referencia);
+            return "redirect:/nuevaReferencia";
         }
         referenciaServicio.guardar(referencia);
         red.addFlashAttribute("msg", "Referencia agregada con éxito!");
-        return "redirect:/listaReferencias";
+        return "redirect:/referencias";
     }
     
     @GetMapping("/referencias")

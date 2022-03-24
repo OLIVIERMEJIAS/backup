@@ -22,9 +22,9 @@
                         <div class="col-6">
                             <label for="nombrePrograma" class="form-label">Seleccione el programa</label>
                             <input type="hidden" id="idPrograma" name="idPrograma" value=""
-                                   th:field="*{programaReferencia.idPrograma}" class="form-control"/>
+                                   class="form-control"/>
                             <input type="text" id="nombrePrograma" name="nombrePrograma" value=""
-                                   readonly="true" th:field="*{programaReferencia.nombrePrograma}" class="form-control"
+                                   readonly="true" class="form-control"
                                    />
                             <a id="btnBuscarP" class="btn btn-success" data-bs-toggle="modal"
                                                data-bs-target="#modalProgramas"><i class="fas fa-binoculars"></i>Buscar</a>
@@ -32,9 +32,9 @@
                         <div class="col-6">
                             <label for="nombrePrograma" class="form-label">Seleccione el módulo</label>
                             <input type="hidden" id="idModulo" name="idModulo" value=""
-                                   th:field="*{moduloReferencia.idModulo}" class="form-control"/>
+                                    class="form-control"/>
                             <input type="text" id="nombreModulo" name="nombreModulo" value="" readonly="true"
-                                   th:field="*{moduloReferencia.nombreModulo}" class="form-control"/>
+                                    class="form-control"/>
                                 <a id="btnBuscarM" class="btn btn-success" data-bs-toggle="modal"
                                                data-bs-target="#modalModulos"><i class="fas fa-binoculars"></i>Buscar</a>
                         </div>
@@ -100,9 +100,15 @@
                         </div>
                         
                         
-                        <div class="input-group">
+                        <div th:if="${accionEliminar == null}" class="input-group">
                             <input class="btn btn-primary mt-3 p-10" type="submit" id="btnGuardar" name="btnGuardar" value="Guardar" />
-                            <a class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Borrar Todo</a>
+                            <a th:href="" class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Cancelar</a>
+
+                        </div> 
+                        
+                        <div th:if="${accionEliminar != null}" class="input-group">
+                            <a th:href="@{/eliminarReferencia/}+${referencia.idReferencia}" class="btn btn-primary mt-3 p-10" type="submit" id="btnEliminar" name="btnEliminar">Eliminar</a>
+                            <a th:href="" class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Cancelar</a>
 
                         </div> 
                      
