@@ -42,7 +42,7 @@ public class ProfesorControlador {
         return "profesor";
     }
     
-    @PostMapping("/guardarProfesores")
+    @PostMapping("/guardarProfesor")
     public String guardar(@Valid Profesor profesor, Errors er){
         
         if(er.hasErrors()){

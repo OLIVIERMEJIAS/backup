@@ -23,6 +23,40 @@
                         </div>
 
                         <div class="form-group">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected="true">Seleccione el motivo del asunto</option>
+                                <option value="1">Vacaciones ordinarias</option>
+                                <option value="2">Vacaciones</option>
+                                <option value="3">Incapacidad</option>
+                                <option value="4">Capacitación</option>
+                                <option value="5">Otros</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inicioModificador" class="form-label">Fecha de inicio</label>
+                            <input type="date" name="inicioModificador" class="form-control" th:field="*{inicioModificador}"/>
+                            <span class="font-italic text-danger" 
+                                  th:if="${#fields.hasErrors('inicioModificador')}" 
+                                  th:errors="*{inicioModificador}">
+                            </span>    
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="finalModificador" class="form-label">Fecha de fin</label>
+                            <input type="date" name="finalModificador" class="form-control" th:field="*{finalModificador}"/>
+                            <span class="font-italic text-danger" 
+                                  th:if="${#fields.hasErrors('finalModificador')}" 
+                                  th:errors="*{finalModificador}">
+                            </span>    
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Descripción del asunto</label>
+                            </div></div>
+                        <div class="form-group">
                             <label for="categoriasModificadoresByIdCategoriaModificador.nombreCategoriaModificador" class="form-label">Nombre Categoría: </label>
                             <input type="text" name="categoriasModificadoresByIdCategoriaModificador.nombreCategoriaModificador" class="form-control" th:field="*{categoriasModificadoresByIdCategoriaModificador.nombreCategoriaModificador}"/>
                             <span class="font-italic text-danger" 
@@ -46,15 +80,6 @@
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('finalModificador')}" 
                                   th:errors="*{finalModificador}">
-                            </span>    
-                        </div>
-
-                        <div class="form-group">
-                            <label for="descripcionModificador" class="form-label">Descripción:</label>
-                            <input type="text" name="descripcionModificador" class="form-control" th:field="*{descripcionModificador}"/>
-                            <span class="font-italic text-danger" 
-                                  th:if="${#fields.hasErrors('descripcionModificador')}" 
-                                  th:errors="*{descripcionModificador}">
                             </span>    
                         </div>
 
