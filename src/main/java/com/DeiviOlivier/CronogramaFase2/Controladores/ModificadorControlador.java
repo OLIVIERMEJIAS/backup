@@ -2,7 +2,9 @@
 package com.DeiviOlivier.CronogramaFase2.Controladores;
 
 import com.DeiviOlivier.CronogramaFase2.Dominios.Modificador;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Profesor;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IModificadorServicio;
+import com.DeiviOlivier.CronogramaFase2.Servicios.IProfesorServicio;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,9 @@ public class ModificadorControlador {
     @Autowired
     private IModificadorServicio servicioModificador;
 
+    @Autowired
+    private IProfesorServicio servicioProfesor;
+    
     @GetMapping("/modificadores")
     public String listar(Model model) {
         List<Modificador> lista = servicioModificador.listar();
@@ -36,6 +41,8 @@ public class ModificadorControlador {
 
     @GetMapping("/nuevoModificador")
     public String nuevo(Modificador modificador, Model model) {
+        List<Profesor> list = servicioProfesor.listar();
+        model.addAttribute("profesores", list);
         return "modificador";
     }
 
