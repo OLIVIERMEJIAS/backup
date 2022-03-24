@@ -15,9 +15,8 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface IModificadorDAO extends JpaRepository<Modificador, Long> {
     @Modifying
-    @Query(value = "Select M.ID_MODIFICADOR, P.NOMBRE_PROFESOR+' '+P.APELLIDO1_PROFESOR+' '+P.APELLIDO2_PROFESOR as ID_PROFESOR,\n"
-            + "C.NOMBRE_CATEGORIA_MODIFICADOR as ID_CATEGORIA_MODIFICADOR, M.INICIO_MODIFICADOR, M.FINAL_MODIFICADOR  from Modificadores M inner join Profesores P on M.ID_Profesor = P.ID_Profesor\n"
+    @Query(value = "Select M.ID_MODIFICADOR,M.ID_PROFESOR,M.ID_CATEGORIA_MODIFICADOR,M.INICIO_MODIFICADOR,M.FINAL_MODIFICADOR, M.DESCRIPCION_MODIFICADOR from Modificadores M inner join Profesores P on M.ID_Profesor = P.ID_Profesor\n"
             + "inner Join CATEGORIAS_MODIFICADORES C on C.Id_Categoria_Modificador = M.Id_Categoria_Modificador\n"
-            + "where P.Nombre_Profesor LIKE '%?1%' or C.NOMBRE_CATEGORIA_MODIFICADOR LIKE '%?2%'",nativeQuery = true)
+            + "where P.Nombre_Profesor LIKE ?1% or C.NOMBRE_CATEGORIA_MODIFICADOR LIKE ?2%",nativeQuery = true)
     public Iterable<Modificador> buscarPorNombreProfesorCategoria(String nombre, String categoria);
 }

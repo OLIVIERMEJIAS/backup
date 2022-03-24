@@ -14,25 +14,25 @@
                     <form th:action="@{/guardarModificador}" method="post" th:object="${modificador}">
                         <input type="hidden" name="idModificador" th:field="*{idModificador}"/>
                         <div class="form-group">
-                            <label for="profesoresModificadores" class="form-label">Nombre del profesor:</label>
-                            <input type="text" name="nombreModulo" class="form-control" th:field="*{profesoresModificadores}"/>
+                            <label for="profesoresModificadores.nombreProfesor" class="form-label">Nombre del profesor:</label>
+                            <input type="text" name="profesoresModificadores.nombreProfesor" class="form-control" th:field="*{profesoresModificadores.nombreProfesor}"/>
                             <span class="font-italic text-danger" 
-                                  th:if="${#fields.hasErrors('profesoresModificadores')}" 
-                                  th:errors="*{profesoresModificadores}">
+                                  th:if="${#fields.hasErrors('profesoresModificadores.nombreProfesor')}" 
+                                  th:errors="*{profesoresModificadores.nombreProfesor}">
                             </span>    
                         </div>
 
                         <div class="form-group">
-                            <label for="categoriasModificadoresByIdCategoriaModificador" class="form-label">Código del módulo: </label>
-                            <input type="text" name="categoriasModificadoresByIdCategoriaModificador" class="form-control" th:field="*{categoriasModificadoresByIdCategoriaModificador}"/>
+                            <label for="categoriasModificadoresByIdCategoriaModificador.nombreCategoriaModificador" class="form-label">Nombre Categoría: </label>
+                            <input type="text" name="categoriasModificadoresByIdCategoriaModificador.nombreCategoriaModificador" class="form-control" th:field="*{categoriasModificadoresByIdCategoriaModificador.nombreCategoriaModificador}"/>
                             <span class="font-italic text-danger" 
-                                  th:if="${#fields.hasErrors('categoriasModificadoresByIdCategoriaModificador')}" 
-                                  th:errors="*{categoriasModificadoresByIdCategoriaModificador}">
+                                  th:if="${#fields.hasErrors('categoriasModificadoresByIdCategoriaModificador.nombreCategoriaModificador')}" 
+                                  th:errors="*{categoriasModificadoresByIdCategoriaModificador.nombreCategoriaModificador}">
                             </span>    
                         </div>
 
                         <div class="form-group">
-                            <label for="inicioModificador" class="form-label">Requisito:</label>
+                            <label for="inicioModificador" class="form-label">Fecha Inicial:</label>
                             <input type="text" name="inicioModificador" class="form-control" th:field="*{inicioModificador}"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('inicioModificador')}" 
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="finalModificador" class="form-label">Requisito:</label>
+                            <label for="finalModificador" class="form-label">Fecha Final:</label>
                             <input type="text" name="finalModificador" class="form-control" th:field="*{finalModificador}"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('finalModificador')}" 
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="descripcionModificador" class="form-label">Requisito:</label>
+                            <label for="descripcionModificador" class="form-label">Descripción:</label>
                             <input type="text" name="descripcionModificador" class="form-control" th:field="*{descripcionModificador}"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('descripcionModificador')}" 
@@ -70,7 +70,6 @@
                                 <a th:href="@{/modificadores}" class="btn btn-warning">Regresar</a>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
