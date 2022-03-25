@@ -48,10 +48,10 @@
                                 <td th:text ="${item.fechaInicioDiaFeriado}"></td>
                                 <td th:text ="${item.diasTotalesDiaFeriado}"></td>
                                 <td th:if="${item.centrosFormacionesByIdCentroFormacion}==null">
-                                    No aplica
+                                    
                                 </td>
                                 <td th:if="${item.centrosFormacionesByIdCentroFormacion}!=null">
-                                    <span th:text="${item.centrosFormacionesByIdCentroFormacion.nombreCentroFormacion}"></span>
+                                    <span th:text="${item.centrosFormacionesByIdCentroFormacion.codigoCentroFormacion}"></span>
                                 </td>
                                 <td> 
                                     <a th:href="@{/editarDia/}+${item.idDiaFeriado}"><i class="fas fa-pen"></i> Editar</a> | 

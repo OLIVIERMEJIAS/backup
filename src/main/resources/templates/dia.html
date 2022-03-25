@@ -42,7 +42,7 @@
 
                         <div class="form-group">
                             <label for="centrosFormacionesByIdCentroFormacion" class="form-label">Centro Formación:</label>
-                            <input type="text" name="centrosFormacionesByIdCentroFormacion" class="form-control" th:field="*{centrosFormacionesByIdCentroFormacion}"/>
+                            <input type="text" name="centrosFormacionesByIdCentroFormacion" class="form-control" th:field="*{centrosFormacionesByIdCentroFormacion.idCentroFormacion}"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('centrosFormacionesByIdCentroFormacion.idCentroFormacion')}" 
                                   th:errors="*{centrosFormacionesByIdCentroFormacion.idCentroFormacion}">

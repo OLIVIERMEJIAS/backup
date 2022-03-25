@@ -16,7 +16,7 @@
                             <input type="hidden" name="idModificador" th:field="*{idModificador}"/>
 
                             <div class="form-group">
-                                <input type="text" id="idProfesor" name="idProfesor" value="" class="form-control"/>
+                                <input type="text" id="" name="" value="" class="form-control" th:field="*{profesoresModificadores.idProfesor}"/>
                                 <input type="text" id="nombreProfesor" name="nombreProfesor" value=""
                                        readonly="true" class="form-control mb-3"
                                        />
@@ -31,8 +31,8 @@
                             </div>
 
                             <div class="form-group">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected="true">Seleccione el motivo del asunto</option>
+                                <label for="motivoDia" class="form-label">Seleccione el motivo:</label>
+                                <select class="form-select" aria-label="Default select example" th:field="*{categoriasModificadoresByIdCategoriaModificador.idCategoriaModificador}">
                                     <option value="1">Vacaciones ordinarias</option>
                                     <option value="2">Vacaciones</option>
                                     <option value="3">Incapacidad</option>
@@ -60,10 +60,7 @@
                             </div><br/>
 
                             <div class="form-group">
-                                <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                    <label for="floatingTextarea2">Descripción del asunto</label>
-                                </div>
+                                <textarea class="form-control" placeholder="Ingrese la descripicón" th:field="*{descripcionModificador}"></textarea>
                             </div>
 
 

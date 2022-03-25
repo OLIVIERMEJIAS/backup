@@ -39,8 +39,7 @@ public class DiaFeriadoControlador {
     }
 
     @GetMapping("/nuevoDia")
-    public String nuevo(DiaFeriado dia, Model model) {
-        model.addAttribute("dia", dia);
+    public String nuevo(DiaFeriado dia) {
         return "dia";
     }
 
