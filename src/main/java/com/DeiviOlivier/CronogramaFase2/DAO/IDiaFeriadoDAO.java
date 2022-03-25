@@ -7,10 +7,6 @@ package com.DeiviOlivier.CronogramaFase2.DAO;
 import com.DeiviOlivier.CronogramaFase2.Dominios.DiaFeriado;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- *
- * @author HP
- */
 public interface IDiaFeriadoDAO extends JpaRepository<DiaFeriado,Long>{
-    
+    public Iterable<DiaFeriado> findByNombreDiaFeriadoContains(String nom);
 }

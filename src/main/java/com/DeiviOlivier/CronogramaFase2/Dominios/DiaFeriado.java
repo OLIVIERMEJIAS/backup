@@ -10,13 +10,16 @@ public class DiaFeriado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_DIA_FERIADO")
-    private byte idDiaFeriado;
+    private Long idDiaFeriado;
     @Basic
     @Column(name = "NOMBRE_DIA_FERIADO")
     private String nombreDiaFeriado;
     @Basic
     @Column(name = "FECHA_INICIO_DIA_FERIADO")
     private Date fechaInicioDiaFeriado;
+    @Basic
+    @Column(name = "DIAS_TOTALES_DIA_FERIADO")
+    private Long diasTotalesDiaFeriado;
     @ManyToOne
     @JoinColumn(name = "ID_CENTRO_FORMACION")
     private CentroFormacion centrosFormacionesByIdCentroFormacion;
@@ -39,13 +42,4 @@ public class DiaFeriado {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = (int) idDiaFeriado;
-        result = 31 * result + (nombreDiaFeriado != null ? nombreDiaFeriado.hashCode() : 0);
-        result = 31 * result + (fechaInicioDiaFeriado != null ? fechaInicioDiaFeriado.hashCode() : 0);
-        return result;
-    }
-
-   
 }
