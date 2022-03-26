@@ -4,10 +4,19 @@
  */
 package com.DeiviOlivier.CronogramaFase2.Servicios;
 
-/**
- *
- * @author HP
- */
+import com.DeiviOlivier.CronogramaFase2.Dominios.Modificador;
+import java.util.List;
+import org.springframework.stereotype.Service;
+
+@Service
 public interface IModificadorServicio {
+    public void guardar(Modificador profesor);
+
+    public List<Modificador> listar();
     
+    public List<Modificador> listar(String nombre, String nombreCategoria);
+
+    public Modificador obtenerModificador(Long idModificador);
+    
+    public void eliminar(Long id);
 }

@@ -4,10 +4,21 @@
  */
 package com.DeiviOlivier.CronogramaFase2.Servicios;
 
+import com.DeiviOlivier.CronogramaFase2.Dominios.DiaFeriado;
+import java.util.List;
+
 /**
  *
  * @author HP
  */
 public interface IDiaFeriadoServicio {
+    public void guardar(DiaFeriado dia);
+
+    public List<DiaFeriado> listar();
+
+    public List<DiaFeriado> listar(String nombre);
+
+    public DiaFeriado obtenerDia(Long idDiaFeriado);
     
+    public void eliminar(Long id);
 }

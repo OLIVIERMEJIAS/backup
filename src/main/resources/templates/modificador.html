@@ -1,0 +1,155 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+    <head th:replace="plantillas/plantilla1 ::head">
+        <title>TODO supply a title</title>
+    </head>
+    <body style="display: flex">
+        <header th:replace="plantillas/plantilla1 ::header"></header>
+        <div class="container mt-3 py-3 rounded-3">
+            <div class="card bg-light">
+                <h1 class="card-header m-3">Administrar asuntos</h1>
+
+                <div class="row">
+                    <div class="col-10 mx-auto">
+                        <form th:action="@{/guardarModificador}" method="post" th:object="${modificador}">
+
+                            <input type="hidden" name="idModificador" th:field="*{idModificador}"/>
+
+                            <div class="form-group">
+                                <input type="text" id="" name="" value="" class="form-control" th:field="*{profesoresModificadores.idProfesor}"/>
+                                <input type="text" id="nombreProfesor" name="nombreProfesor" value=""
+                                       readonly="true" class="form-control mb-3"
+                                       />
+                                <input type="text" id="ape1Profesor" name="apellido1Profesor" value=""
+                                       readonly="true" class="form-control mb-3"
+                                       />
+                                <input type="text" id="ape2Profesor" name="apellido2Profesor" value=""
+                                       readonly="true" class="form-control mb-3"
+                                       />
+                                <a id="btnBuscarP" class="btn btn-success form-control mb-3" data-bs-toggle="modal"
+                                   data-bs-target="#modalProfesores">Buscar profesor</a>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="motivoDia" class="form-label">Seleccione el motivo:</label>
+                                <select class="form-select" aria-label="Default select example" th:field="*{categoriasModificadoresByIdCategoriaModificador.idCategoriaModificador}">
+                                    <option value="1">Vacaciones ordinarias</option>
+                                    <option value="2">Vacaciones</option>
+                                    <option value="3">Incapacidad</option>
+                                    <option value="4">Capacitación</option>
+                                    <option value="5">Otros</option>
+                                </select>
+                            </div><br/>
+
+                            <div class="form-group">
+                                <label for="inicioModificador" class="form-label">Fecha de inicio</label>
+                                <input type="date" name="inicioModificador" class="form-control" th:field="*{inicioModificador}"/>
+                                <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('inicioModificador')}" 
+                                      th:errors="*{inicioModificador}">
+                                </span>    
+                            </div><br/>
+
+                            <div class="form-group">
+                                <label for="finalModificador" class="form-label">Fecha de fin</label>
+                                <input type="date" name="finalModificador" class="form-control" th:field="*{finalModificador}"/>
+                                <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('finalModificador')}" 
+                                      th:errors="*{finalModificador}">
+                                </span>    
+                            </div><br/>
+
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Ingrese la descripicón" th:field="*{descripcionModificador}"></textarea>
+                            </div>
+
+
+                            <div th:if="${editar==null}" class="form-group">
+                                <div class="mt-3">
+                                    <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar"/>
+                                    <a th:href="@{/modificadores}" class="btn btn-warning">Regresar</a>
+                                </div>
+                            </div>
+
+                            <div th:if="${eliminar!=null}" class="form-group">
+                                <div class="mt-3">
+                                    <a class="btn btn-primary" th:href="@{/borrarModificador(idModificador=*{idModificador})}">Eliminar</a>
+                                    <a th:href="@{/modificadores}" class="btn btn-warning">Regresar</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <section>
+                <div class="modal fade" id="modalProfesores" tabindex="-1" role="dialog"
+                     aria-labelledby="moduloModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="moduloModalLabel" >Listado de Profesores</h5>                                
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                            </div>
+                            <div class="modal-body">
+                                <div th:if="${profesores != null and !profesores.empty}">
+                                    <table class="table" id="tablaProfesores">
+                                        <thead>
+                                            <tr>
+                                                <th hidden="true">Id</th>
+                                                <th>Nombre:</th>
+                                                <th>Primer apellido</th>
+                                                <th>Segundo apellido</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="item:${profesores}">
+                                                <td th:text="${item.idProfesor}" hidden="true"></td>
+                                                <td th:text="${item.nombreProfesor}"></td>
+                                                <td th:text="${item.apellido1Profesor}"></td>
+                                                <td th:text="${item.apellido2Profesor}"></td>
+                                                <td>
+                                                    <a href="#" th:onclick="seleccionarProfesor([[${item.idProfesor}]],[[${item.nombreProfesor}]],[[${item.apellido1Profesor}]],[[${item.apellido2Profesor}]])">Seleccionar</a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div th:if="${profesores == null or profesor.empty}">
+                                    No hay profesores guardados
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button id="btonCerrar" type="button" class="btn btn-primary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                            </div>                            
+                        </div>
+                    </div>
+                </div> <!--FIN MODAL-->
+            </section>
+
+            <script type="text/javascript">
+                function seleccionarProfesor(id, nombre, ape1, ape2) {
+                    $("#idProfesor").val(id);
+                    $("#nombreProfesor").val(nombre);
+                    $("#ape1Profe").val(ape1);
+                    $("#ape2Profe").val(ape2);
+                    $("#btonCerrar").click();
+                }
+
+                $(document).ready(function () {
+                    $("#tablaProfesores").DataTable({
+                        "ordering": false,
+                        "lengthMenu": [5, 10, 15],
+                        "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
+                    })
+                })
+
+            </script>
+        </div>
+    </body>
+</html>

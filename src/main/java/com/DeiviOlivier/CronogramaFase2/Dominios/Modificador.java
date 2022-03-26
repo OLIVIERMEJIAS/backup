@@ -10,7 +10,7 @@ public class Modificador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_MODIFICADOR")
-    private int idModificador;
+    private Long idModificador;
     @Basic
     @Column(name = "INICIO_MODIFICADOR")
     private Date inicioModificador;
@@ -46,14 +46,6 @@ public class Modificador {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = idModificador;
-        result = 31 * result + (inicioModificador != null ? inicioModificador.hashCode() : 0);
-        result = 31 * result + (finalModificador != null ? finalModificador.hashCode() : 0);
-        result = 31 * result + (descripcionModificador != null ? descripcionModificador.hashCode() : 0);
-        return result;
-    }
 
     
 }

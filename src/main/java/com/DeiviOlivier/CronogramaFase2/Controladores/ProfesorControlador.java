@@ -42,7 +42,7 @@ public class ProfesorControlador {
         return "profesor";
     }
     
-    @PostMapping("/guardarProfesores")
+    @PostMapping("/guardarProfesor")
     public String guardar(@Valid Profesor profesor, Errors er){
         
         if(er.hasErrors()){
@@ -100,6 +100,11 @@ public class ProfesorControlador {
             }
         }
         return "redirect:/profesores";
+    }
+    
+    @GetMapping("/modificador")
+    public String modificadores(Model model){
+        return "modificador";
     }
     
 }

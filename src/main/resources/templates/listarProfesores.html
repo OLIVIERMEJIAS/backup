@@ -39,6 +39,7 @@
                                 <th>Primer Apellido</th>
                                 <th>Correo</th>
                                 <th>Cédula</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,7 +60,7 @@
                     </table>
                 </div>
                 <div class="mt-3">
-                    <a th:href="@{/asuntos}" class="btn btn-success">Agregar Asuntos</a>
+                    <a th:href="@{/modificadores}" class="btn btn-success">Ver asuntos</a>
                 </div>
                 <div th:if="${profesores == null or profesores.empty}">
                     Actualmente no hay datos de profesores.
