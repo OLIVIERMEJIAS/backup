@@ -35,16 +35,21 @@ public class ReferenciaControlador {
     private IProgramaServicio progServ;
     @Autowired
     private IModuloReferenciaServicio modRefServicio;
+     @GetMapping("/modalidad")
+    public String modalidad(){
+        return "modalidadReferencia";
+    }
+    
     @GetMapping("/nuevaReferencia")
     public String nuevaReferencia(Referencia referencia,Model model){
+        referencia.setModalidad("existe");
         List<Modulo> listMod = modServ.listar();
         List<Programa> listProg = progServ.listar();
-        model.addAttribute("programasReferencia", listProg);
-        model.addAttribute("modulosSeleccionar", listMod);
-  
+       model.addAttribute("referencia", referencia);
         return "referencia";
     }
     
+
     @PostMapping("/guardarReferencia")
     public String guardar(@Valid Referencia referencia, RedirectAttributes red,Errors e){
         if(e.hasErrors())
@@ -81,11 +86,11 @@ public class ReferenciaControlador {
             
         }
         
-    
+        referencia.setModalidad("existe");
         red.addFlashAttribute("referencia", referencia);
         return "redirect:/nuevaReferencia";
     }
-    
+   
     @GetMapping("/eliminarReferencia/{idReferencia}")
     public String eliminar(Referencia referencia, RedirectAttributes red){
         String msg;
@@ -93,6 +98,7 @@ public class ReferenciaControlador {
         if(referencia != null){
          red.addFlashAttribute("referencia", referencia);
          red.addFlashAttribute("accionEliminar","1");
+         referencia.setModalidad("existe");
         return "redirect:/nuevaReferencia";
         }
         msg = "No existe esta referencia";
@@ -100,8 +106,6 @@ public class ReferenciaControlador {
         return "redirect:/referencias";
        
     }
-    
- 
     
     @GetMapping("/borrarReferencia/{idReferencia}")
     public String borrarModulo(Referencia referencia, RedirectAttributes red) {
@@ -114,7 +118,7 @@ public class ReferenciaControlador {
                 modRefServicio.eliminarPorReferencia(referencia);
                 msg = "Referencia borrada con éxito";
                  red.addFlashAttribute("msg", msg);
-                return "redirect:/listaReferencias";
+                return "redirect:/referencias";
             } catch (Exception e) { 
                 red.addFlashAttribute("msg","No un error borrando");
                 
@@ -122,13 +126,40 @@ public class ReferenciaControlador {
         }
           msg = "No existe esta referencia";
                 red.addFlashAttribute("msg", msg);
-                return "redirect:/listaReferencias";
+                return "redirect:/referencias";
         
     }
     
-    @GetMapping("/modalidad")
-    public String modalidad(){
-        return "modalidadReferencia";
+    @GetMapping("/modalidades/{idReferencia}")
+    public String elegirModalidad(Referencia referencia,Model model){
+        model.addAttribute("referencia", referencia);
+        return "modalidad";
+    }
+    
+    @GetMapping("/asociarProgramas/{idReferencia}")
+    public String vincularProgramas(Referencia referencia,Model model){
+        List<Programa> lista = null;
+        lista = progServ.listar();
+        model.addAttribute("programasReferencia", lista);
+        model.addAttribute("referencia", referencia);
+        return "asociarPrograma";
+    }
+    
+      @GetMapping("/asociarModulos/{idPrograma}")
+    public String vincularModulos(Referencia referencia,Model model){
+        List<Modulo> lista = null;
+        lista = modServ.listar();
+        model.addAttribute("modulosSeleccionar", lista);
+        model.addAttribute("referencia", referencia);
+        return "asociarModulo";
+    }
+  
+    @PostMapping("/programaAsociar/{idReferencia}")
+    public String cargarPrograma(Programa programa, Referencia referencia){
+        programa = progServ.obtenerPrograma(referencia.getProgramaReferencia().getIdPrograma());
+        referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
+        referencia.setProgramaReferencia(programa);
+        return "redirect:/referencias";
     }
 }
 

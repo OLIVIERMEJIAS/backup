@@ -10,14 +10,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <body>
+    <body style="display: flex">
          <div class="container mt-3 py-3 bg-light rounded-3">
             <header th:replace="plantillas/plantilla1 :: header" >
 
             </header>
 
             <div class="container mt-3">
-                <h1>Lista de Módulos Por Referecia</h1>
+                <h1>Lista de Módulos Por Referencia</h1>
                 <h2>Referencia: [[${referencia.codigo}]]</h2>
                 <a id="btnBuscarM" class="btn btn-success" data-bs-toggle="modal"
                 data-bs-target="#modalModulos"><i class="fas fa-folder-plus"></i>Agregar Nuevo</a>
@@ -64,8 +64,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 </td>
                       
                                 <td>
-                                    <a th:href="@{/editarModuloReferencia/}+${modR.idModuloReferencia}"><i class="fas fa-marker"></i>Editar</a> | 
-                                    <a th:href="@{/eliminarModuloReferencia/}+${modR.idModuloReferencia}"><i class="fas fa-trash-alt"></i>Eliminar</a> 
+                                    <a th:href="@{/editarModRef/}+${modR.idModuloReferencia}"><i class="fas fa-marker"></i>Editar</a> | 
+                                    <a th:href="@{/eliminarModRef/}+${modR.idModuloReferencia}"><i class="fas fa-trash-alt"></i>Eliminar</a> 
                                 </td>
                             </tr>
 
@@ -104,7 +104,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                 <td th:text="${item.idModulo}"></td>
                                                 <td th:text="${item.nombreModulo}"></td>
                                                 <td>
-                                                    <a href="#" th:onclick="seleccionar([[${item.idModulo}]],[[${item.nombreModulo}]])">Seleccionar</a>
+                                                    <a th:href="@/nuevoModuloReferencia/+${item.idModulo}+${referencia.idReferencia}" >Agregar</a>
                                                 </td>
                                             </tr>
 

@@ -17,7 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             
             <div class="row">
                 <div class="col-10 mx-auto">
-                    <form th:action="@{/guardarModuloReferencia}" method="post" th:object="${moduloReferemcia}">
+                    <form th:action="@{/guardarModuloRef}" method="post" th:object="${moduloReferencia}">
                         <input type="hidden" name="idModuloR" th:field="*{idModuloReferencia}"/>
                         <input type="hidden" name="idReferencia" th:field="${referencia.idReferencia}"/>
                          <input type="hidden" name="idReferencia" th:field="${profesor.idReferencia}"/>
@@ -28,14 +28,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <label for="horaInicial" class="form-label">Seleccione la hora inicial</label>
                             <div class="input-group">
                                 <input type="time" id="horaInicial" name="horaInicial" value=""
-                                       th:field="*{horaInicioReferencia}" class="form-control"/>
+                                       th:field="*{horaInicioModuloReferencia}" class="form-control"/>
                             </div> 
                         </div>
 
                         <div class="col-6">
                             <label for="horaFinal" class="form-label">Seleccione la hora final</label>
                             <div class="input-group">
-                                <input  th:field="*{horaFinalReferencia}"
+                                <input  th:field="*{horaFinalModuloReferencia}"
                                         class="btn btn-outline-primary form-control" type="time" id="horaFinal" name="horaFinal" value=""/>
                             </div> 
                         </div>
@@ -50,7 +50,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <label class="form-label">No use espacios, comas u otro símbolo</label>
                            <label class="form-label">L: LUNES, K: MARTES, M:MIÉRCOLES, J:JUEVES, V:VIERNES y S:SABADO</label> 
                        
-                           <input type="text" id="dias" name="dias" value="" th:field="*{diasReferencia}"/>
+                           <input type="text" id="dias" name="dias" value="" th:field="*{diasModuloReferencia}"/>
 
                         </div>
                              
@@ -61,12 +61,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                        
 
                         
-                        <div th:if="${eliminarModRef == null}">
+                        <div th:if="${eliminarModRef == null and modificarModRef == null}">
                             <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar"/>
                             <a th:href="@{/modulosReferencia}+${referencia.idReferencia}" class="btn btn-warning">Regresar</a>
                         </div>
+                         <div th:if="${modificarModRef != null}">
+                             <a th:href="@{/actualizarModRef/}+${moduloReferencia.idModuloReferencia}" class="btn btn-warning" name="btnEliminar">Eliminar</a>
+                            <a th:href="@{/modulosReferencia}+${referencia.idReferencia}" class="btn btn-warning">Regresar</a>
+                        </div>
                          <div th:if="${eliminarModRef != null}">
-                             <a th:href="@{/eliminarModF/}+${moduloReferencia.idModuloReferencia}" class="btn btn-warning" name="btnEliminar">Eliminar</a>
+                             <a th:href="@{/eliminarModRef/}+${moduloReferencia.idModuloReferencia}" class="btn btn-warning" name="btnEliminar">Eliminar</a>
                             <a th:href="@{/modulosReferencia}+${referencia.idReferencia}" class="btn btn-warning">Regresar</a>
                         </div>
                     </form>

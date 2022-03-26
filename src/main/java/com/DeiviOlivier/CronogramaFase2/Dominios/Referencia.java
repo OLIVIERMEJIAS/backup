@@ -32,11 +32,11 @@ public class Referencia {
     @Basic
     @Column(name = "HORA_INICIO_REFERENCIA")
     @NotNull(message = "Es necesaria una hora de inicio")
-    private Time horaInicioReferencia;
+    private String horaInicioReferencia;
     @Basic
     @Column(name = "HORA_FINAL_REFERENCIA")
     @NotNull(message = "Es necesario una hora de fin")
-    private Time horaFinalReferencia;
+    private String horaFinalReferencia;
     
    
     @Basic
@@ -50,13 +50,14 @@ public class Referencia {
     @Column(name = "ESTADO_REFERENCIA")
     @NotEmpty(message = "Es necesario un estado")
     private String estadoReferencia;
- 
-    @OneToMany(mappedBy = "referencia",orphanRemoval = true)
+    @Transient
+    private String modalidad;
+    @OneToMany(mappedBy = "referencia")
     private Collection<ModuloReferencia> modulosReferenciasByIdReferencia;
-    @ManyToOne(optional = true,cascade = {CascadeType.MERGE})
+    @ManyToOne(optional = true)
     @JoinColumn(name = "ID_MODULO",nullable = true)
     private Modulo moduloReferencia;
-    @ManyToOne(optional = true,cascade = {CascadeType.MERGE})
+    @ManyToOne(optional = true)
     @JoinColumn(name = "ID_PROGRAMA",nullable=true)
     private Programa programaReferencia;
 

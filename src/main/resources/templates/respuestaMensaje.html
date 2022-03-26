@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantillas/plantilla1 :: head">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <header th:replace="plantillas/plantilla1 :: header"></header>
+        <div>
+            <h1>Respuesta al Mensaje</h1>
+        <form th:action="@{/enviarRespuesta/}+${mensaje.idMensaje}" method="post" >
+        <label for="respuesta">Ingrese su respuesta:</label>
+        <input type="text" id="respuestaMensaje" name="respuestaMensaje"
+               th:field="${mensaje.respuestaMensaje}" value=""/>
+            <div>
+                <input type="submit" class="btn btn-primary" id="btnEnviar" name="btnEnviar" value="Enviar"/>
+
+                <a h:href="@/mensajesAdmin">Cancelar</a>
+            </div>
+        </form>
+        </div> 
+    </body>
+</html>

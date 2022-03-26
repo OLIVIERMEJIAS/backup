@@ -11,13 +11,15 @@ public class Mensaje {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_MENSAJE")
-    private int idMensaje;
+    private Long idMensaje;
     @Basic
     @Column(name = "FECHA_MENSAJE")
     private Date fechaMensaje;
     @Basic
     @Column(name = "ASUNTO_MENSAJE")
     private String asuntoMensaje;
+    @Column(name = "RESPUESTA_MENSAJE")
+    private String respuestaMensaje;
     @ManyToOne
     @JoinColumn(name="ID_PROFESOR")
     private Profesor profesorMensajes;
@@ -38,15 +40,10 @@ public class Mensaje {
             return false;
         if (asuntoMensaje != null ? !asuntoMensaje.equals(mensajes.asuntoMensaje) : mensajes.asuntoMensaje != null)
             return false;
-
+        if (respuestaMensaje != null ? !respuestaMensaje.equals(mensajes.respuestaMensaje) : mensajes.respuestaMensaje != null)
+            return false;
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = idMensaje;
-        result = 31 * result + (fechaMensaje != null ? fechaMensaje.hashCode() : 0);
-        result = 31 * result + (asuntoMensaje != null ? asuntoMensaje.hashCode() : 0);
-        return result;
-    }
+
 }

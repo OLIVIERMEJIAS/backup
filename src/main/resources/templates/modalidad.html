@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantillas/plantilla1 :: head">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <header th:replace="plantillas/plantilla1 :: header"></header>
+        <div class="card">
+            <div class="card-header">
+                <h1>Seleccione la modalidad de la referencia</h1>
+            </div>
+            <div class="card-body">
+                <a th:href="@{/asociarProgramas/}+${referencia.idReferencia}" class="btn btn-primary">Programa</a>   
+                <a th:href="@{/asociarModulos/}+${referencia.idReferencia}" class="btn btn-success">Módulo Individual</a>  
+            </div>
+        </div>
+    </body>
+</html>
