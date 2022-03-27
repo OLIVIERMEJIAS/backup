@@ -44,6 +44,8 @@ public class ModuloControlador {
 
     @GetMapping("/nuevoModulo")
     public String nuevo(Modulo modulo, Model model) {
+        List<Modulo> lista = servicioModulo.listar();
+        model.addAttribute("modulos", lista);
         return "modulo";
     }
 
