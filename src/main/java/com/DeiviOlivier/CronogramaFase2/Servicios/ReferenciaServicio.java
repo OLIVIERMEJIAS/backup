@@ -51,5 +51,17 @@ public class ReferenciaServicio implements IReferenciaServicio{
     public List<Referencia> filtrar(String codigo) {
         return referenciaDAO.findByCodigo(codigo);
     }
+
+    @Override
+    @Transactional
+    public int asociarPrograma(Long idPrograma, Long idReferencia) {
+        return referenciaDAO.asociarPrograma(idPrograma, idReferencia);
+    }
+
+    @Override
+    @Transactional
+    public int asociarModulo(Long idPrograma, Long idReferencia) {
+        return referenciaDAO.asociarModulo(idPrograma, idReferencia);
+    }
     
 }

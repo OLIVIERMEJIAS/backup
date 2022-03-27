@@ -95,6 +95,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                             <tr>
                                                 <th>Código</th>
                                                 <th>Nombre:</th>
+                                                <th>Horas:</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -102,8 +103,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                             <tr th:each="item:${modSeleccionar}">
                                                 <td th:text="${item.idModulo}"></td>
                                                 <td th:text="${item.nombreModulo}"></td>
+                                                <td th:text="${item.horasModulo}"></td>
                                                 <td>
-                                                    <a th:href="@/nuevoModuloReferencia/+${item.idModulo}+${referencia.idReferencia}" >Agregar</a>
+                                                    <a th:href="@{/nuevoModuloReferencia(idModulo=${item.idModulo},idReferencia=${referencia.idReferencia})}" >Agregar</a>
                                                 </td>
                                             </tr>
 

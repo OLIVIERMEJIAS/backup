@@ -42,7 +42,6 @@ public class ReferenciaControlador {
     
     @GetMapping("/nuevaReferencia")
     public String nuevaReferencia(Referencia referencia,Model model){
-        referencia.setModalidad("existe");
         List<Modulo> listMod = modServ.listar();
         List<Programa> listProg = progServ.listar();
        model.addAttribute("referencia", referencia);
@@ -86,7 +85,6 @@ public class ReferenciaControlador {
             
         }
         
-        referencia.setModalidad("existe");
         red.addFlashAttribute("referencia", referencia);
         return "redirect:/nuevaReferencia";
     }
@@ -98,7 +96,6 @@ public class ReferenciaControlador {
         if(referencia != null){
          red.addFlashAttribute("referencia", referencia);
          red.addFlashAttribute("accionEliminar","1");
-         referencia.setModalidad("existe");
         return "redirect:/nuevaReferencia";
         }
         msg = "No existe esta referencia";
@@ -145,7 +142,7 @@ public class ReferenciaControlador {
         return "asociarPrograma";
     }
     
-      @GetMapping("/asociarModulos/{idPrograma}")
+      @GetMapping("/asociarModulos/{idReferencia}")
     public String vincularModulos(Referencia referencia,Model model){
         List<Modulo> lista = null;
         lista = modServ.listar();
@@ -155,14 +152,20 @@ public class ReferenciaControlador {
     }
   
     @PostMapping("/programaAsociar/{idReferencia}")
-    public String cargarPrograma(Referencia referencia){
-       
+    public String cargarPrograma(Referencia referencia,RedirectAttributes red){
+        referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
+       referenciaServicio.asociarPrograma(referencia.getProgramaReferencia().getIdPrograma(),
+               referencia.getIdReferencia());
+          red.addFlashAttribute("msg", "Módulo asociado a la referencia");      
         return "redirect:/referencias";
     }
     
-     @PostMapping("/programaModulo/{idReferencia}")
-    public String cargarModulo(Referencia referencia){
-        
+     @PostMapping("/moduloAsociar/{idReferencia}")
+    public String cargarModulo(Referencia referencia,RedirectAttributes red){
+          referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
+         referenciaServicio.asociarModulo(referencia.getModuloReferencia().getIdModulo(),
+               referencia.getIdReferencia());
+         red.addFlashAttribute("msg", "Módulo asociado a la referencia");
         return "redirect:/referencias";
     }
 }

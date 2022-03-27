@@ -18,13 +18,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </div>
                 <div class="card-body">
                     <div>
-                        <form th:action="@{/guardarPrograma}" method="post" th:object="${referencia}">
+                        <form th:action="@{/moduloAsociar/}+${referencia.idReferencia}" method="post" th:object="${referencia}">
                             <input type="hidden" id="idModulo" name="idModulo" value=""
                                    th:field="*{moduloReferencia.idModulo}" class="form-control"/>
                             <input type="text" id="nombreModulo" name="nombreModulo" value="" readonly="true"
                                    class="form-control"/>
                             <a id="btnBuscarM" class="btn btn-success" data-bs-toggle="modal"
                                data-bs-target="#modalModulos"><i class="fas fa-binoculars"></i>Buscar</a>
+                               <br/>
+                               <input class="form-control btn btn-primary" type="submit" value="Guardar"/>
                         </form>
                     </div>
 
@@ -46,6 +48,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                         <th hidden="true">Id</th>
                                                         <th>Código</th>
                                                         <th>Nombre:</th>
+                                                        <th>Horas:</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
@@ -54,6 +57,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                         <td hidden="true" th:text="${item.idModulo}"></td>
                                                         <td th:text="${item.codigoModulo}"></td>
                                                         <td th:text="${item.nombreModulo}"></td>
+                                                        <td th:text="${item.horasModulo}"></td>
                                                         <td>
                                                             <a href="#" th:onclick="seleccionarModulo([[${item.idModulo}]],[[${item.nombreModulo}]])">Seleccionar</a>
                                                         </td>

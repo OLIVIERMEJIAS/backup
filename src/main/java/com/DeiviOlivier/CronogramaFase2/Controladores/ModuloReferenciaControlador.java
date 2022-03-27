@@ -6,9 +6,11 @@ package com.DeiviOlivier.CronogramaFase2.Controladores;
 
 import com.DeiviOlivier.CronogramaFase2.Dominios.Modulo;
 import com.DeiviOlivier.CronogramaFase2.Dominios.ModuloReferencia;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Profesor;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IModuloReferenciaServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IModuloServicio;
+import com.DeiviOlivier.CronogramaFase2.Servicios.IProfesorServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IReferenciaServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,8 @@ public class ModuloReferenciaControlador {
     private IReferenciaServicio refServicio;
     @Autowired
     private IModuloServicio moduloServicio;
-    
+    @Autowired
+    private IProfesorServicio profServ;
    
     
     @GetMapping("/modulosReferencia/{idReferencia}")
@@ -52,12 +55,16 @@ public class ModuloReferenciaControlador {
         return "listaModulosReferencia";
     }
     
-    @GetMapping("/nuevoModuloReferencia/{idModulo}/{idReferencia}/")
+    @GetMapping("/nuevoModuloReferencia")
     public String nuevoModuloRef(Referencia referencia, Modulo modulo,
-            ModuloReferencia moduloReferencia, RedirectAttributes red){
-        red.addFlashAttribute("referencia", referencia);
-        red.addFlashAttribute("modulo", modulo);
-        return "redirect:/modulosReferencia";
+            ModuloReferencia moduloReferencia, Model model){
+        List<Profesor> lista = null;
+        lista = profServ.listar();
+        model.addAttribute("referencia", referencia);
+        model.addAttribute("modulo", modulo);
+        model.addAttribute("moduloReferencia", moduloReferencia);
+        model.addAttribute("profesoresMod", lista);
+        return "modulosReferencia";
     }
     
        
