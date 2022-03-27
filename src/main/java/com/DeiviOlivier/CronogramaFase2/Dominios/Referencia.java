@@ -1,5 +1,6 @@
 package com.DeiviOlivier.CronogramaFase2.Dominios;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -12,7 +13,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="REFERENCIAS")
-public class Referencia {
+public class Referencia implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_REFERENCIA")
