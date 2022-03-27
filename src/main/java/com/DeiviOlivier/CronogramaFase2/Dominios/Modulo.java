@@ -3,7 +3,9 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 @Data
 @Entity
@@ -17,16 +19,18 @@ public class Modulo implements Serializable {
     private Long idModulo;
     
     @Column(name = "NOMBRE_MODULO")
-    @NotEmpty(message="El Nombre es obligatorio")
+    @NotEmpty(message="El nombre es obligatorio")
     private String nombreModulo;
     
     @Column(name = "CODIGO_MODULO")
-    @NotEmpty(message="El Nombre es obligatorio")
+    @NotEmpty(message="El codigo es obligatorio")
     private String codigoModulo;
-    @Basic
+    
     @Column(name = "HORAS_MODULO")
-    private short horasModulo;
-    @Basic
+    @NotNull(message="La cantidad de horas no debe estar vacía")
+    @Min(value=1, message="La cantidad debe ser mayor a 0")
+    private Integer horasModulo;
+    
     @Column(name = "REQUISITO_MODULO")
     private String requisitoModulo;
 
