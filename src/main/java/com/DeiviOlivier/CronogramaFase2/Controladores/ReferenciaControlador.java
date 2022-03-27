@@ -133,7 +133,7 @@ public class ReferenciaControlador {
     @GetMapping("/modalidades/{idReferencia}")
     public String elegirModalidad(Referencia referencia,Model model){
         model.addAttribute("referencia", referencia);
-        return "modalidad";
+        return "modalidad.html";
     }
     
     @GetMapping("/asociarProgramas/{idReferencia}")
@@ -155,10 +155,14 @@ public class ReferenciaControlador {
     }
   
     @PostMapping("/programaAsociar/{idReferencia}")
-    public String cargarPrograma(Programa programa, Referencia referencia){
-        programa = progServ.obtenerPrograma(referencia.getProgramaReferencia().getIdPrograma());
-        referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
-        referencia.setProgramaReferencia(programa);
+    public String cargarPrograma(Referencia referencia){
+       
+        return "redirect:/referencias";
+    }
+    
+     @PostMapping("/programaModulo/{idReferencia}")
+    public String cargarModulo(Referencia referencia){
+        
         return "redirect:/referencias";
     }
 }

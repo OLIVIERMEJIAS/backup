@@ -9,15 +9,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <body>
+    <body style="display : flex">
         <header th:replace="plantillas/plantilla1 :: header"></header>
-        <div class="card">
-            <div class="card-header">
-                <h1>Seleccione la modalidad de la referencia</h1>
-            </div>
-            <div class="card-body">
-                <a th:href="@{/asociarProgramas/}+${referencia.idReferencia}" class="btn btn-primary">Programa</a>   
-                <a th:href="@{/asociarModulos/}+${referencia.idReferencia}" class="btn btn-success">Módulo Individual</a>  
+        <div class="container mt-3 py-3 bg-light rounded-3">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Seleccione la modalidad de la referencia</h1>
+                </div>
+                <div class="card-body">
+                    <a th:href="@{/asociarProgramas/}+${referencia.idReferencia}" class="btn btn-primary">Programa</a>   
+                    <a th:href="@{/asociarModulos/}+${referencia.idReferencia}" class="btn btn-success">Módulo Individual</a>  
+                </div>
             </div>
         </div>
     </body>

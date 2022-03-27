@@ -16,30 +16,30 @@
 
                 <div class="card-body">
                     <form th:action="@{/guardarReferencia}" method="post" th:object="${referencia}">
-                        
-                        
-                        
+
+
+
                         <div>
                             <label class="form-label" for="codigo">Ingrese el código de la referencia</label>
                             <div class="input-group">
-                                <input type="text" id="horasMaximas" name="codigo" value="" th:field="*{codigo}" />
+                                <input type="text" id="codigo" name="codigo" value="" th:field="*{codigo}" />
                             </div> 
                         </div>
-                        
-                       <div>
+
+                        <div>
                             <label class="form-label">Ingrese los días lectivos, con respecto a los ejemplos:</label>
                             <label class="form-label">LKMJV</label>
                             <label class="form-label">LKJVS</label>
                             <label class="form-label">No use espacios, comas u otro símbolo</label>
-                           <label class="form-label">L: LUNES, K: MARTES, M:MIÉRCOLES, J:JUEVES, V:VIERNES y S:SABADO</label> 
-                       
-                           <div>
-                               <input type="text" id="dias" name="dias" value="" th:field="*{diasReferencia}"/>
-                           </div>
+                            <label class="form-label">L: LUNES, K: MARTES, M:MIÉRCOLES, J:JUEVES, V:VIERNES y S:SABADO</label> 
+
+                            <div>
+                                <input type="text" id="dias" name="dias" value="" th:field="*{diasReferencia}"/>
+                            </div>
 
                         </div>
-                       
-                        
+
+
                         <div>
                             <label class="form-label">Seleccione el máximo de horas del programa</label>
                             <div class="input-group">
@@ -69,7 +69,7 @@
                             </div> 
 
                         </div>
-                        
+
                         <div>
                             <label class="form-label">Seleccione el estado de la referencia</label>
 
@@ -79,55 +79,26 @@
                                 <option value="Finalizado">Finalizado</option>
                             </select>
                         </div>
-                        
-                        
+
+
                         <div th:if="${accionEliminar == null}" class="input-group">
                             <input class="btn btn-primary mt-3 p-10" type="submit" id="btnGuardar" name="btnGuardar" value="Guardar" />
                             <a th:href="@{/referencias}" class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Cancelar</a>
 
                         </div> 
-                        
+
                         <div th:if="${accionEliminar != null}" class="input-group">
                             <a th:href="@{/borrarReferencia/}+${referencia.idReferencia}" class="btn btn-primary mt-3 p-10" type="submit" id="btnEliminar" name="btnEliminar">Eliminar</a>
                             <a th:href="@{/referencias}" class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Cancelar</a>
 
                         </div> 
-                     
+
                     </form> <!--FIN FORMULARIO-->
-                       <div>
-                              <span class="font-italic text-danger" 
-                                      th:if="${#fields.hasErrors('codigo')}" 
-                                      th:errors="*{codigo}">
-                                </span>
-                            <span class="font-italic text-danger" 
-                                      th:if="${#fields.hasErrors('diasReferencia')}" 
-                                      th:errors="*{diasReferencia}">
-                                </span>
-                            <span class="font-italic text-danger" 
-                                      th:if="${#fields.hasErrors('horasMaximasReferencia')}" 
-                                      th:errors="*{horasMaximasReferencia}">
-                                </span>
-                            <span class="font-italic text-danger" 
-                                      th:if="${#fields.hasErrors('inicioReferencia')}" 
-                                      th:errors="*{inicioReferencia}">
-                                </span>
-                            <span class="font-italic text-danger" 
-                                      th:if="${#fields.hasErrors('horaInicialReferencia')}" 
-                                      th:errors="*{horaInicialReferencia}">
-                                </span>
-                            <span class="font-italic text-danger" 
-                                      th:if="${#fields.hasErrors('horaFinalReferencia')}" 
-                                      th:errors="*{horaFinalReferencia}">
-                                </span>
-                            <span class="font-italic text-danger" 
-                                      th:if="${#fields.hasErrors('estadoReferencia')}" 
-                                      th:errors="*{estadoReferencia}">
-                                </span>
-                        </div>
+                    
                 </div>
             </div>
-            
-            
+           
+
         </div>
     </body>
 </html>
