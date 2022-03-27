@@ -3,6 +3,8 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
@@ -20,19 +22,24 @@ public class Profesor implements Serializable{
     @Column(name = "CONTRASENA_PROFESOR")
     private String contrasenaProfesor;
     @Basic
-    @Column(name = "CEDULA_PROFESOR")
+    @Column(unique=true)
+    @NotEmpty(message="Este campo es obligatorio")
     private String cedulaProfesor;
     @Basic
     @Column(name = "NOMBRE_PROFESOR")
+    @NotEmpty(message="Este campo es obligatorio")
     private String nombreProfesor;
     @Basic
     @Column(name = "APELLIDO1_PROFESOR")
+    @NotEmpty(message="Este campo es obligatorio")
     private String apellido1Profesor;
     @Basic
     @Column(name = "APELLIDO2_PROFESOR")
     private String apellido2Profesor;
     @Basic
-    @Column(name = "CORREO_PROFESOR")
+    @Column(unique=true)
+    @Email(message="Debe ingresar un correo válido")
+    @NotEmpty(message="Este campo es obligatorio")
     private String correoProfesor;
     @OneToMany(mappedBy = "profesoresModificadores")
     private Collection<Modificador> modificadoresByIdProfesor;

@@ -43,8 +43,8 @@
                                 <td th:text ="${item.codigoPrograma}"></td>
                                 <td th:text ="${item.horasTotales}"></td>
                                 <td> 
-                                    <a th:href="@{/editarPrograma/}+${item.idPrograma}"><i class="fas fa-pen"></i> Editar</a> | 
-                                    <a th:href="@{/eliminarPrograma(idPrograma=${item.idPrograma})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                                    <a th:href="@{/editarPrograma/}+${item.idPrograma}" class="link-secondary"><i class="fas fa-pen"></i> Editar</a> | 
+                                    <a th:href="@{/eliminarPrograma(idPrograma=${item.idPrograma})}" class="link-secondary"><i class="fas fa-trash-alt"></i> Eliminar</a>
                                 </td>
                             </tr>
 

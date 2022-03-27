@@ -41,8 +41,8 @@
                                 <td th:text ="${item.horasModulo}"></td>
                                 <td th:text ="${item.requisitoModulo}"></td>
                                 <td> 
-                                    <a th:href="@{/editarModulo/}+${item.idModulo}"><i class="fas fa-pen"></i> Editar</a> | 
-                                    <a th:href="@{/eliminarModulo(idModulo=${item.idModulo})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                                    <a th:href="@{/editarModulo/}+${item.idModulo}" class="link-secondary"><i class="fas fa-pen"></i> Editar</a> | 
+                                    <a th:href="@{/eliminarModulo(idModulo=${item.idModulo})}" class="link-secondary"><i class="fas fa-trash-alt"></i> Eliminar</a>
                                 </td>
                             </tr>
 

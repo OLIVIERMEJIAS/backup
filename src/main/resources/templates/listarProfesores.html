@@ -43,8 +43,8 @@
                                 <td th:text ="${item.correoProfesor}"></td>
                                 <td th:text ="${item.cedulaProfesor}"></td>
                                 <td> 
-                                    <a th:href="@{/editarProfesor/}+${item.idProfesor}"><i class="fas fa-pen"></i> Editar</a> | 
-                                    <a th:href="@{/eliminarProfesor(idProfesor=${item.idProfesor})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                                    <a th:href="@{/editarProfesor/}+${item.idProfesor}" class="link-secondary"><i class="fas fa-pen"></i> Editar</a> | 
+                                    <a th:href="@{/eliminarProfesor(idProfesor=${item.idProfesor})}" class="link-secondary"><i class="fas fa-trash-alt"></i> Eliminar</a>
                                 </td>
                             </tr>
 
