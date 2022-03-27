@@ -13,7 +13,9 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="REFERENCIAS")
-public class Referencia implements Serializable{
+public class Referencia implements Serializable {
+    private static final long serialVersionUID=1L;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_REFERENCIA")
@@ -39,7 +41,6 @@ public class Referencia implements Serializable{
     @NotNull(message = "Es necesario una hora de fin")
     private String horaFinalReferencia;
     
-   
     @Basic
     @Column(name = "INICIO_REFERENCIA")
     @NotNull(message="Es necesaria una fecha de inicio")
@@ -62,37 +63,4 @@ public class Referencia implements Serializable{
     @JoinColumn(name = "ID_PROGRAMA",nullable=true)
     private Programa programaReferencia;
 
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Referencia that = (Referencia) o;
-
-        if (idReferencia != that.idReferencia) return false;
-        if (codigo != null ? !codigo.equals(that.codigo) : that.codigo != null) return false;
-        if (horasMaximasReferencia != null ? !horasMaximasReferencia.equals(that.horasMaximasReferencia) : that.horasMaximasReferencia != null)
-            return false;
-        if (horaFinalReferencia != null ? !horaFinalReferencia.equals(that.horaFinalReferencia) : that.horaFinalReferencia != null)
-            return false;
-        if (diasReferencia != null ? !diasReferencia.equals(that.diasReferencia) : that.diasReferencia != null)
-            return false;
-        if (horaInicioReferencia != null ? !horaInicioReferencia.equals(that.horaInicioReferencia) : that.horaInicioReferencia != null)
-            return false;
-        if (inicioReferencia != null ? !inicioReferencia.equals(that.inicioReferencia) : that.inicioReferencia != null)
-            return false;
-        if (finalReferencia != null ? !finalReferencia.equals(that.finalReferencia) : that.finalReferencia != null)
-            return false;
-        if (estadoReferencia != null ? !estadoReferencia.equals(that.estadoReferencia) : that.estadoReferencia != null)
-            return false;
-
-        return true;
-    }
-
-  
-
-  
- 
 }

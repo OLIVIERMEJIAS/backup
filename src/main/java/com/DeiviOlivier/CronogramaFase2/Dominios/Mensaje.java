@@ -1,5 +1,6 @@
 package com.DeiviOlivier.CronogramaFase2.Dominios;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Date;
 import lombok.Data;
@@ -7,7 +8,9 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="MENSAJES")
-public class Mensaje {
+public class Mensaje implements Serializable {
+    private static final long serialVersionUID=1L;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_MENSAJE")
@@ -27,23 +30,5 @@ public class Mensaje {
     @ManyToOne
     @JoinColumn(name="ID_ADMINISTRADOR")
     private Administrador administradorMensajes;
-            
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Mensaje mensajes = (Mensaje) o;
-
-        if (idMensaje != mensajes.idMensaje) return false;
-        if (fechaMensaje != null ? !fechaMensaje.equals(mensajes.fechaMensaje) : mensajes.fechaMensaje != null)
-            return false;
-        if (asuntoMensaje != null ? !asuntoMensaje.equals(mensajes.asuntoMensaje) : mensajes.asuntoMensaje != null)
-            return false;
-        if (respuestaMensaje != null ? !respuestaMensaje.equals(mensajes.respuestaMensaje) : mensajes.respuestaMensaje != null)
-            return false;
-        return true;
-    }
-
-
+           
 }

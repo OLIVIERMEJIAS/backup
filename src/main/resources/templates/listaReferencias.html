@@ -58,15 +58,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                                 <td th:if ="${ref.moduloReferencia == null}">--
                                 </td>
-
-                                <td>
-                                    <a th:href="@{/editarReferencia/}+${ref.idReferencia}"><i class="fas fa-marker"></i>Editar</a> | 
-                                    <a th:href="@{/eliminarReferencia/}+${ref.idReferencia}"><i class="fas fa-trash-alt"></i>Eliminar</a> |
-                                    <a th:href="@{/modulosReferencia/}+${ref.idReferencia}"><i class="fas fa-folders"></i>Módulos</a> 
-                                    <a th:href="@{/modalidades/}+${ref.idReferencia}">Asociar Programa o Módulo Individual</a> 
-                                </td>
-
-
+                                 
+                                  <td>
+                                    <a th:href="@{/editarReferencia/}+${ref.idReferencia}" class="link-secondary"><i class="fas fa-marker"></i>Editar</a> | 
+                                    <a th:href="@{/eliminarReferencia/}+${ref.idReferencia}" class="link-secondary"><i class="fas fa-trash-alt"></i>Eliminar</a> |
+                                    <a th:href="@{/modulosReferencia/}+${ref.idReferencia}" class="link-secondary"><i class="fas fa-folders"></i>Módulos</a> 
+                                    <a th:href="@{/modalidades/}+${ref.idReferencia}" class="link-secondary">Asociar Programa o Módulo Individual</a> 
+                                  </td>
+                                 
+                              
                             </tr>
 
                         </tbody>

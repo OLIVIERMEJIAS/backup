@@ -1,12 +1,15 @@
 package com.DeiviOlivier.CronogramaFase2.Dominios;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Date;
 import lombok.Data;
 @Data
 @Entity
 @Table(name = "MODULOS_REFERENCIAS")
-public class ModuloReferencia {
+public class ModuloReferencia implements Serializable {
+    private static final long serialVersionUID=1L;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_MODULO_REFERENCIA")
@@ -35,31 +38,6 @@ public class ModuloReferencia {
     @ManyToOne
     @JoinColumn(name = "ID_REFERENCIA", nullable = false)
     private Referencia referencia;
-
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ModuloReferencia that = (ModuloReferencia) o;
-
-        if (idModuloReferencia != that.idModuloReferencia) return false;
-        if (diasModuloReferencia != null ? !diasModuloReferencia.equals(that.diasModuloReferencia) : that.diasModuloReferencia != null)
-            return false;
-        if (horaInicioModuloReferencia != null ? !horaInicioModuloReferencia.equals(that.horaInicioModuloReferencia) : that.horaInicioModuloReferencia != null)
-            return false;
-        if (horaFinalModuloReferencia != null ? !horaFinalModuloReferencia.equals(that.horaFinalModuloReferencia) : that.horaFinalModuloReferencia != null)
-            return false;
-        if (inicioModuloReferencia != null ? !inicioModuloReferencia.equals(that.inicioModuloReferencia) : that.inicioModuloReferencia != null)
-            return false;
-        if (finalModuloReferencia != null ? !finalModuloReferencia.equals(that.finalModuloReferencia) : that.finalModuloReferencia != null)
-            return false;
-
-        return true;
-    }
-
-
 
 
 }

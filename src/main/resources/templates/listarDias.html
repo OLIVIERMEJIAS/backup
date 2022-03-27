@@ -17,20 +17,12 @@
 
             <div class="container mt-3">
                 <div class="row me-1">
-                    <div class="col-9 rounded">
-                        <form th:action="@{/filtrarDias}" method="post">
-                            <div class="input-group shadow p-2 mb-2 bg-body rounded">
-                                <input type="text" name="txtTexto" placeholder="Motivo del día:" class="form-control"/>
-                                <input type="submit" name="btnBuscar" value="Buscar" class="btn btn-primary"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-3 shadow p-2 mb-2 bg-body rounded">
-                        <a th:href="@{/nuevoDia}" class="btn btn-primary w-100"><i class="fas fa-user-plus"></i> Agregar día</a>
+                    <div class="">
+                        <a th:href="@{/nuevoDia}" class="btn btn-primary form-control"><i class="fas fa-user-plus"></i> Agregar día</a>
                     </div>
                 </div>
                 <div class="mt-3" th:if="${dias != null and !dias.empty}">
-                    <table class="table table-striped table-hover shadow p-3 mb-3 bg-body rounded">
+                    <table class="table table-striped table-hover shadow p-3 mb-3 bg-body rounded" id="tablaDias">
                         <thead class="table-dark">
                             <tr>
                                 <th hidden="true">Id</th>
@@ -54,8 +46,8 @@
                                     <span th:text="${item.centrosFormacionesByIdCentroFormacion.codigoCentroFormacion}"></span>
                                 </td>
                                 <td> 
-                                    <a th:href="@{/editarDia/}+${item.idDiaFeriado}"><i class="fas fa-pen"></i> Editar</a> | 
-                                    <a th:href="@{/eliminarDia(idDiaFeriado=${item.idDiaFeriado})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                                    <a th:href="@{/editarDia/}+${item.idDiaFeriado}" class="link-secondary"><i class="fas fa-pen"></i> Editar</a> | 
+                                    <a th:href="@{/eliminarDia(idDiaFeriado=${item.idDiaFeriado})}" class="link-secondary"><i class="fas fa-trash-alt"></i> Eliminar</a>
                                 </td>
                             </tr>
 
@@ -67,6 +59,16 @@
                     Actualmente no hay días no lectivos de.
                 </div>
             </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#tablaDias").DataTable({
+                        "ordering": true,
+                        "lengthMenu": [5, 10, 15],
+                        "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
+                    })
+                })
+
+            </script>
         </div>
     </body>
 </html>

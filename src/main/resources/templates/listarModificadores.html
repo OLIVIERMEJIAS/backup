@@ -52,8 +52,8 @@
                                 <td th:text ="${item.finalModificador}"></td>
                                 <td th:text ="${item.descripcionModificador}"></td>
                                 <td> 
-                                    <a th:href="@{/editarModificador/}+${item.idModificador}"><i class="fas fa-pen"></i> Editar</a> | 
-                                    <a th:href="@{/eliminarModificador(idModificador=${item.idModificador})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+                                    <a th:href="@{/editarModificador/}+${item.idModificador}" class="link-secondary"><i class="fas fa-pen"></i> Editar</a> | 
+                                    <a th:href="@{/eliminarModificador(idModificador=${item.idModificador})}" class="link-secondary"><i class="fas fa-trash-alt"></i> Eliminar</a>
                                 </td>
                             </tr>
 

@@ -1,26 +1,36 @@
 package com.DeiviOlivier.CronogramaFase2.Dominios;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 @Data
 @Entity
 @Table(name="MODULOS")
-public class Modulo {
+public class Modulo implements Serializable {
+    private static final long serialVersionUID=1L;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_MODULO")
     private Long idModulo;
-    @Basic
+    
     @Column(name = "NOMBRE_MODULO")
+    @NotEmpty(message="El nombre es obligatorio")
     private String nombreModulo;
-    @Basic
+    
     @Column(name = "CODIGO_MODULO")
+    @NotEmpty(message="El codigo es obligatorio")
     private String codigoModulo;
-    @Basic
+    
     @Column(name = "HORAS_MODULO")
-    private short horasModulo;
-    @Basic
+    @NotNull(message="La cantidad de horas no debe estar vacía")
+    @Min(value=1, message="La cantidad debe ser mayor a 0")
+    private Integer horasModulo;
+    
     @Column(name = "REQUISITO_MODULO")
     private String requisitoModulo;
 
@@ -32,26 +42,5 @@ public class Modulo {
     private Collection<ModuloReferencia> modulosReferenciasByIdModulo;
     @OneToMany(mappedBy = "moduloReferencia")
     private Collection<Referencia> referencia;
-
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Modulo modulos = (Modulo) o;
-
-        if (idModulo != modulos.idModulo) return false;
-        if (horasModulo != modulos.horasModulo) return false;
-        if (nombreModulo != null ? !nombreModulo.equals(modulos.nombreModulo) : modulos.nombreModulo != null)
-            return false;
-        if (codigoModulo != null ? !codigoModulo.equals(modulos.codigoModulo) : modulos.codigoModulo != null)
-            return false;
-        if (requisitoModulo != null ? !requisitoModulo.equals(modulos.requisitoModulo) : modulos.requisitoModulo != null)
-            return false;
-
-        return true;
-    }
-
 
 }
