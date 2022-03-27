@@ -1,5 +1,6 @@
 package com.DeiviOlivier.CronogramaFase2.Dominios;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
 import lombok.Data;
@@ -7,7 +8,9 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="PROVINCIAS")
-public class Provincia {
+public class Provincia implements Serializable {
+    private static final long serialVersionUID=1L;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_PROVINCIA")
@@ -17,27 +20,4 @@ public class Provincia {
     private String nombreProvincia;
     @OneToMany(mappedBy = "provinciasByIdProvincia")
     private Collection<Canton> cantonesByIdProvincia;
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Provincia that = (Provincia) o;
-
-        if (idProvincia != that.idProvincia) return false;
-        if (nombreProvincia != null ? !nombreProvincia.equals(that.nombreProvincia) : that.nombreProvincia != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) idProvincia;
-        result = 31 * result + (nombreProvincia != null ? nombreProvincia.hashCode() : 0);
-        return result;
-    }
-
 }

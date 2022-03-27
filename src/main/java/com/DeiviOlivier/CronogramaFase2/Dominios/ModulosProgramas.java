@@ -1,11 +1,14 @@
 package com.DeiviOlivier.CronogramaFase2.Dominios;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import lombok.Data;
 @Data
 @Entity
 @Table(name = "MODULOS_PROGRAMAS")
-public class ModulosProgramas {
+public class ModulosProgramas implements Serializable {
+    private static final long serialVersionUID=1L;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name="ID_MODULO_PROGRAMA")
@@ -17,19 +20,4 @@ public class ModulosProgramas {
     @JoinColumn(name = "ID_MODULO", nullable = false)
     private Modulo modulosByIdModulo;
 
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ModulosProgramas that = (ModulosProgramas) o;
-
-
-        return true;
-    }
-
-   
-
-    
 }

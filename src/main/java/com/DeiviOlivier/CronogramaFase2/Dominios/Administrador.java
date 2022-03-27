@@ -1,12 +1,15 @@
 package com.DeiviOlivier.CronogramaFase2.Dominios;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Collection;
 import lombok.Data;
 @Data
 @Entity
 @Table(name="ADMINISTRADORES")
-public class Administrador {
+public class Administrador implements Serializable {
+    
+    private static final long serialVersionUID=1L;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_ADMINISTRADOR")
@@ -44,43 +47,5 @@ public class Administrador {
     private Rol rol;
     @OneToMany(mappedBy="administradorMensajes")
     private Collection<Mensaje> mensajes;
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Administrador that = (Administrador) o;
-
-        if (idAdministrador != that.idAdministrador) return false;
-        if (cedulaAdministrador != that.cedulaAdministrador) return false;
-        if (contrasenaAdministrador != null ? !contrasenaAdministrador.equals(that.contrasenaAdministrador) : that.contrasenaAdministrador != null)
-            return false;
-        if (nombreUsuario != null ? !nombreUsuario.equals(that.nombreUsuario) : that.nombreUsuario != null)
-            return false;
-        if (nombreAdministrador != null ? !nombreAdministrador.equals(that.nombreAdministrador) : that.nombreAdministrador != null)
-            return false;
-        if (apellido1Administrador != null ? !apellido1Administrador.equals(that.apellido1Administrador) : that.apellido1Administrador != null)
-            return false;
-        if (apellido2Administrador != null ? !apellido2Administrador.equals(that.apellido2Administrador) : that.apellido2Administrador != null)
-            return false;
-        if (correoAdministrador != null ? !correoAdministrador.equals(that.correoAdministrador) : that.correoAdministrador != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idAdministrador;
-        result = 31 * result + cedulaAdministrador;
-        result = 31 * result + (contrasenaAdministrador != null ? contrasenaAdministrador.hashCode() : 0);
-        result = 31 * result + (nombreUsuario != null ? nombreUsuario.hashCode() : 0);
-        result = 31 * result + (nombreAdministrador != null ? nombreAdministrador.hashCode() : 0);
-        result = 31 * result + (apellido1Administrador != null ? apellido1Administrador.hashCode() : 0);
-        result = 31 * result + (apellido2Administrador != null ? apellido2Administrador.hashCode() : 0);
-        result = 31 * result + (correoAdministrador != null ? correoAdministrador.hashCode() : 0);
-        return result;
-    }
-
-    
+  
 }

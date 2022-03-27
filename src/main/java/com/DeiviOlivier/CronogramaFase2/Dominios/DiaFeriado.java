@@ -1,12 +1,15 @@
 package com.DeiviOlivier.CronogramaFase2.Dominios;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Date;
 import lombok.Data;
 @Data
 @Entity
 @Table(name = "DIAS_FERIADOS")
-public class DiaFeriado {
+public class DiaFeriado implements Serializable{
+    private static final long serialVersionUID=1L;
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_DIA_FERIADO")
