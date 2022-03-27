@@ -11,6 +11,7 @@ import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -22,28 +23,33 @@ public class ReferenciaServicio implements IReferenciaServicio{
     @Autowired
     private IReferenciaDAO referenciaDAO;
     @Override
+    @Transactional
     public void eliminar(Long id) {
         referenciaDAO.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void guardar(Referencia referencia) {
         referenciaDAO.save(referencia);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Referencia obtenerReferencia(Long id) {
         return referenciaDAO.findById(id).orElse(null);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Referencia> listar() {
         return referenciaDAO.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Referencia> filtrar(String codigo) {
-        return referenciaDAO.findByReferencia(codigo);
+        return referenciaDAO.findByCodigo(codigo);
     }
     
 }

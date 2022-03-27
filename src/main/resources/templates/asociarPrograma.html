@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantillas/plantilla1 :: head">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <header th:replace="plantillas/plantilla1 :: header"></header>
+        <div class="card">
+            <div class="card-header">
+                <label for="nombrePrograma" class="form-label">Seleccione el programa</label>
+
+            </div>
+            <div class="card-body">
+                <div>
+                    <form th:action="@{/programaAsociar/}+${referencia.idReferencia}" method="post" th:object="${referencia}">
+                        <input type="hidden" id="idPrograma" name="idPrograma" value=""
+                               th:field="*{programaReferencia.idPrograma}" class="form-control"/>
+                        <input type="text" id="nombrePrograma" name="nombrePrograma" value=""
+                               readonly="true" class="form-control"
+                               />
+                        <a id="btnBuscarP" class="btn btn-success" data-bs-toggle="modal"
+                           data-bs-target="#modalProgramas"><i class="fas fa-binoculars"></i>Buscar</a>
+                        <br/>  
+                        <input class="form-control" type="submit" value="Guardar"/>
+                    </form>
+                </div>
+                <section>
+                    <div class="modal fade" id="modalProgramas" tabindex="-1" role="dialog"
+                         aria-labelledby="programaModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="programaModalLabel" >Listado de Programas</h5>                                
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div th:if="${programasReferencia != null and !programasReferencia.empty}">
+                                        <table class="table" id="tablaProgramas">
+                                            <thead>
+                                                <tr>
+                                                    <th hidden="true">Id</th>
+                                                <th>Código</th>
+                                                <th>Nombre:</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="item:${programasReferencia}">
+                                                <td hidden="true" th:text="${item.idPrograma}"></td>
+                                                 <td th:text="${item.codigoPrograma}"></td>
+                                                <td th:text="${item.nombrePrograma}"></td>
+                                                    <td>
+                                                        <a href="#" th:onclick="seleccionar([[${item.idPrograma}]],[[${item.nombrePrograma}]])">Seleccionar</a>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div th:if="${programasReferencia == null or programasReferencia.empty}">
+                                        No hay Programas guardados
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button id="btnCerrar" type="button" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                </div>                            
+                            </div>
+
+                        </div>
+
+
+                    </div> <!--FIN MODAL-->
+                </section>
+                <script type="text/javascript">
+                    function seleccionar(id, nombre) {
+                        $("#idPrograma").val(id);
+                        $("#nombrePrograma").val(nombre);
+                        $("#btnCerrar").click();
+                    }
+
+                    $(document).ready(function () {
+                        $("#tablaProgramas").DataTable({
+                            "ordering": false,
+                            "lengthMenu": [5, 10, 15],
+                            "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
+                        })
+                    })
+
+                </script>  
+            </div>
+        </div>
+    </body>
+</html>

@@ -4,10 +4,16 @@
  */
 package com.DeiviOlivier.CronogramaFase2.Servicios;
 
+import com.DeiviOlivier.CronogramaFase2.Dominios.Mensaje;
+import java.util.List;
+
 /**
  *
  * @author HP
  */
 public interface IMensajeServicio {
-    
+    public  List<Mensaje> listar();
+    public void actualizarRespuesta(String respuesta,Long idMensaje);
+    public Mensaje obtenerMensaje(Long id);
+    public void eliminar (Long id);
 }

@@ -10,7 +10,7 @@ public class ModuloReferencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_MODULO_REFERENCIA")
-    private int idModuloReferencia;
+    private Long idModuloReferencia;
     @Basic
     @Column(name = "DIAS_MODULO_REFERENCIA")
     private String diasModuloReferencia;
@@ -21,10 +21,10 @@ public class ModuloReferencia {
     @Column(name = "HORA_FINAL_MODULO_REFERENCIA")
     private String horaFinalModuloReferencia;
     @Basic
-    @Column(name = "INICIO_MODULO_REFERENCIA")
+    @Column(name = "INICIO_MODULO_REFERENCIA",nullable = true)
     private Date inicioModuloReferencia;
     @Basic
-    @Column(name = "FINAL_MODULO_REFERENCIA")
+    @Column(name = "FINAL_MODULO_REFERENCIA",nullable = true)
     private Date finalModuloReferencia;
     @ManyToOne
     @JoinColumn(name = "ID_MODULO ", nullable = false)
@@ -59,16 +59,7 @@ public class ModuloReferencia {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = idModuloReferencia;
-        result = 31 * result + (diasModuloReferencia != null ? diasModuloReferencia.hashCode() : 0);
-        result = 31 * result + (horaInicioModuloReferencia != null ? horaInicioModuloReferencia.hashCode() : 0);
-        result = 31 * result + (horaFinalModuloReferencia != null ? horaFinalModuloReferencia.hashCode() : 0);
-        result = 31 * result + (inicioModuloReferencia != null ? inicioModuloReferencia.hashCode() : 0);
-        result = 31 * result + (finalModuloReferencia != null ? finalModuloReferencia.hashCode() : 0);
-        return result;
-    }
+
 
 
 }

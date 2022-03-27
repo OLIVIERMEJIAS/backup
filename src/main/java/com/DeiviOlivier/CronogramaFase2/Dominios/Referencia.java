@@ -3,8 +3,11 @@ package com.DeiviOlivier.CronogramaFase2.Dominios;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.Calendar;
 import java.util.Collection;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 @Data
 @Entity
@@ -16,37 +19,46 @@ public class Referencia {
     private Long idReferencia;
     @Basic
     @Column(name = "REFERENCIA")
-    private String referencia;
+    @NotEmpty(message = "Es necesario un código de referencia")
+    private String codigo;
     @Basic
     @Column(name = "HORAS_MAXIMAS_REFERENCIA")
+    @NotNull(message = "Es necesario un número máximo de horas lectivas")
     private BigDecimal horasMaximasReferencia; 
     @Basic
     @Column(name = "DIAS_REFERENCIA")
+    @NotEmpty(message = "Es necesario elegir por lo menos un día")
     private String diasReferencia;
     @Basic
     @Column(name = "HORA_INICIO_REFERENCIA")
+    @NotNull(message = "Es necesaria una hora de inicio")
     private String horaInicioReferencia;
     @Basic
     @Column(name = "HORA_FINAL_REFERENCIA")
+    @NotNull(message = "Es necesario una hora de fin")
     private String horaFinalReferencia;
     
    
     @Basic
     @Column(name = "INICIO_REFERENCIA")
+    @NotNull(message="Es necesaria una fecha de inicio")
     private Date inicioReferencia;
     @Basic
-    @Column(name = "FINAL_REFERENCIA")
+    @Column(name = "FINAL_REFERENCIA",nullable = true)
     private Date finalReferencia;
     @Basic
     @Column(name = "ESTADO_REFERENCIA")
+    @NotEmpty(message = "Es necesario un estado")
     private String estadoReferencia;
+    @Transient
+    private String modalidad;
     @OneToMany(mappedBy = "referencia")
     private Collection<ModuloReferencia> modulosReferenciasByIdReferencia;
-    @ManyToOne
-    @JoinColumn(name = "ID_MODULO")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "ID_MODULO",nullable = true)
     private Modulo moduloReferencia;
-    @ManyToOne
-    @JoinColumn(name = "ID_PROGRAMA")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "ID_PROGRAMA",nullable=true)
     private Programa programaReferencia;
 
 
@@ -59,7 +71,7 @@ public class Referencia {
         Referencia that = (Referencia) o;
 
         if (idReferencia != that.idReferencia) return false;
-        if (referencia != null ? !referencia.equals(that.referencia) : that.referencia != null) return false;
+        if (codigo != null ? !codigo.equals(that.codigo) : that.codigo != null) return false;
         if (horasMaximasReferencia != null ? !horasMaximasReferencia.equals(that.horasMaximasReferencia) : that.horasMaximasReferencia != null)
             return false;
         if (horaFinalReferencia != null ? !horaFinalReferencia.equals(that.horaFinalReferencia) : that.horaFinalReferencia != null)

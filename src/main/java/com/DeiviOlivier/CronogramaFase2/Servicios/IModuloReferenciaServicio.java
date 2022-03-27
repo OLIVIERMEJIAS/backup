@@ -17,4 +17,5 @@ public interface IModuloReferenciaServicio {
     public void guardar(ModuloReferencia moduloReferencia);
     public ModuloReferencia obtenerModuloReferencia(Long id);
     public List<ModuloReferencia> listar(Referencia referencia);
+    public void eliminarPorReferencia(Referencia referencia);
 }

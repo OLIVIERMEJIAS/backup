@@ -12,9 +12,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body style="display: flex">
         <header th:replace="plantillas/plantilla1 :: header" ></header>
+      
          <div class="container mt-3 py-3 bg-light rounded-3">
             <h1 class="card-header">Lista de Referencias</h1>
-
+              <div th:if="${msg!=null and !msg.empty}">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Mensaje: </strong> <span th:text="${msg}">texto</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div> 
+                 </div>
 
             <div class="container mt-3">
                 <div class="row me-1">
@@ -45,7 +51,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <tr th:each="ref:${referencias}">
                                 <td hidden="true" th:text ="${ref.idReferencia}"></td>
                                 
-                                 <td th:text ="${ref.referencia}"></td>
+                                 <td th:text ="${ref.codigo}"></td>
                                  
                                 <td th:if ="${ref.programaReferencia != null}">
                                     <span th:text ="${ref.programaReferencia.nombrePrograma}"></span>
@@ -61,11 +67,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                  <td th:if ="${ref.moduloReferencia == null}">--
                                 </td>
                                  
-                                <td>
+                                  <td>
                                     <a th:href="@{/editarReferencia/}+${ref.idReferencia}"><i class="fas fa-marker"></i>Editar</a> | 
                                     <a th:href="@{/eliminarReferencia/}+${ref.idReferencia}"><i class="fas fa-trash-alt"></i>Eliminar</a> |
                                     <a th:href="@{/modulosReferencia/}+${ref.idReferencia}"><i class="fas fa-folders"></i>Módulos</a> 
-                                </td>
+                                    <a th:href="@{/modalidades/}+${ref.idReferencia}">Asociar Programa o Módulo Individual</a> 
+                                  </td>
+                                 
+                              
                             </tr>
 
                         </tbody>

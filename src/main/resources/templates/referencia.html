@@ -1,6 +1,6 @@
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-    <head th:replace="plantillas/plantilla1 :: head ">
+    <head th:replace="plantillas/plantilla1 :: head">
         <title>TODO supply a title</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,51 +16,34 @@
 
                 <div class="card-body">
                     <form th:action="@{/guardarReferencia}" method="post" th:object="${referencia}">
-                        <input type="hidden" name="idReferencia" th:field="*{idReferencia}" value=""/>
-
+                        
+                        
+                        
                         <div>
-                            <label for="tipo" class="form-label">Seleccione Modalidad</label>
-                            <input class="btn" type="checkbox" id="checkPrograma" name="checkPrograma" value="Programa"/>
-                            <input class="btn" type="checkbox" id="checkModulo" name="checkModulo" value="Módulo Individual"/>
-                        </div>
-                        <div>
-                            <label for="nombrePrograma" class="form-label">Seleccione el programa</label>
-                            <input type="hidden" id="idPrograma" name="idPrograma" value=""
-                                   th:field="*{programaReferencia.idPrograma}" class="form-control"/>
-                            <input type="text" id="nombrePrograma" name="nombrePrograma" value=""
-                                   readonly="true" th:field="*{programaReferencia.nombrePrograma}" class="form-control"
-                                   />
-                            <a id="btnBuscarP" class="btn btn-success" data-bs-toggle="modal"
-                                               data-bs-target="#modalProgramas"><i class="fas fa-binoculars"></i>Buscar</a>
-                        </div>
-                        <div>
-                            <label for="nombrePrograma" class="form-label">Seleccione el módulo</label>
-                            <input type="hidden" id="idModulo" name="idModulo" value=""
-                                   th:field="*{moduloReferencia.idModulo}" class="form-control"/>
-                            <input type="text" id="nombreModulo" name="nombreModulo" value="" readonly="true"
-                                   th:field="*{moduloReferencia.nombreModulo}" class="form-control"/>
-                                <a id="btnBuscarM" class="btn btn-success" data-bs-toggle="modal"
-                                               data-bs-target="#modalModulos"><i class="fas fa-binoculars"></i>Buscar</a>
-                        </div>
-
-                        <div>
-                            <label class="form-label">Seleccione los días lectivos</label>
+                            <label class="form-label" for="codigo">Ingrese el código de la referencia</label>
                             <div class="input-group">
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkLunes" name="checkLunes" value="Lunes"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkMartes" name="checkMartes" value="Martes"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkMiercoles" name="checkMiercoles" value="Miércoles"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkJueves" name="checkJueves" value="Jueves"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkViernes" name="checkViernes" value="Viernes"/>
-                                <input class="btn btn-outline-primary" type="checkbox" id="checkSabado" name="checkSabado" value="Sábado"/>
+                                <input type="text" id="horasMaximas" name="codigo" value="" th:field="*{codigo}" />
                             </div> 
+                        </div>
+                        
+                       <div>
+                            <label class="form-label">Ingrese los días lectivos, con respecto a los ejemplos:</label>
+                            <label class="form-label">LKMJV</label>
+                            <label class="form-label">LKJVS</label>
+                            <label class="form-label">No use espacios, comas u otro símbolo</label>
+                           <label class="form-label">L: LUNES, K: MARTES, M:MIÉRCOLES, J:JUEVES, V:VIERNES y S:SABADO</label> 
+                       
+                           <div>
+                               <input type="text" id="dias" name="dias" value="" th:field="*{diasReferencia}"/>
+                           </div>
 
                         </div>
-
+                       
+                        
                         <div>
                             <label class="form-label">Seleccione el máximo de horas del programa</label>
                             <div class="input-group">
-                                <input class="btn btn-outline-primary" type="checkbox" id="check6" name="check6" value="6" />
-                                <input class="btn btn-outline-primary" type="checkbox" id="check5.4" name="check5.4" value="5.4"/>
+                                <input type="number" id="horasMaximas" name="horasMaximas" value="" th:field="*{horasMaximasReferencia}" />
                             </div> 
                         </div>
                         <div>
@@ -86,150 +69,65 @@
                             </div> 
 
                         </div>
+                        
+                        <div>
+                            <label class="form-label">Seleccione el estado de la referencia</label>
 
-                        <div class="input-group">
+                            <select class="form-control" th:field="*{estadoReferencia}">
+                                <option selected="true" value="Activo">Activo</option>
+                                <option value="Suspendido">Suspendido</option>
+                                <option value="Finalizado">Finalizado</option>
+                            </select>
+                        </div>
+                        
+                        
+                        <div th:if="${accionEliminar == null}" class="input-group">
                             <input class="btn btn-primary mt-3 p-10" type="submit" id="btnGuardar" name="btnGuardar" value="Guardar" />
-                            <a class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Borrar Todo</a>
+                            <a th:href="@{/referencias}" class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Cancelar</a>
 
                         </div> 
+                        
+                        <div th:if="${accionEliminar != null}" class="input-group">
+                            <a th:href="@{/borrarReferencia/}+${referencia.idReferencia}" class="btn btn-primary mt-3 p-10" type="submit" id="btnEliminar" name="btnEliminar">Eliminar</a>
+                            <a th:href="@{/referencias}" class="btn btn-warning mt-3" type="button" id="btnBorrar" name="btnBorrar">Cancelar</a>
 
+                        </div> 
+                     
                     </form> <!--FIN FORMULARIO-->
+                       <div>
+                              <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('codigo')}" 
+                                      th:errors="*{codigo}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('diasReferencia')}" 
+                                      th:errors="*{diasReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('horasMaximasReferencia')}" 
+                                      th:errors="*{horasMaximasReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('inicioReferencia')}" 
+                                      th:errors="*{inicioReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('horaInicialReferencia')}" 
+                                      th:errors="*{horaInicialReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('horaFinalReferencia')}" 
+                                      th:errors="*{horaFinalReferencia}">
+                                </span>
+                            <span class="font-italic text-danger" 
+                                      th:if="${#fields.hasErrors('estadoReferencia')}" 
+                                      th:errors="*{estadoReferencia}">
+                                </span>
+                        </div>
                 </div>
             </div>
             
-             <section>
-                <div class="modal fade" id="modalProgramas" tabindex="-1" role="dialog"
-                     aria-labelledby="programaModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="programaModalLabel" >Listado de Programas</h5>                                
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                
-                            </div>
-                            <div class="modal-body">
-                                <div th:if="${programasReferencia != null and !programasReferencia.empty}">
-                                    <table class="table" id="tablaProgramas">
-                                        <thead>
-                                            <tr>
-                                                <th>Código</th>
-                                                <th>Nombre:</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="item:${programasReferencia}">
-                                                <td th:text="${item.idPrograma}"></td>
-                                                <td th:text="${item.nombrePrograma}"></td>
-                                                <td>
-                                                    <a href="#" th:onclick="seleccionar([[${item.idPrograma}]],[[${item.nombrePrograma}]])">Seleccionar</a>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div th:if="${programasReferencia == null or programasReferencia.empty}">
-                                    No hay Programas guardados
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <button id="btnCerrar" type="button" class="btn btn-primary"
-                                        data-bs-dismiss="modal">Cerrar</button>
-                            </div>                            
-                        </div>
-
-                    </div>
-
-
-                </div> <!--FIN MODAL-->
-            </section>
-        
-        <script type="text/javascript">
-            function seleccionar(id, nombre) {
-                $("#idPrograma").val(id);
-                $("#nombrePrograma").val(nombre);
-                $("#btnCerrar").click();
-            }
-
-            $(document).ready(function () {
-                $("#tablaProgramas").DataTable({
-                    "ordering": false,
-                    "lengthMenu": [5, 10, 15],
-                    "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
-                })
-            })
-
-        </script>
-        
-        <section>
-                <div class="modal fade" id="modalModulos" tabindex="-1" role="dialog"
-                     aria-labelledby="moduloModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="moduloModalLabel" >Listado de Módulos</h5>                                
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                
-                            </div>
-                            <div class="modal-body">
-                                <div th:if="${modulosSeleccionar != null and !modulosSeleccionar.empty}">
-                                    <table class="table" id="tablaModulos">
-                                        <thead>
-                                            <tr>
-                                                <th>Código</th>
-                                                <th>Nombre:</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr th:each="item:${modulosSeleccionar}">
-                                                <td th:text="${item.idModulo}"></td>
-                                                <td th:text="${item.nombreModulo}"></td>
-                                                <td>
-                                                    <a href="#" th:onclick="seleccionar([[${item.idModulo}]],[[${item.nombreModulo}]])">Seleccionar</a>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div th:if="${modulosSeleccionar == null or modulosSeleccionar.empty}">
-                                    No hay Módulos guardados
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <button id="btonCerrar" type="button" class="btn btn-primary"
-                                        data-bs-dismiss="modal">Cerrar</button>
-                            </div>                            
-                        </div>
-
-                    </div>
-
-
-                </div> <!--FIN MODAL-->
-            </section>
-        
-        <script type="text/javascript">
-            function seleccionarModulo(id, nombre) {
-                $("#idModulo").val(id);
-                $("#nombreModulo").val(nombre);
-                $("#btonCerrar").click();
-            }
-
-            $(document).ready(function () {
-                $("#tablaModulos").DataTable({
-                    "ordering": false,
-                    "lengthMenu": [5, 10, 15],
-                    "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
-                })
-            })
-
-        </script>
+            
         </div>
     </body>
 </html>

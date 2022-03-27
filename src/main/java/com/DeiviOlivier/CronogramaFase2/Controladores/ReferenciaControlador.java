@@ -7,13 +7,16 @@ package com.DeiviOlivier.CronogramaFase2.Controladores;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Modulo;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Programa;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
+import com.DeiviOlivier.CronogramaFase2.Servicios.IModuloReferenciaServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IModuloServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IProgramaServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IReferenciaServicio;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,18 +33,33 @@ public class ReferenciaControlador {
     private IModuloServicio modServ;
     @Autowired
     private IProgramaServicio progServ;
+    @Autowired
+    private IModuloReferenciaServicio modRefServicio;
+     @GetMapping("/modalidad")
+    public String modalidad(){
+        return "modalidadReferencia";
+    }
+    
     @GetMapping("/nuevaReferencia")
     public String nuevaReferencia(Referencia referencia,Model model){
+        referencia.setModalidad("existe");
         List<Modulo> listMod = modServ.listar();
         List<Programa> listProg = progServ.listar();
-        model.addAttribute("programasReferencia", listProg);
-        model.addAttribute("modulosSeleccionar", listMod);
+       model.addAttribute("referencia", referencia);
         return "referencia";
     }
     
-    @PostMapping("/guardarReferencias")
-    public String guardar(Referencia referencia, RedirectAttributes red){
-        return "listaReferencias";
+
+    @PostMapping("/guardarReferencia")
+    public String guardar(@Valid Referencia referencia, RedirectAttributes red,Errors e){
+        if(e.hasErrors())
+        {
+            red.addAttribute("referencia", referencia);
+            return "redirect:/nuevaReferencia";
+        }
+        referenciaServicio.guardar(referencia);
+        red.addFlashAttribute("msg", "Referencia agregada con éxito!");
+        return "redirect:/referencias";
     }
     
     @GetMapping("/referencias")
@@ -51,41 +69,97 @@ public class ReferenciaControlador {
         return "listaReferencias";
     }
     @PostMapping("/filtrarReferencias")
-    public String filtrar(Referencia referencia,Model model){
+    public String filtrar(Referencia referencia,RedirectAttributes red){
         List<Referencia> lista;
-        lista = referenciaServicio.filtrar(referencia.getReferencia());
-        model.addAttribute("referencias", lista);
-        return "listaReferencias";
+        lista = referenciaServicio.filtrar(referencia.getCodigo());
+        red.addFlashAttribute("referencias", lista);
+        return "redirect:/referencias";
     }
     
      @GetMapping("/editarReferencia/{idReferencia}")
-    public String editar(Referencia referencia, Model model,RedirectAttributes red){
+    public String editar(Referencia referencia, RedirectAttributes red){
         String msg;
         referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
         if(referencia == null){
-            model.addAttribute("referencia", referencia);
             msg="No se logró cargar la referencia";
-            return "redirect:/listaReferencias";
+            return "redirect:/referencias";
             
         }
-        referenciaServicio.guardar(referencia);
-        msg="Referencia actualizada con éxito";
-        red.addFlashAttribute("msg", msg);
-        return "redirect:/listaClientes";
+        
+        referencia.setModalidad("existe");
+        red.addFlashAttribute("referencia", referencia);
+        return "redirect:/nuevaReferencia";
     }
-    
-    @GetMapping("/eliminarReferencia")
+   
+    @GetMapping("/eliminarReferencia/{idReferencia}")
     public String eliminar(Referencia referencia, RedirectAttributes red){
         String msg;
         referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
         if(referencia != null){
-        referenciaServicio.eliminar(referencia.getIdReferencia());
-        //borrar modulos referencias
-        msg = "Referencia borrada con éxito";
+         red.addFlashAttribute("referencia", referencia);
+         red.addFlashAttribute("accionEliminar","1");
+         referencia.setModalidad("existe");
+        return "redirect:/nuevaReferencia";
         }
         msg = "No existe esta referencia";
         red.addFlashAttribute("msg", msg);
-        return "redirect:/listaReferencias";
+        return "redirect:/referencias";
        
     }
+    
+    @GetMapping("/borrarReferencia/{idReferencia}")
+    public String borrarModulo(Referencia referencia, RedirectAttributes red) {
+        String msg;
+        referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
+        if (referencia!=null) {
+            try {
+
+                referenciaServicio.eliminar(referencia.getIdReferencia());
+                modRefServicio.eliminarPorReferencia(referencia);
+                msg = "Referencia borrada con éxito";
+                 red.addFlashAttribute("msg", msg);
+                return "redirect:/referencias";
+            } catch (Exception e) { 
+                red.addFlashAttribute("msg","No un error borrando");
+                
+            }
+        }
+          msg = "No existe esta referencia";
+                red.addFlashAttribute("msg", msg);
+                return "redirect:/referencias";
+        
+    }
+    
+    @GetMapping("/modalidades/{idReferencia}")
+    public String elegirModalidad(Referencia referencia,Model model){
+        model.addAttribute("referencia", referencia);
+        return "modalidad";
+    }
+    
+    @GetMapping("/asociarProgramas/{idReferencia}")
+    public String vincularProgramas(Referencia referencia,Model model){
+        List<Programa> lista = null;
+        lista = progServ.listar();
+        model.addAttribute("programasReferencia", lista);
+        model.addAttribute("referencia", referencia);
+        return "asociarPrograma";
+    }
+    
+      @GetMapping("/asociarModulos/{idPrograma}")
+    public String vincularModulos(Referencia referencia,Model model){
+        List<Modulo> lista = null;
+        lista = modServ.listar();
+        model.addAttribute("modulosSeleccionar", lista);
+        model.addAttribute("referencia", referencia);
+        return "asociarModulo";
+    }
+  
+    @PostMapping("/programaAsociar/{idReferencia}")
+    public String cargarPrograma(Programa programa, Referencia referencia){
+        programa = progServ.obtenerPrograma(referencia.getProgramaReferencia().getIdPrograma());
+        referencia = referenciaServicio.obtenerReferencia(referencia.getIdReferencia());
+        referencia.setProgramaReferencia(programa);
+        return "redirect:/referencias";
+    }
 }
+
