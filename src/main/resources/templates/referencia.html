@@ -23,7 +23,7 @@
                         <div>
                             <label class="form-label" for="codigo">Ingrese el código de la referencia</label>
                             <div class="input-group">
-                                <input type="text" id="codigo" name="codigo" value="" th:field="*{codigo}" />
+                                <input type="text" id="codigo" name="codigo" value="" th:field="*{codigo}" class="form-control" />
                             </div> 
                         </div>
 
@@ -35,7 +35,7 @@
                             <label class="form-label">L: LUNES, K: MARTES, M:MIÉRCOLES, J:JUEVES, V:VIERNES y S:SABADO</label> 
 
                             <div>
-                                <input type="text" id="dias" name="dias" value="" th:field="*{diasReferencia}"/>
+                                <input type="text" id="dias" name="dias" value="" th:field="*{diasReferencia}" class="form-control"/>
                             </div>
 
                         </div>
@@ -44,7 +44,7 @@
                         <div>
                             <label class="form-label">Seleccione el máximo de horas del programa</label>
                             <div class="input-group">
-                                <input type="number" id="horasMaximas" name="horasMaximas" value="" th:field="*{horasMaximasReferencia}" />
+                                <input type="number" id="horasMaximas" name="horasMaximas" value="" th:field="*{horasMaximasReferencia}" class="form-control"/>
                             </div> 
                         </div>
                         <div>
@@ -66,7 +66,7 @@
                             <label for="horaFinal" class="form-label">Seleccione la hora final</label>
                             <div class="input-group">
                                 <input  th:field="*{horaFinalReferencia}"
-                                        class="btn btn-outline-primary form-control" type="time" id="horaFinal" name="horaFinal" value=""/>
+                                        class="form-control" type="time" id="horaFinal" name="horaFinal" value=""/>
                             </div> 
 
                         </div>
