@@ -5,6 +5,7 @@
 package com.DeiviOlivier.CronogramaFase2.DAO;
 
 import com.DeiviOlivier.CronogramaFase2.Dominios.Modificador;
+import java.util.Date;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,5 @@ public interface IModificadorDAO extends JpaRepository<Modificador, Long> {
             + "inner Join CATEGORIAS_MODIFICADORES C on C.Id_Categoria_Modificador = M.Id_Categoria_Modificador\n"
             + "where P.Nombre_Profesor LIKE ?1% or C.NOMBRE_CATEGORIA_MODIFICADOR LIKE ?2%",nativeQuery = true)
     public Iterable<Modificador> buscarPorNombreProfesorCategoria(String nombre, String categoria);
+    
 }

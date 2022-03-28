@@ -52,6 +52,7 @@ public class ProfesorControlador {
             return "redirect:/nuevoProfesor";
         }
         if(er.hasErrors()){
+            redAtr.addFlashAttribute("msg","No se pudo guardar");
             return "profesor";
         }
         if (servicioProfesor.existeEmail(profesor.getCorreoProfesor())==true) {

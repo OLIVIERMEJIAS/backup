@@ -11,6 +11,12 @@
 
                 <div class="row">
                     <div class="col-10 mx-auto">
+                        <div th:if="${msg!=null and !msg.empty}">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Mensaje: </strong> <span th:text="${msg}">texto</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div> 
+                        </div>
                         <form th:action="@{/guardarModificador}" method="post" th:object="${modificador}">
 
                             <input type="hidden" name="idModificador" th:field="*{idModificador}"/>

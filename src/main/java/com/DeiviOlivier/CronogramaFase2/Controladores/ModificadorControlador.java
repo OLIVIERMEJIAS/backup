@@ -5,6 +5,7 @@ import com.DeiviOlivier.CronogramaFase2.Dominios.Modificador;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Profesor;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IModificadorServicio;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IProfesorServicio;
+import java.sql.Date;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -47,13 +48,23 @@ public class ModificadorControlador {
     }
 
     @PostMapping("/guardarModificador")
-    public String guardar(@Valid Modificador modificador, Errors er) {
-
+    public String guardar(@Valid Modificador modificador, Errors er,RedirectAttributes red) {
+        
+        Date inicio= modificador.getInicioModificador();
+        Date fin= modificador.getFinalModificador();
+        
+        if (inicio.after(fin)) {
+            red.addFlashAttribute("msg","La fecha final debe ser después o el mismo día de la fecha inicial");
+            red.addFlashAttribute("modificador",modificador);
+            return "redirect:/nuevoModificador";
+        }
         if (er.hasErrors()) {
+            red.addFlashAttribute("msg","No se pudo guardar");
             return "modificador";
         }
 
         servicioModificador.guardar(modificador);
+        red.addFlashAttribute("msg","Guardado con éxito");
         return "redirect:/modificadores";
     }
 

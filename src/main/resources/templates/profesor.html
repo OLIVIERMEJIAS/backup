@@ -20,7 +20,7 @@
 
                         <div class="form-group" hidden="true">
                             <label for="contrasenaProfesor" class="form-label">Contraseña: </label>
-                            <input type="text" name="contrasenaProfesor" class="form-control" value="Profe"/>
+                            <input type="text" name="contrasenaProfesor" class="form-control" th:value="*{cedulaProfesor}"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('contrasenaProfesor')}" 
                                   th:errors="*{contrasenaProfesor}">
@@ -83,7 +83,7 @@
 
                         <div class="form-group">
                             <label for="rol.idRol" class="form-label">Rol:</label>
-                            <input type="text" name="rol.idRol" class="form-control" th:field="*{rol.idRol}"/>
+                            <input type="text" name="rol.idRol" class="form-control" value="2" readonly="true"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('rol.idRol')}" 
                                   th:errors="*{rol.idRol}">

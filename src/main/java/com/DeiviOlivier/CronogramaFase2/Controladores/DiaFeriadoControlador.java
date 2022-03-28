@@ -39,13 +39,15 @@ public class DiaFeriadoControlador {
     }
 
     @PostMapping("/guardarDiaFeriado")
-    public String guardar(@Valid DiaFeriado diaFeriado, Errors er) {
+    public String guardar(@Valid DiaFeriado diaFeriado, Errors er,RedirectAttributes red) {
 
         if (er.hasErrors()) {
+            red.addFlashAttribute("msg","No se pudo guardar");
             return "diaFeriado";
         }
 
         servicioDia.guardar(diaFeriado);
+        red.addFlashAttribute("msg","Guardado con éxito");
         return "redirect:/diasFeriados";
     }
 
