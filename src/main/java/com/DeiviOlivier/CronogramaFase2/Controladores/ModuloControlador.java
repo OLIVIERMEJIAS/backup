@@ -50,13 +50,15 @@ public class ModuloControlador {
     }
 
     @PostMapping("/guardarModulo")
-    public String guardar(@Valid Modulo modulo, Errors er) {
+    public String guardar(@Valid Modulo modulo, Errors er,RedirectAttributes red) {
 
         if (er.hasErrors()) {
+            red.addFlashAttribute("msg","No se pudo guardar");
             return "modulo";
         }
 
         servicioModulo.guardar(modulo);
+        red.addFlashAttribute("msg","Guardado con éxito");
         return "redirect:/modulos";
     }
 

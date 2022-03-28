@@ -44,13 +44,15 @@ public class ProgramaControlador {
     }
     
     @PostMapping("/guardarPrograma")
-    public String guardar(@Valid Programa programa, Errors er){
+    public String guardar(@Valid Programa programa, Errors er,RedirectAttributes red){
         
         if(er.hasErrors()){
+            red.addFlashAttribute("msg","No se pudo guardar");
             return "programa";
         }
         
         servicioPrograma.guardar(programa);
+        red.addFlashAttribute("msg","Guardado con éxito");
         return "redirect:/programas";
     }
     

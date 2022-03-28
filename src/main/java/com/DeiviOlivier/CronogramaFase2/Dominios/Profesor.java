@@ -9,39 +9,42 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="PROFESORES",uniqueConstraints =
-        {@UniqueConstraint(name="unique_email",columnNames={"correoProfesor"})})
-public class Profesor implements Serializable{
-    private static final long serialVersionUID=1L;
-    
+@Table(name = "PROFESORES")
+public class Profesor implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_PROFESOR")
     private Long idProfesor;
-    
+
     @Basic
     @Column(name = "CONTRASENA_PROFESOR")
     private String contrasenaProfesor;
+
     @Basic
-    @Column(unique=true)
-    @NotEmpty(message="Este campo es obligatorio")
+    @Column(name = "CEDULA_PROFESOR")
+    @NotEmpty(message = "Este campo es obligatorio")
     private String cedulaProfesor;
     @Basic
     @Column(name = "NOMBRE_PROFESOR")
-    @NotEmpty(message="Este campo es obligatorio")
+    @NotEmpty(message = "Este campo es obligatorio")
     private String nombreProfesor;
     @Basic
     @Column(name = "APELLIDO1_PROFESOR")
-    @NotEmpty(message="Este campo es obligatorio")
+    @NotEmpty(message = "Este campo es obligatorio")
     private String apellido1Profesor;
     @Basic
     @Column(name = "APELLIDO2_PROFESOR")
     private String apellido2Profesor;
+
     @Basic
-    @Column
-    @Email(message="Debe ingresar un correo válido")
-    @NotEmpty(message="Este campo es obligatorio")
+    @Column(name = "CORREO_PROFESOR")
+    @Email(message = "Debe ingresar un correo válido")
+    @NotEmpty(message = "Este campo es obligatorio")
     private String correoProfesor;
+
     @OneToMany(mappedBy = "profesoresModificadores")
     private Collection<Modificador> modificadoresByIdProfesor;
     @OneToMany(mappedBy = "profesor")
@@ -49,9 +52,9 @@ public class Profesor implements Serializable{
     @ManyToOne
     @JoinColumn(name = "ID_ADMINISTRADOR", nullable = false)
     private Administrador administradoresByIdAdministrador;
-@   OneToOne
-    @JoinColumn(name="ID_ROL", referencedColumnName = "ID_ROL", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "ID_ROL", referencedColumnName = "ID_ROL", nullable = false)
     private Rol rol;
-    @OneToMany(mappedBy="profesorMensajes")
+    @OneToMany(mappedBy = "profesorMensajes")
     private Collection<Mensaje> mensajes;
 }
