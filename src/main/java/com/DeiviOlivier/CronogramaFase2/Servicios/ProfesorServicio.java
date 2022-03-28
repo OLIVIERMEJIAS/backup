@@ -45,4 +45,13 @@ public class ProfesorServicio implements IProfesorServicio {
         profesorDAO.deleteById(id);
     }
 
+    @Override
+    public boolean existeEmail(String correo) {
+        return profesorDAO.existsByCorreoProfesor(correo);
+    }
+
+    @Override
+    public boolean existeCedula(String cedula) {
+        return profesorDAO.existsByCedulaProfesor(cedula);
+    }
 }

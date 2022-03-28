@@ -9,4 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IProfesorDAO extends JpaRepository<Profesor,Long>{
     public Iterable<Profesor> findByNombreProfesorContainsOrApellido1ProfesorContainsOrCedulaProfesorContains(String nom, String ape,String cedula);
+    
+    public boolean existsByCorreoProfesor(String correo);
+    
+    public boolean existsByCedulaProfesor(String correo);
 }

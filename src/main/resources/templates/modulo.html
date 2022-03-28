@@ -42,11 +42,9 @@
 
                         <div class="form-group">
                             <label for="nombreRequisito" class="form-label">Seleccione el requisito:</label>
-                            <input type="hidden" id="idRequisito" name="nombreRequisito" value=""
-                                   th:field="*{idModulo}" class="form-control"/>
-                            <input type="text" id="nombreRequisito" name="nombreRequisito" value="" readonly="true"
-                                   th:field="*{nombreModulo}" class="form-control"/>
-                            <a id="btnBuscarM" class="btn btn-success form-control" data-bs-toggle="modal"
+                            <input type="text" id="requisitoModulo" name="nombreRequisito" value="" readonly="true"
+                                   th:field="*{requisitoModulo}" class="form-control"/>
+                            <a id="btnBuscarM" class="btn btn-success form-control mt-3" data-bs-toggle="modal"
                                data-bs-target="#modalModulos"><i class="fas fa-binoculars"></i>Buscar</a>
                         </div>
 
@@ -119,7 +117,7 @@
             <script type="text/javascript">
                 function seleccionarModulo(id, nombre) {
                     $("#idRequisito").val(id);
-                    $("#nombreModulo").val(nombre);
+                    $("#requisitoModulo").val(nombre);
                     $("#btonCerrar").click();
                 }
 

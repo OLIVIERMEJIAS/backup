@@ -11,8 +11,8 @@
 
             <div class="row">
                 <div class="col-10 mx-auto">
-                    <form th:action="@{/guardarDia}" method="post" th:object="${dia}">
-                        <input type="hidden" name="idDia" th:field="*{idDiaFeriado}"/>
+                    <form th:action="@{/guardarDia}" method="post" th:object="${diaF}">
+                        <input type="hidden" name="idDiaFeriado" th:field="*{idDiaFeriado}"/>
                         <div class="form-group">
                             <label for="nombreDiaFeriado" class="form-label">Motivo:</label>
                             <input type="text" name="nombreDiaFeriado" class="form-control" th:field="*{nombreDiaFeriado}"/>

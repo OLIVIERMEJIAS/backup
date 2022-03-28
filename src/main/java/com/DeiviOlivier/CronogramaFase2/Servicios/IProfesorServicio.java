@@ -19,4 +19,8 @@ public interface IProfesorServicio {
     public Profesor obtenerProfesor(Long idProfesor);
     
     public void eliminar(Long id);
+    
+    public boolean existeEmail(String correo);
+    
+    public boolean existeCedula(String cedula);
 }

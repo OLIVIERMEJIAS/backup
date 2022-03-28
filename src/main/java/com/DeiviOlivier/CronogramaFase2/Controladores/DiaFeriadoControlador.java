@@ -39,27 +39,27 @@ public class DiaFeriadoControlador {
     }
 
     @GetMapping("/nuevoDia")
-    public String nuevo(DiaFeriado dia) {
+    public String nuevo(DiaFeriado diaF) {
         return "dia";
     }
 
     @PostMapping("/guardarDia")
-    public String guardar(@Valid DiaFeriado dia, Errors er) {
+    public String guardar(@Valid DiaFeriado diaF, Errors er) {
 
         if (er.hasErrors()) {
             return "dia";
         }
 
-        servicioDia.guardar(dia);
+        servicioDia.guardar(diaF);
         return "redirect:/dias";
     }
 
     @GetMapping("/editarDia/{idDiaFeriado}")
-    public String editar(DiaFeriado dia, Model model, RedirectAttributes redirAtt) {
-        dia = servicioDia.obtenerDia(dia.getIdDiaFeriado());
+    public String editar(DiaFeriado diaF, Model model, RedirectAttributes redirAtt) {
+        diaF = servicioDia.obtenerDia(diaF.getIdDiaFeriado());
 
-        if (dia != null) {
-            redirAtt.addFlashAttribute("dia", dia);
+        if (diaF != null) {
+            redirAtt.addFlashAttribute("diaF", diaF);
             return "redirect:/nuevoDia";
         } else {
             String editar = "Imposible cargar el día";
@@ -70,12 +70,12 @@ public class DiaFeriadoControlador {
     }
 
     @GetMapping("/eliminarDia")
-    public String eliminar(DiaFeriado dia, Model model, RedirectAttributes redirAtt) {
+    public String eliminar(DiaFeriado diaF, Model model, RedirectAttributes redirAtt) {
 
-        dia = servicioDia.obtenerDia(dia.getIdDiaFeriado());
+        diaF = servicioDia.obtenerDia(diaF.getIdDiaFeriado());
 
-        if (dia != null) {
-            redirAtt.addFlashAttribute("dia", dia);
+        if (diaF != null) {
+            redirAtt.addFlashAttribute("diaF", diaF);
             String eliminar = "1";
             redirAtt.addFlashAttribute("eliminar", eliminar);
             redirAtt.addFlashAttribute("editar", "2");
@@ -89,11 +89,11 @@ public class DiaFeriadoControlador {
     }
     
     @GetMapping("/borrarDia")
-    public String borrarDia(DiaFeriado dia, Model model,RedirectAttributes redirAtt) {
+    public String borrarDia(DiaFeriado diaF, Model model,RedirectAttributes redirAtt) {
 
-        if (dia!=null) {
+        if (diaF!=null) {
             try {
-                servicioDia.eliminar(dia.getIdDiaFeriado());
+                servicioDia.eliminar(diaF.getIdDiaFeriado());
                 redirAtt.addFlashAttribute("msg","Eliminado con éxito");
                 return "redirect:/dias";
             } catch (Exception e) { 
