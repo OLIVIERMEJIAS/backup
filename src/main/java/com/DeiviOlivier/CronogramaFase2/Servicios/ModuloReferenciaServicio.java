@@ -7,6 +7,8 @@ package com.DeiviOlivier.CronogramaFase2.Servicios;
 import com.DeiviOlivier.CronogramaFase2.DAO.IModuloReferenciaDAO;
 import com.DeiviOlivier.CronogramaFase2.Dominios.ModuloReferencia;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +31,7 @@ public class ModuloReferenciaServicio implements IModuloReferenciaServicio{
     @Override
     @Transactional
     public void eliminarPorReferencia(Referencia referencia) {
-        modRedDao.deleteByReferencia(referencia);
+        modRedDao.deleteAllByReferencia(referencia);
     }
     
     
@@ -50,6 +52,18 @@ public class ModuloReferenciaServicio implements IModuloReferenciaServicio{
     @Transactional(readOnly = true)
     public List<ModuloReferencia> listar(Referencia referencia) {
         return modRedDao.findByReferencia(referencia);
+    }
+
+    @Override
+    @Transactional
+    public HashMap verificarHorarioProfesor(int idProfesor, String respuesta, String msg, String diasEntrada, String horaEntradaInicio, String horaEntradaFin, Date fechaIniEntrada, Date fechaFinEntrada, int idModEntrada) {
+        return modRedDao.sp_verificarHorario_(idProfesor, respuesta, msg, diasEntrada, horaEntradaInicio, horaEntradaFin, fechaIniEntrada, fechaFinEntrada, idModEntrada);
+    }
+
+    @Override
+    @Transactional
+    public void calcular(long idReferencia, long idCentro) {
+        modRedDao.calcular(idReferencia, idCentro);
     }
     
 }

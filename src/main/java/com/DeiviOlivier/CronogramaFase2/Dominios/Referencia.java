@@ -55,10 +55,10 @@ public class Referencia implements Serializable {
 
     @OneToMany(mappedBy = "referencia")
     private Collection<ModuloReferencia> modulosReferenciasByIdReferencia;
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true,cascade = {CascadeType.MERGE})
     @JoinColumn(name = "ID_MODULO",nullable = true)
     private Modulo moduloReferencia;
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true,cascade = {CascadeType.MERGE})
     @JoinColumn(name = "ID_PROGRAMA",nullable=true)
     private Programa programaReferencia;
 
