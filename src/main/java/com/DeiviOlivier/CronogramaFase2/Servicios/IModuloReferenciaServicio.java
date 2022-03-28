@@ -6,7 +6,11 @@ package com.DeiviOlivier.CronogramaFase2.Servicios;
 
 import com.DeiviOlivier.CronogramaFase2.Dominios.ModuloReferencia;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -18,4 +22,13 @@ public interface IModuloReferenciaServicio {
     public ModuloReferencia obtenerModuloReferencia(Long id);
     public List<ModuloReferencia> listar(Referencia referencia);
     public void eliminarPorReferencia(Referencia referencia);
+    public HashMap verificarHorarioProfesor(int idProfesor,String respuesta,
+            String msg,String diasEntrada, String horaEntradaInicio,
+            String horaEntradaFin,
+            Date fechaIniEntrada, 
+            Date fechaFinEntrada,int idModEntrada);
+    
+    public void calcular(long idReferencia,long idCentro);
+    
+
 }
