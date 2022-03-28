@@ -19,4 +19,6 @@ public interface IReferenciaServicio {
     public Referencia obtenerReferencia(Long id);
     public List<Referencia> listar();
     public List<Referencia> filtrar(String codigo);
+    public int asociarPrograma(Long idPrograma,Long idReferencia);
+    public int asociarModulo(Long idPrograma,Long idReferencia);
 }

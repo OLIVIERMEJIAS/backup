@@ -28,7 +28,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <a id="btnBuscarP" class="btn btn-success" data-bs-toggle="modal"
                                data-bs-target="#modalProgramas"><i class="fas fa-binoculars"></i>Buscar</a>
                             <br/>  
-                            <input class="form-control" type="submit" value="Guardar"/>
+                            <input class="form-control btn btn-primary" type="submit" value="Guardar"/>
                         </form>
                     </div>
                     <section>
@@ -49,6 +49,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                         <th hidden="true">Id</th>
                                                         <th>Código</th>
                                                         <th>Nombre:</th>
+                                                        <th>Horas:</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
@@ -57,6 +58,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                         <td hidden="true" th:text="${item.idPrograma}"></td>
                                                         <td th:text="${item.codigoPrograma}"></td>
                                                         <td th:text="${item.nombrePrograma}"></td>
+                                                        <td th:text="${item.horasTotales}"></td>
                                                         <td>
                                                             <a href="#" th:onclick="seleccionar([[${item.idPrograma}]],[[${item.nombrePrograma}]])">Seleccionar</a>
                                                         </td>

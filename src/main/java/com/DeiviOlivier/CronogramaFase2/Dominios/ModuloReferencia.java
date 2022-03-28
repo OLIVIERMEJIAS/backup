@@ -29,13 +29,13 @@ public class ModuloReferencia implements Serializable {
     @Basic
     @Column(name = "FINAL_MODULO_REFERENCIA",nullable = true)
     private Date finalModuloReferencia;
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.MERGE})
     @JoinColumn(name = "ID_MODULO ", nullable = false)
     private Modulo modulo;
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.MERGE})
     @JoinColumn(name = "ID_PROFESOR", nullable = false)
     private Profesor profesor;
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.MERGE})
     @JoinColumn(name = "ID_REFERENCIA", nullable = false)
     private Referencia referencia;
 

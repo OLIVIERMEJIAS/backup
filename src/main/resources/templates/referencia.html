@@ -16,6 +16,10 @@
 
                 <div class="card-body">
                     <form th:action="@{/guardarReferencia}" method="post" th:object="${referencia}">
+
+                        <input type="hidden" id="idReferencia" name="idReferencia" value="" th:field="*{idReferencia}" />
+
+
                         <div>
                             <label class="form-label" for="codigo">Ingrese el código de la referencia</label>
                             <div class="input-group">

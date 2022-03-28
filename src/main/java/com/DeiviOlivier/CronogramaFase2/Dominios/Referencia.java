@@ -52,8 +52,7 @@ public class Referencia implements Serializable {
     @Column(name = "ESTADO_REFERENCIA")
     @NotEmpty(message = "Es necesario un estado")
     private String estadoReferencia;
-    @Transient
-    private String modalidad;
+
     @OneToMany(mappedBy = "referencia")
     private Collection<ModuloReferencia> modulosReferenciasByIdReferencia;
     @ManyToOne(optional = true)

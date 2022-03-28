@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="PROFESORES", uniqueConstraints = {@UniqueConstraint(columnNames = "CORREO_PROFESOR")})
+@Table(name="PROFESORES")
 public class Profesor implements Serializable{
     private static final long serialVersionUID=1L;
     

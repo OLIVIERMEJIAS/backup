@@ -10,72 +10,148 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8"/>
 
     </head>
-    <body>
+    <body style="display: flex"> 
+        <header th:replace="plantillas/plantilla1 :: header"></header>
         <div class="container mt-3 py-3 bg-light rounded-3">
-            <header th:replace="plantillas/plantilla1 :: header"></header>
-            <h1 class="card-header">Administrar Módulos de Referencia</h1>
-            
-            <div class="row">
-                <div class="col-10 mx-auto">
-                    <form th:action="@{/guardarModuloRef}" method="post" th:object="${moduloReferencia}">
+
+            <div class="card">
+                <h1 class="card-header">Administrar Módulos de Referencia</h1>
+                <div class="card-body">
+
+                    <form th:action="@{/guardarModRef(idModulo=${modulo.idModulo},
+                          idReferencia=${referencia.idReferencia},idModuloReferencia=${moduloReferencia.idModuloReferencia})}" method="post" th:object="${moduloReferencia}">
                         <input type="hidden" name="idModuloR" th:field="*{idModuloReferencia}"/>
-                        <input type="hidden" name="idReferencia" th:field="${referencia.idReferencia}"/>
-                         <input type="hidden" name="idReferencia" th:field="${profesor.idReferencia}"/>
+                        <input type="hidden" name="idProfesor" th:field="${profesor.idProfesor}"/>
                         
-                         
-                         <div class="row">
-                        <div class="col-6">
-                            <label for="horaInicial" class="form-label">Seleccione la hora inicial</label>
-                            <div class="input-group">
-                                <input type="time" id="horaInicial" name="horaInicial" value=""
-                                       th:field="*{horaInicioModuloReferencia}" class="form-control"/>
-                            </div> 
+                        <label for="nombreProfesor">Nombre del Profesor:</label>
+                        <div class="row">
+                            <div class="col-2"><input readonly="true" class="form-control" type="text" id="nombreProfesor" th:field="*{profesor.nombreProfesor}"/></div>
+                            <div class="col-2"><input readonly="true" class="form-control" type="text" id="apellido1Profesor" th:field="*{profesor.apellido1Profesor}"/></div>
+                            <div class="col-2"><input readonly="true" class="form-control" type="text" id="apellido2Profesor" th:field="*{profesor.apellido2Profesor}"/></div>
+                            <div class="col-3"><a id="btnBuscarP" class="btn btn-success" data-bs-toggle="modal"
+                                                  data-bs-target="#modalModulos"><i class="fas fa-binoculars"></i>Buscar</a></div>
                         </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="horaInicial" class="form-label">Seleccione la hora inicial</label>
+                                <div class="input-group">
+                                    <input type="time" id="horaInicial" name="horaInicial" value=""
+                                           th:field="*{horaInicioModuloReferencia}" class="form-control"/>
+                                </div> 
+                            </div>
 
-                        <div class="col-6">
-                            <label for="horaFinal" class="form-label">Seleccione la hora final</label>
-                            <div class="input-group">
-                                <input  th:field="*{horaFinalModuloReferencia}"
-                                        class="btn btn-outline-primary form-control" type="time" id="horaFinal" name="horaFinal" value=""/>
-                            </div> 
-                        </div>
-
-                        </div>
-                        
-                         <div class="row">
-                         <div class="col-6">
-                            <label class="form-label">Ingrese los días lectivos, con respecto a los ejemplos:</label>
-                            <label class="form-label">LKMJV</label>
-                            <label class="form-label">LKJVS</label>
-                            <label class="form-label">No use espacios, comas u otro símbolo</label>
-                           <label class="form-label">L: LUNES, K: MARTES, M:MIÉRCOLES, J:JUEVES, V:VIERNES y S:SABADO</label> 
-                       
-                           <input type="text" id="dias" name="dias" value="" th:field="*{diasModuloReferencia}"/>
+                            <div class="col-6">
+                                <label for="horaFinal" class="form-label">Seleccione la hora final</label>
+                                <div class="input-group">
+                                    <input  th:field="*{horaFinalModuloReferencia}"
+                                            class="btn btn-outline-primary form-control" type="time" id="horaFinal" name="horaFinal" value=""/>
+                                </div> 
+                            </div>
 
                         </div>
-                             
-                             
-                             
-                             
-                         </div>
-                       
 
-                        
-                        <div th:if="${eliminarModRef == null and modificarModRef == null}">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label">Ingrese los días lectivos, con respecto a los ejemplos:</label>
+                                <label class="form-label">LKMJV</label>
+                                <label class="form-label">LKJVS</label>
+                                <label class="form-label">No use espacios, comas u otro símbolo</label>
+                                <label class="form-label">L: LUNES, K: MARTES, M:MIÉRCOLES, J:JUEVES, V:VIERNES y S:SABADO</label> 
+
+                                <input type="text" id="dias" name="dias" value="" th:field="*{diasModuloReferencia}"/>
+
+                            </div>
+                        </div>
+
+
+
+                        <div th:if="${eliminarModRef == null}">
                             <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar"/>
-                            <a th:href="@{/modulosReferencia}+${referencia.idReferencia}" class="btn btn-warning">Regresar</a>
+                            <a th:href="@{/modulosReferencia(idReferencia=${referencia.idReferencia})}" class="btn btn-warning">Regresar</a>
                         </div>
-                         <div th:if="${modificarModRef != null}">
-                             <a th:href="@{/actualizarModRef/}+${moduloReferencia.idModuloReferencia}" class="btn btn-warning" name="btnEliminar">Eliminar</a>
-                            <a th:href="@{/modulosReferencia}+${referencia.idReferencia}" class="btn btn-warning">Regresar</a>
-                        </div>
-                         <div th:if="${eliminarModRef != null}">
-                             <a th:href="@{/eliminarModRef/}+${moduloReferencia.idModuloReferencia}" class="btn btn-warning" name="btnEliminar">Eliminar</a>
-                            <a th:href="@{/modulosReferencia}+${referencia.idReferencia}" class="btn btn-warning">Regresar</a>
+                        <div th:if="${eliminarModRef != null}">
+                            <a th:href="@{/borrarModRef(idModuloReferencia=${moduloReferencia.idModuloReferencia},
+                               idReferencia=${referencia.idReferencia})}" class="btn btn-warning" name="btnEliminar">Eliminar</a>
+                            <a th:href="@{/modulosReferencia(idReferencia=${referencia.idReferencia})}" class="btn btn-warning">Regresar</a>
                         </div>
                     </form>
+                    <section>
+                        <div class="modal fade" id="modalModulos" tabindex="-1" role="dialog"
+                             aria-labelledby="moduloModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="moduloModalLabel" >Listado de Módulos</h5>                                
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <div th:if="${profesoresMod != null and !profesoresMod.empty}">
+                                            <table class="table" id="tablaModulos">
+                                                <thead>
+                                                    <tr>
+                                                        <th hidden="true">Id</th>
+                                                        <th>Código</th>
+                                                        <th>Nombre:</th>
+                                                        <th>Horas:</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="item:${profesoresMod}">
+                                                        <td hidden="true" th:text="${item.idProfesor}"></td>
+                                                        <td th:text="${item.cedulaProfesor}"></td>
+                                                        <td th:text="${item.nombreProfesor}"></td>
+                                                        <td th:text="${item.correoProfesor}"></td>
+                                                        <td>
+                                                            <a href="#" th:onclick="seleccionarModulo([[${item.idProfesor}]],[[${item.nombreProfesor}]])">Seleccionar</a>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div th:if="${profesoresMod == null or profesoresMod.empty}">
+                                            No hay Módulos guardados
+                                        </div>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button id="btonCerrar" type="button" class="btn btn-primary"
+                                                data-bs-dismiss="modal">Cerrar</button>
+                                    </div>                            
+                                </div>
+
+                            </div>
+
+
+                        </div> <!--FIN MODAL-->
+                    </section>
+
+                    <script type="text/javascript">
+                        function seleccionarModulo(id, nombre) {
+                            $("#idProfesor").val(id);
+                            $("#nombreProfesor").val(nombre);
+                            $("#btonCerrar").click();
+                        }
+
+                        $(document).ready(function () {
+                            $("#tablaModulos").DataTable({
+                                "ordering": false,
+                                "lengthMenu": [5, 10, 15],
+                                "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
+                            })
+                        })
+
+                    </script>
+
+
+
                 </div>
             </div>
         </div>
+
+
     </body>
 </html>
