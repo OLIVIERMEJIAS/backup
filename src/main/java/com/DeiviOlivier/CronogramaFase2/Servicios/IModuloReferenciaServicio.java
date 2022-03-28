@@ -24,7 +24,7 @@ public interface IModuloReferenciaServicio {
     public void eliminarPorReferencia(Referencia referencia);
     public HashMap verificarHorarioProfesor(int idProfesor,String respuesta,
             String msg,String diasEntrada, String horaEntradaInicio,
-            String horaEntradaFin,
+            Double horasDiariasEntrada,
             Date fechaIniEntrada, 
             Date fechaFinEntrada,int idModEntrada);
     

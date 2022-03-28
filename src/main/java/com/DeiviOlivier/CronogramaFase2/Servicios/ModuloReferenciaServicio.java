@@ -56,14 +56,14 @@ public class ModuloReferenciaServicio implements IModuloReferenciaServicio{
 
     @Override
     @Transactional
-    public HashMap verificarHorarioProfesor(int idProfesor, String respuesta, String msg, String diasEntrada, String horaEntradaInicio, String horaEntradaFin, Date fechaIniEntrada, Date fechaFinEntrada, int idModEntrada) {
-        return modRedDao.sp_verificarHorario_(idProfesor, respuesta, msg, diasEntrada, horaEntradaInicio, horaEntradaFin, fechaIniEntrada, fechaFinEntrada, idModEntrada);
+    public HashMap verificarHorarioProfesor(int idProfesor, String respuesta, String msg, String diasEntrada, String horaEntradaInicio, Double horasDiariasEntrada, Date fechaIniEntrada, Date fechaFinEntrada, int idModEntrada) {
+        return modRedDao.sp_verificarHorario_(idProfesor, respuesta, msg, diasEntrada, horaEntradaInicio, horasDiariasEntrada, fechaIniEntrada, fechaFinEntrada, idModEntrada);
     }
 
     @Override
     @Transactional
     public void calcular(long idReferencia, long idCentro) {
-        modRedDao.calcular(idReferencia, idCentro);
+        modRedDao.sp_calcular(idReferencia, idCentro);
     }
     
 }

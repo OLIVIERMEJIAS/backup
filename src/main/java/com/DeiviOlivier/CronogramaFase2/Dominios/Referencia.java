@@ -27,7 +27,7 @@ public class Referencia implements Serializable {
     @Basic
     @Column(name = "HORAS_MAXIMAS_REFERENCIA")
     @NotNull(message = "Es necesario un número máximo de horas lectivas")
-    private BigDecimal horasMaximasReferencia; 
+    private Double horasMaximasReferencia; 
     @Basic
     @Column(name = "DIAS_REFERENCIA")
     @NotEmpty(message = "Es necesario elegir por lo menos un día")
@@ -37,9 +37,9 @@ public class Referencia implements Serializable {
     @NotNull(message = "Es necesaria una hora de inicio")
     private String horaInicioReferencia;
     @Basic
-    @Column(name = "HORA_FINAL_REFERENCIA")
+    @Column(name = "HORAS_DIARIAS_REFERENCIA")
     @NotNull(message = "Es necesario una hora de fin")
-    private String horaFinalReferencia;
+    private Double horasDiariaslReferencia;
     
     @Basic
     @Column(name = "INICIO_REFERENCIA")

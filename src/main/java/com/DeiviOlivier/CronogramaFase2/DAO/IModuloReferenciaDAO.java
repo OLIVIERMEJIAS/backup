@@ -29,13 +29,13 @@ public interface IModuloReferenciaDAO extends JpaRepository<ModuloReferencia,Lon
             @Param("MSG") String msg,
             @Param("DIASENTRADA") String diasEntrada,
             @Param("HORAENTRADAINICIO") String horaEntradaInicio,
-            @Param("HORAENTRADAFIN") String horaEntradaFin,
+            @Param("HORADIARIASENTRADA") Double horasDiariasEntrada,
             @Param("FECHAINIENTRADA") Date fechaIniEntrada,
             @Param("FECHAFINENTRADA") Date fechaFinEntrada,
             @Param("IDMODENTRADA") int idModEntrada);
     
     
-    @Procedure(procedureName = "CALCULAR")
-    public void calcular(@Param("ID_REFERENCIA") long idReferencia, @Param("ID_CENTRO") long idCentro);
+    @Procedure(procedureName = "SP_CALCULAR")
+    public void sp_calcular(@Param("ID_REFERENCIA") long idReferencia, @Param("ID_CENTRO") long idCentro);
     
 }

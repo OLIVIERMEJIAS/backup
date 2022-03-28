@@ -41,10 +41,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             </div>
 
                             <div class="col-6">
-                                <label for="horaFinal" class="form-label">Seleccione la hora final</label>
+                                <label for="horaFinal" class="form-label">Ingrese las horas diarias lectivas:</label>
                                 <div class="input-group">
-                                    <input  th:field="*{horaFinalModuloReferencia}"
-                                            class="btn btn-outline-primary form-control" type="time" id="horaFinal" name="horaFinal" value=""/>
+                                    <input  th:field="*{horasDiariasModuloReferencia}"
+                                            class="btn btn-outline-primary form-control" type="number" step="any" min="0" max="6" id="horasDiarias" name="horasDarias" value=""/>
                                 </div> 
                             </div>
 

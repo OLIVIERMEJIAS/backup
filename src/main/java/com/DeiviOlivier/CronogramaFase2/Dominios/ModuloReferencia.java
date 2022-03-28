@@ -17,7 +17,7 @@ import lombok.Data;
                 @StoredProcedureParameter(mode = ParameterMode.INOUT, name = "MSG", type = Long.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "DIASENTRADA", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "HORAENTRADAINICIO", type = String.class),
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "HORAENTRADAFIN", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "HORASDIARIASENTRADA", type = Double.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "FECHAINIENTRADA", type = Date.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "FECHAFINENTRADA", type = Date.class),
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "IDMODENTRADA", type = Integer.class)
@@ -41,8 +41,8 @@ public class ModuloReferencia implements Serializable {
     @Column(name = "HORA_INICIO_MODULO_REFERENCIA")
     private String horaInicioModuloReferencia;
     @Basic
-    @Column(name = "HORA_FINAL_MODULO_REFERENCIA")
-    private String horaFinalModuloReferencia;
+    @Column(name = "HORAS_DIARIAS_MODULO_REFERENCIA")
+    private Double horasDiariasModuloReferencia;
     @Basic
     @Column(name = "INICIO_MODULO_REFERENCIA", nullable = true)
     private Date inicioModuloReferencia;
