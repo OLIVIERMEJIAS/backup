@@ -18,17 +18,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <h1 class="card-header">Administrar Módulos de Referencia</h1>
                 <div class="card-body">
 
-                    <form th:action="@{/guardarModuloRef}" method="post" th:object="${moduloReferencia}">
+                    <form th:action="@{/guardarModRef(idModulo=${modulo.idModulo},
+                          idReferencia=${referencia.idReferencia},idModuloReferencia=${moduloReferencia.idModuloReferencia})}" method="post" th:object="${moduloReferencia}">
                         <input type="hidden" name="idModuloR" th:field="*{idModuloReferencia}"/>
-                        <input type="hidden" name="idReferencia" th:field="${referencia.idReferencia}"/>
-                        <input type="hidden" name="idProfesor" th:field="${moduloReferencia.profesor.idProfesor}"/>
+                        <input type="hidden" name="idProfesor" th:field="${profesor.idProfesor}"/>
+                        
                         <label for="nombreProfesor">Nombre del Profesor:</label>
                         <div class="row">
-                            <div class="col-2"><input readonly="true" class="form-control" type="text" id="nombreProfesor"/></div>
-                            <div class="col-2"><input readonly="true" class="form-control" type="text" id="apellido1Profesor"/></div>
-                            <div class="col-2"><input readonly="true" class="form-control" type="text" id="apellido2Profesor"/></div>
+                            <div class="col-2"><input readonly="true" class="form-control" type="text" id="nombreProfesor" th:field="*{profesor.nombreProfesor}"/></div>
+                            <div class="col-2"><input readonly="true" class="form-control" type="text" id="apellido1Profesor" th:field="*{profesor.apellido1Profesor}"/></div>
+                            <div class="col-2"><input readonly="true" class="form-control" type="text" id="apellido2Profesor" th:field="*{profesor.apellido2Profesor}"/></div>
                             <div class="col-3"><a id="btnBuscarP" class="btn btn-success" data-bs-toggle="modal"
-                                                  data-bs-target="#modalProfesores"><i class="fas fa-binoculars"></i>Buscar</a></div>
+                                                  data-bs-target="#modalModulos"><i class="fas fa-binoculars"></i>Buscar</a></div>
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -64,51 +65,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
 
 
-                        <div th:if="${eliminarModRef == null and modificarModRef == null}">
+                        <div th:if="${eliminarModRef == null}">
                             <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar"/>
-                            <a th:href="@{/modulosReferencia}+${referencia.idReferencia}" class="btn btn-warning">Regresar</a>
-                        </div>
-                        <div th:if="${modificarModRef != null}">
-                            <a th:href="@{/actualizarModRef/}+${moduloReferencia.idModuloReferencia}" class="btn btn-warning" name="btnActualizar">Guardar</a>
-                            <a th:href="@{/modulosReferencia}+${referencia.idReferencia}" class="btn btn-warning">Regresar</a>
+                            <a th:href="@{/modulosReferencia(idReferencia=${referencia.idReferencia})}" class="btn btn-warning">Regresar</a>
                         </div>
                         <div th:if="${eliminarModRef != null}">
-                            <a th:href="@{/eliminarModRef/}+${moduloReferencia.idModuloReferencia}" class="btn btn-warning" name="btnEliminar">Eliminar</a>
-                            <a th:href="@{/modulosReferencia}+${referencia.idReferencia}" class="btn btn-warning">Regresar</a>
+                            <a th:href="@{/borrarModRef(idModuloReferencia=${moduloReferencia.idModuloReferencia},
+                               idReferencia=${referencia.idReferencia})}" class="btn btn-warning" name="btnEliminar">Eliminar</a>
+                            <a th:href="@{/modulosReferencia(idReferencia=${referencia.idReferencia})}" class="btn btn-warning">Regresar</a>
                         </div>
                     </form>
                     <section>
-                        <div class="modal fade" id="modalProfesores" tabindex="-1" role="dialog"
-                             aria-labelledby="profesorModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="modalModulos" tabindex="-1" role="dialog"
+                             aria-labelledby="moduloModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="profesorModalLabel" >Listado de Programas</h5>                                
+                                        <h5 class="modal-title" id="moduloModalLabel" >Listado de Módulos</h5>                                
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
                                     </div>
                                     <div class="modal-body">
                                         <div th:if="${profesoresMod != null and !profesoresMod.empty}">
-                                            <table class="table" id="tablaProgramas">
+                                            <table class="table" id="tablaModulos">
                                                 <thead>
                                                     <tr>
                                                         <th hidden="true">Id</th>
-                                                        <th>Cédula:</th>
+                                                        <th>Código</th>
                                                         <th>Nombre:</th>
-                                                        <th>Correo electrónico:</th>
+                                                        <th>Horas:</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr th:each="profMod:${profesoresMod}">
-                                                        <td hidden="true" th:text="${profMod.idProfesor}"></td>
-                                                        <td th:text="${profMod.cedulaPrograma}"></td>
-                                                        <td>[[${profMod.nombreProfesor} + ' ' + ${profMod.apellido1Profesor}
-                                                            + ' ' + ${profMod.apellido2Profesor}]]</td>
-                                                        <td th:text="${profMod.correoProfesor}"></td>
+                                                    <tr th:each="item:${profesoresMod}">
+                                                        <td hidden="true" th:text="${item.idProfesor}"></td>
+                                                        <td th:text="${item.cedulaProfesor}"></td>
+                                                        <td th:text="${item.nombreProfesor}"></td>
+                                                        <td th:text="${item.correoProfesor}"></td>
                                                         <td>
-                                                            <a href="#" th:onclick="seleccionar([[${profMod.idPrograma}]],[[${profMod.nombrePrograma}]],
-                                                               [[${profMod.apellido1Programa}]],[[${profMod.apellido2Programa}]])">Seleccionar</a>
+                                                            <a href="#" th:onclick="seleccionarModulo([[${item.idProfesor}]],[[${item.nombreProfesor}]])">Seleccionar</a>
                                                         </td>
                                                     </tr>
 
@@ -116,13 +112,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                             </table>
                                         </div>
                                         <div th:if="${profesoresMod == null or profesoresMod.empty}">
-                                            No hay Profesores guardados
+                                            No hay Módulos guardados
                                         </div>
 
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button id="btnCerrar" type="button" class="btn btn-primary"
+                                        <button id="btonCerrar" type="button" class="btn btn-primary"
                                                 data-bs-dismiss="modal">Cerrar</button>
                                     </div>                            
                                 </div>
@@ -132,28 +128,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                         </div> <!--FIN MODAL-->
                     </section>
+
                     <script type="text/javascript">
-                        function seleccionar(id, nombre, ape1, ape2) {
+                        function seleccionarModulo(id, nombre) {
                             $("#idProfesor").val(id);
                             $("#nombreProfesor").val(nombre);
-                            $("#apellido1Profesor").val(ape1);
-                            $("#apellido2Profesor").val(ape2);
-                            $("#btnCerrar").click();
+                            $("#btonCerrar").click();
                         }
 
                         $(document).ready(function () {
-                            $("#tablaProgramas").DataTable({
+                            $("#tablaModulos").DataTable({
                                 "ordering": false,
                                 "lengthMenu": [5, 10, 15],
                                 "language": {"url": "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"}
                             })
                         })
 
-                    </script>  
+                    </script>
+
+
+
                 </div>
             </div>
         </div>
-       
-        
+
+
     </body>
 </html>

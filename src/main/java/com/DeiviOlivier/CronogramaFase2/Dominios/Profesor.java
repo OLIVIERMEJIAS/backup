@@ -9,7 +9,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="PROFESORES")
+@Table(name="PROFESORES",uniqueConstraints =
+        {@UniqueConstraint(name="unique_email",columnNames={"correoProfesor"})})
 public class Profesor implements Serializable{
     private static final long serialVersionUID=1L;
     
@@ -37,7 +38,7 @@ public class Profesor implements Serializable{
     @Column(name = "APELLIDO2_PROFESOR")
     private String apellido2Profesor;
     @Basic
-    @Column(unique=true)
+    @Column
     @Email(message="Debe ingresar un correo válido")
     @NotEmpty(message="Este campo es obligatorio")
     private String correoProfesor;
