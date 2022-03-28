@@ -7,14 +7,14 @@
         <header th:replace="plantillas/plantilla1 ::header"></header>
         <div class="container mt-3 py-3 bg-light rounded-3">
 
-            <h1 class="card-header">Administrar Días No Lectivos</h1>
+            <h1 class="card-header">Administrar Días No lectivos</h1>
 
             <div class="row">
                 <div class="col-10 mx-auto">
-                    <form th:action="@{/guardarDia}" method="post" th:object="${diaF}">
+                    <form th:action="@{/guardarDiaFeriado}" method="post" th:object="${diaFeriado}">
                         <input type="hidden" name="idDiaFeriado" th:field="*{idDiaFeriado}"/>
                         <div class="form-group">
-                            <label for="nombreDiaFeriado" class="form-label">Motivo:</label>
+                            <label for="nombreDiaFeriado" class="form-label">Motivo del día sin lecciones:</label>
                             <input type="text" name="nombreDiaFeriado" class="form-control" th:field="*{nombreDiaFeriado}"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('nombreDiaFeriado')}" 
@@ -23,11 +23,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fechaInicioDiaFeriado" class="form-label">Fecha de Inicio: </label>
+                            <label for="fechaInicioDiaFeriado" class="form-label">Fecha de inicio: </label>
                             <input type="date" name="fechaInicioDiaFeriado" class="form-control" th:field="*{fechaInicioDiaFeriado}"/>
                             <span class="font-italic text-danger" 
                                   th:if="${#fields.hasErrors('fechaInicioDiaFeriado')}" 
-                                  th:errors="*{fechaInicioDiaFeriado}">
+                                  th:errors="*{fechaInicioDiaFeriadovv}">
                             </span>    
                         </div>
 
@@ -40,27 +40,19 @@
                             </span>    
                         </div>
 
-                        <div class="form-group">
-                            <label for="centrosFormacionesByIdCentroFormacion" class="form-label">Centro Formación:</label>
-                            <input type="text" name="centrosFormacionesByIdCentroFormacion" class="form-control" th:field="*{centrosFormacionesByIdCentroFormacion.idCentroFormacion}"/>
-                            <span class="font-italic text-danger" 
-                                  th:if="${#fields.hasErrors('centrosFormacionesByIdCentroFormacion.idCentroFormacion')}" 
-                                  th:errors="*{centrosFormacionesByIdCentroFormacion.idCentroFormacion}">
-                            </span>    
-                        </div>
-
                         <div th:if="${editar==null}">
                             <div class="mt-3">
                                 <input type="submit" value="Guardar" class="btn btn-primary" name="btnGuardar"/>
-                                <a th:href="@{/dias}" class="btn btn-warning">Regresar</a>
+                                <a th:href="@{/diasFeriados}" class="btn btn-warning">Regresar</a>
                             </div>
                         </div>
                         <div th:if="${eliminar!=null}">
                             <div class="mt-3">
-                                <a class="btn btn-primary" th:href="@{/borrarDia(idDiaFeriado=*{idDiaFeriado})}">Eliminar</a>
-                                <a th:href="@{/dias}" class="btn btn-warning">Regresar</a>
+                                <a class="btn btn-primary" th:href="@{/borrarDiaFeriado(idDiaFeriado=*{idDiaFeriado})}">Eliminar</a>
+                                <a th:href="@{/diasFeriados}" class="btn btn-warning">Regresar</a>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

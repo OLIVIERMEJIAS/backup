@@ -43,13 +43,25 @@ public class ProfesorControlador {
     }
     
     @PostMapping("/guardarProfesor")
-    public String guardar(@Valid Profesor profesor, Errors er){
+    public String guardar(@Valid Profesor profesor, Errors er,Model model,RedirectAttributes redAtr){
         
+        if (servicioProfesor.existeCedula(profesor.getCedulaProfesor())==true) {
+            
+            redAtr.addFlashAttribute("msg","Esta cédula ya está en uso");
+            redAtr.addFlashAttribute("profesor",profesor);
+            return "redirect:/nuevoProfesor";
+        }
         if(er.hasErrors()){
             return "profesor";
         }
+        if (servicioProfesor.existeEmail(profesor.getCorreoProfesor())==true) {
+            redAtr.addFlashAttribute("msg","Este correo  ya está en uso");
+            redAtr.addFlashAttribute("profesor",profesor);
+            return "redirect:/nuevoProfesor";
+        }
         
         servicioProfesor.guardar(profesor);
+        redAtr.addFlashAttribute("msg","Guardado con éxito");
         return "redirect:/profesores";
     }
     
