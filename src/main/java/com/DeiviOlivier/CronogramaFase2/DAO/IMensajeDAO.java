@@ -12,8 +12,5 @@ import org.springframework.data.jpa.repository.Query;
  * @author HP
  */
 public interface IMensajeDAO extends JpaRepository<Mensaje, Long>{
-    @Modifying
-    @Query(value="Update Mensajes Set RESPUESTA_MENSAJE = ?1 Where ID_MENSAJE = ?2",
-            nativeQuery = true)
-    public void actualizarRespuesta( String respuesta, Long idMensaje);
+  
 }

@@ -18,11 +18,11 @@ public class Distrito implements Serializable {
     @Column(name = "NOMBRE_DISTRITO")
     private String nombreDistrito;
 
-    @OneToMany(mappedBy = "distritosByIdDistrito")
+    @OneToMany(mappedBy = "distrito")
     private Collection<CentroFormacion> centrosFormacionesByIdDistrito;
     @ManyToOne
     @JoinColumn(name = "ID_CANTON", nullable = false)
-    private Canton cantonesByIdCanton;
+    private Canton canton;
 
     
 

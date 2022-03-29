@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantillas/plantilla1 :: head">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body style="display: flex">
+        <header th:replace="plantillas/plantilla1 :: header"></header>
+        <div class="card">
+            <div class="card-header">
+                <h1>Cambio de contraseña</h1>
+            </div>
+             <div th:if="${msg!=null and !msg.empty}">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Mensaje: </strong> <span th:text="${msg}">texto</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div> 
+            </div>
+            <div class="card-body">
+                <form th:action="@{/cambioProfesor}" method="post" th:object="profesor">
+                    <div>
+                    <label for="nuevaContrasena">Ingrese su nueva contraseña:</label>
+                    <input type="text" id="nuevaContrasena" name="nuevaContrasena"
+                           th:field="*{contrasenaProfesor}" value=""/>
+                    </div>
+                    <div>
+                    <label for="contrasenaRepetida">Repita su nueva contraseña:</label>
+                    <input type="text" id="contrasenaRepetida" name="contrasenaRepetida"
+                           th:field="*{contrasenaRepetida}" value=""/>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-primary" id="btnEnviar" name="btnEnviar" value="Enviar"/>
+
+                        <a h:href="@/">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    </body>
+</html>

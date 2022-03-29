@@ -25,8 +25,8 @@ public class MensajeServicio implements IMensajeServicio{
     }
 
     @Override
-    public void actualizarRespuesta(String respuesta, Long idMensaje) {
-        mensajeDao.actualizarRespuesta(respuesta, idMensaje);
+    public void guardar(Mensaje mensaje) {
+        mensajeDao.save(mensaje);
     }
     
     @Override

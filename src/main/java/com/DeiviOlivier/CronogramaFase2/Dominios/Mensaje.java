@@ -23,11 +23,11 @@ public class Mensaje implements Serializable {
     private String asuntoMensaje;
     @Column(name = "RESPUESTA_MENSAJE")
     private String respuestaMensaje;
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.MERGE})
     @JoinColumn(name="ID_PROFESOR")
     private Profesor profesorMensajes;
             
-    @ManyToOne
+    @ManyToOne(cascade={CascadeType.MERGE})
     @JoinColumn(name="ID_ADMINISTRADOR")
     private Administrador administradorMensajes;
            

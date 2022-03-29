@@ -4,10 +4,13 @@
  */
 package com.DeiviOlivier.CronogramaFase2.Servicios;
 
+import com.DeiviOlivier.CronogramaFase2.Dominios.Administrador;
+
 /**
  *
  * @author HP
  */
 public interface IAdministradorServicio {
-    
+    public void guardar(Administrador administrador);
+    public Administrador obtenerAdministrador(Long id);
 }

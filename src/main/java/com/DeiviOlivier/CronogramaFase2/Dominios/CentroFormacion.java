@@ -26,12 +26,12 @@ public class CentroFormacion implements Serializable {
     private String codigoCentroFormacion;
     @OneToMany(mappedBy = "centrosFormacionesByIdCentroFormacion")
     private Collection<Administrador> administradoresByIdCentroFormacion;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "ID_REGIONAL", nullable = false)
-    private Regional regionalesByIdRegional;
-    @ManyToOne
+    private Regional regional;
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "ID_DISTRITO", nullable = false)
-    private Distrito distritosByIdDistrito;
+    private Distrito distrito;
     
     @OneToMany(mappedBy = "centrosFormacionesByIdCentroFormacion")
     private Collection<DiaFeriado> diasFeriadosByIdCentroFormacion;

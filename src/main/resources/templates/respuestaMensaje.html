@@ -9,20 +9,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <body>
+    <body style="display: flex">
         <header th:replace="plantillas/plantilla1 :: header"></header>
-        <div>
-            <h1>Respuesta al Mensaje</h1>
-        <form th:action="@{/enviarRespuesta/}+${mensaje.idMensaje}" method="post" >
-        <label for="respuesta">Ingrese su respuesta:</label>
-        <input type="text" id="respuestaMensaje" name="respuestaMensaje"
-               th:field="${mensaje.respuestaMensaje}" value=""/>
-            <div>
-                <input type="submit" class="btn btn-primary" id="btnEnviar" name="btnEnviar" value="Enviar"/>
-
-                <a h:href="@/mensajesAdmin">Cancelar</a>
+        <div class="card">
+            <div class="card-header">
+                <h1>Respuesta al Mensaje</h1>
             </div>
-        </form>
+            <div class="card-body">
+                <form th:action="@{/enviarRespuesta/}+${mensaje.idMensaje}" method="post" th:object="mensaje">
+                    <label for="respuesta">Ingrese su respuesta:</label>
+                    <input type="text" id="respuestaMensaje" name="respuestaMensaje"
+                           th:field="${mensaje.respuestaMensaje}" value=""/>
+                    <div>
+                        <input type="submit" class="btn btn-primary" id="btnEnviar" name="btnEnviar" value="Enviar"/>
+
+                        <a h:href="@/mensajesAdmin">Cancelar</a>
+                    </div>
+                </form>
+            </div>
         </div> 
     </body>
 </html>

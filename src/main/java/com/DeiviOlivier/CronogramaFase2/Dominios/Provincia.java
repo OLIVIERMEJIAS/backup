@@ -18,6 +18,6 @@ public class Provincia implements Serializable {
     @Basic
     @Column(name = "NOMBRE_PROVINCIA")
     private String nombreProvincia;
-    @OneToMany(mappedBy = "provinciasByIdProvincia")
+    @OneToMany(mappedBy = "provincia")
     private Collection<Canton> cantonesByIdProvincia;
 }

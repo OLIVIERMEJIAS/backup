@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IMensajeServicio {
     public  List<Mensaje> listar();
-    public void actualizarRespuesta(String respuesta,Long idMensaje);
+    public void guardar(Mensaje mensaje);
     public Mensaje obtenerMensaje(Long id);
     public void eliminar (Long id);
 }

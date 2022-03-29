@@ -119,5 +119,29 @@ public class ProfesorControlador {
     public String modificadores(Model model){
         return "modificador";
     }
-    
+    @GetMapping("/contrasenaProfesor")
+    public String cambioAdministrador(Profesor Profesor){
+        return "cambioContrasenaProfesor";
+    }
+    @GetMapping("/cambioAdministrador")
+    public String cambioContraseña(Profesor profesor,RedirectAttributes red){
+        Profesor aux = null;
+        aux = servicioProfesor.obtenerProfesor(profesor.getIdProfesor());
+        if(aux != null){
+            if(profesor.getContrasenaProfesor().equals(profesor.getContrasenaRepetida())){
+                servicioProfesor.guardar(profesor);
+            }
+            else{
+                red.addFlashAttribute("msg", "La contraseña no concuerda con la repetición de la esta!");
+                red.addFlashAttribute("profesor", profesor);
+                return "redirect:/contrasenaProfesor";
+            }
+        }
+        else{
+            red.addFlashAttribute("msg", "Este profesor ya no existe!");
+            return "redirect:/";
+        }
+        red.addFlashAttribute("msg", "Contraseña actualizada con éxito");
+        return "redirect:/";
+    }
 }

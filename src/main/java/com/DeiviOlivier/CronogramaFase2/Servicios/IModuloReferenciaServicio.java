@@ -5,6 +5,7 @@
 package com.DeiviOlivier.CronogramaFase2.Servicios;
 
 import com.DeiviOlivier.CronogramaFase2.Dominios.ModuloReferencia;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Profesor;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,6 +30,6 @@ public interface IModuloReferenciaServicio {
             Date fechaFinEntrada,int idModEntrada);
     
     public void calcular(long idReferencia,long idCentro);
-    
+    public List<ModuloReferencia> listarPorProfesor(Profesor profesor);
 
 }

@@ -41,8 +41,8 @@ public class MensajeControlador {
         String msg ="";
         mensaje = mensajServ.obtenerMensaje(mensaje.getIdMensaje());
         if(mensaje != null){
-            mensajServ.actualizarRespuesta(mensaje.getRespuestaMensaje(),mensaje.getIdMensaje());
-            msg = "Respuesta ingresado con éxito!";
+            mensajServ.guardar(mensaje);
+            msg = "Respuesta ingresada con éxito!";
             red.addFlashAttribute("msg", msg);
             return "redirect:/mensajesAdmin";
         }

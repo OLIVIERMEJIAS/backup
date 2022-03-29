@@ -5,6 +5,8 @@
 package com.DeiviOlivier.CronogramaFase2.Controladores;
 
 import com.DeiviOlivier.CronogramaFase2.Dominios.Modulo;
+import com.DeiviOlivier.CronogramaFase2.Dominios.ModuloReferencia;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Profesor;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Programa;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
 import com.DeiviOlivier.CronogramaFase2.Servicios.IModuloReferenciaServicio;
@@ -62,7 +64,7 @@ public class ReferenciaControlador {
     }
 
     @GetMapping("/referencias")
-    public String nuevaReferencia(Model model) {
+    public String listarReferenciaS(Model model) {
         List<Referencia> lista = referenciaServicio.listar();
         model.addAttribute("referencias", lista);
         return "listaReferencias";
@@ -185,5 +187,22 @@ public class ReferenciaControlador {
         red.addFlashAttribute("msg", "Módulo asociado a la referencia");
         return "redirect:/referencias";
         }
+    }
+    
+     @GetMapping("/cronoAdministrador")
+    public String administradorCronogramas(Model model)
+    {
+        List<Referencia> lista = referenciaServicio.listar();
+        model.addAttribute("referenciasCrono", lista);
+        return "cronogramaAdministrador";
+    }
+    
+     @GetMapping("/cronoProfesor")
+    public String profesorCronograma(Profesor profesor, Model model)
+    {
+        List<ModuloReferencia> lista = null;
+        lista = modRefServicio.listarPorProfesor(profesor);
+        model.addAttribute("modulosProfesor", lista);
+        return "cronogramaProfesor";
     }
 }

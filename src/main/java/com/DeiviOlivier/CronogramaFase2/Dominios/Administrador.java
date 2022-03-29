@@ -13,7 +13,7 @@ public class Administrador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_ADMINISTRADOR")
-    private int idAdministrador;
+    private Long idAdministrador;
 
     @Basic
     @Column(name = "CEDULA_ADMINISTRADOR")
@@ -21,6 +21,8 @@ public class Administrador implements Serializable {
     @Basic
     @Column(name = "CONTRASENA_ADMINISTRADOR")
     private String contrasenaAdministrador;
+    @Transient
+    private String contrasenaRepetida;
     @Basic
     @Column(name = "NOMBRE_USUARIO")
     private String nombreUsuario;
@@ -37,7 +39,7 @@ public class Administrador implements Serializable {
     @Column(name = "CORREO_ADMINISTRADOR")
     private String correoAdministrador;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "ID_CENTRO_FORMACION", nullable = false)
     private CentroFormacion centrosFormacionesByIdCentroFormacion;
     @OneToMany(mappedBy = "administradoresByIdAdministrador")

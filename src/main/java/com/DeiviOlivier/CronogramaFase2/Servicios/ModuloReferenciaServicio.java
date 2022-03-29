@@ -6,6 +6,7 @@ package com.DeiviOlivier.CronogramaFase2.Servicios;
 
 import com.DeiviOlivier.CronogramaFase2.DAO.IModuloReferenciaDAO;
 import com.DeiviOlivier.CronogramaFase2.Dominios.ModuloReferencia;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Profesor;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
 import java.util.Date;
 import java.util.HashMap;
@@ -64,6 +65,12 @@ public class ModuloReferenciaServicio implements IModuloReferenciaServicio{
     @Transactional
     public void calcular(long idReferencia, long idCentro) {
         modRedDao.sp_calcular(idReferencia, idCentro);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ModuloReferencia> listarPorProfesor(Profesor profesor) {
+        return modRedDao.findByProfesor(profesor);
     }
     
 }

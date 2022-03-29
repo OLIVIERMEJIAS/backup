@@ -38,8 +38,8 @@ public class Referencia implements Serializable {
     private String horaInicioReferencia;
     @Basic
     @Column(name = "HORAS_DIARIAS_REFERENCIA")
-    @NotNull(message = "Es necesario una hora de fin")
-    private Double horasDiariaslReferencia;
+    @NotNull(message = "Es necesario indicar las horas de duración diarias")
+    private Double horasDiariasReferencia;
     
     @Basic
     @Column(name = "INICIO_REFERENCIA")

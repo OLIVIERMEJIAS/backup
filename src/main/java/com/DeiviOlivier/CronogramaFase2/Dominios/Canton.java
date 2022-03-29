@@ -20,8 +20,8 @@ public class Canton implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "ID_PROVINCIA", nullable = false)
-    private Provincia provinciasByIdProvincia;
-    @OneToMany(mappedBy = "cantonesByIdCanton")
+    private Provincia provincia;
+    @OneToMany(mappedBy = "canton")
     private Collection<Distrito> distritosByIdCanton;
 
     

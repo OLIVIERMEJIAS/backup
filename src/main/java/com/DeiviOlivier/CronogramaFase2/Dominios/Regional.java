@@ -17,7 +17,7 @@ public class Regional implements Serializable {
     @Basic
     @Column(name = "NOMBRE_REGIONAL")
     private String nombreRegional;
-    @OneToMany(mappedBy = "regionalesByIdRegional")
+    @OneToMany(mappedBy = "regional")
     private Collection<CentroFormacion> centrosFormacionesByIdRegional;
 
 

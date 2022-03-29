@@ -5,6 +5,7 @@
 package com.DeiviOlivier.CronogramaFase2.DAO;
 
 import com.DeiviOlivier.CronogramaFase2.Dominios.ModuloReferencia;
+import com.DeiviOlivier.CronogramaFase2.Dominios.Profesor;
 import com.DeiviOlivier.CronogramaFase2.Dominios.Referencia;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +21,9 @@ import org.springframework.data.repository.query.Param;
 public interface IModuloReferenciaDAO extends JpaRepository<ModuloReferencia,Long>{
     public List<ModuloReferencia> findByReferencia(Referencia referencia);
     public void deleteAllByReferencia(Referencia referencia);
+    
+    public List<ModuloReferencia> findByProfesor(Profesor profesor);
+    
     @Override
     public ModuloReferencia save(ModuloReferencia moduloReferencia);
     @Procedure(name="sp_verificarHorario")

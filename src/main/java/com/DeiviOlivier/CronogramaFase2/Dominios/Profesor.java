@@ -22,7 +22,8 @@ public class Profesor implements Serializable {
     @Basic
     @Column(name = "CONTRASENA_PROFESOR")
     private String contrasenaProfesor;
-
+    @Transient
+    private String contrasenaRepetida;
     @Basic
     @Column(name = "CEDULA_PROFESOR")
     @NotEmpty(message = "Este campo es obligatorio")
@@ -49,7 +50,7 @@ public class Profesor implements Serializable {
     private Collection<Modificador> modificadoresByIdProfesor;
     @OneToMany(mappedBy = "profesor")
     private Collection<ModuloReferencia> modulosReferenciasByIdProfesor;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "ID_ADMINISTRADOR", nullable = false)
     private Administrador administradoresByIdAdministrador;
     @OneToOne

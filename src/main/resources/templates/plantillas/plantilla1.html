@@ -53,9 +53,18 @@
                                     <li class="nav-item">
                                         <a th:href="@{/mensajesAdmin}" class="nav-link font-weight-bold">Mensajes</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a th:href="@{/contrasena}" class="nav-link font-weight-bold">Actualizar Contraseña</a>
+                                    </li>
                                 </ul>
                             </div>      
                         </nav>   
+                        <div th:if="${msg!=null and !msg.empty}">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Mensaje: </strong> <span th:text="${msg}">texto</span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div> 
+                        </div>
                     </aside>
                 </div>
             </div>
